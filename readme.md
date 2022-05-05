@@ -1,4 +1,4 @@
-<p align="center"><img src="./modules/assets/icons/icon.svg" width="150px" height="150px" alt="aviutil toys icon"/></p>
+<p align="center"><img src="./modules/assets/image/icon.svg" width="150px" height="150px" alt="aviutil toys icon"/></p>
 <h1 align="center">Aviutil Toys</h1>
 
 Aviutil Toys は Aviutil をより便利にするユーティリティのセットです。
