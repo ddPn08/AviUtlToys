@@ -1,0 +1,17 @@
+{
+  "extends": "@tsconfig/create-react-app",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "dist.test",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
+  },
+  "include": [
+    "preload",
+    "browser",
+  ],
+}

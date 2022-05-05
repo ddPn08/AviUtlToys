@@ -1,0 +1,29 @@
+{
+  "name": "common",
+  "version": "v1.0.0",
+  "id": "world.ddpn.aviutil-toys",
+  "description": "Aviutil Toys の基礎機能を提供します。",
+  "homepage": "https://ddpn.world",
+  "scripts": {
+    "build": "aviutil-toys build"
+  },
+  "dependencies": {
+    "@aviutil-toys/api": "workspace:modules/api",
+    "@aviutil-toys/plugin-sdk": "workspace:modules/plugin-sdk",
+    "@aviutil/exo": "^0.1.0",
+    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/react": "^1.8.8",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^6",
+    "react": "^18",
+    "react-router-dom": "^6.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.30",
+    "@types/react": "^18",
+    "electron": "^18.2.0",
+    "iconv-lite": "^0.6.3"
+  },
+  "packageManager": "yarn@3.2.0"
+}

@@ -1,0 +1,14 @@
+{
+  "client.externals": [
+    "react",
+    "react-dom",
+    "react-dom/client",
+    "react-router-dom",
+    "@emotion/react",
+    "@emotion/styled",
+    "@chakra-ui/react",
+    "@chakra-ui/icons",
+    "framer-motion",
+    "@aviutil-toys/api"
+  ]
+}

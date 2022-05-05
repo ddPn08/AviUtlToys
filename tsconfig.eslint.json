@@ -1,0 +1,8 @@
+{
+  "extends": "@tsconfig/node16-strictest-esm",
+  "compilerOptions": {
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "allowJs": true
+  }
+}

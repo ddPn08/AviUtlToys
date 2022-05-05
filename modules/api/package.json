@@ -1,0 +1,19 @@
+{
+  "name": "@aviutil-toys/api",
+  "main": "./root/index.ts",
+  "publishConfig": {},
+  "devDependencies": {
+    "@types/react": "^18.0.6",
+    "electron": "^18.2.0",
+    "esbuild": "^0.14.38",
+    "glob": "^8.0.1",
+    "package-json-type": "^1.0.3",
+    "tsc-alias": "^1.6.7",
+    "typescript": "^4.6.4"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "packageManager": "yarn@3.2.0"
+}

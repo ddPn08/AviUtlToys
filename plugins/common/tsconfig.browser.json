@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/create-react-app",
+  "compilerOptions": {
+    "composite": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+    }
+  },
+  "include": [
+    "client",
+    "types",
+  ],
+}

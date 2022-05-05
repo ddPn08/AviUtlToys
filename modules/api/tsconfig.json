@@ -1,0 +1,17 @@
+{
+  "extends": "@tsconfig/node16-strictest-esm",
+  "compilerOptions": {
+    "lib": [
+      "DOM"
+    ],
+    "outDir": "dist",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "declaration": true,
+  },
+  "include": [
+    "server",
+    "client",
+    "root"
+  ]
+}
