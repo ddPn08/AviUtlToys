@@ -7,18 +7,17 @@
   "scripts": {
     "lint": "eslint '**/*.{tsx,ts}'",
     "format": "prettier --write '**/*.{tsx,ts}'",
-    "builder": "node scripts/index.mjs",
-    "build:module": "yarn builder build:module",
-    "build:prod": "yarn builder build:app --production",
-    "dev": "yarn builder build:app --dev"
+    "build:module": "yarn dev-tools build:module",
+    "build:app": "yarn dev-tools build:app",
+    "dev": "yarn dev-tools build:app --dev --bundle-only"
   },
   "devDependencies": {
+    "@aviutil-toys/dev-tools": "workspace:^",
     "@tsconfig/create-react-app": "^1.0.2",
     "@tsconfig/node16-strictest-esm": "^1.0.1",
     "@types/eslint": "^8.4.1",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
-    "cac": "^6.7.12",
     "electron-builder": "^23.0.3",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
@@ -28,8 +27,6 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.6.2",
-    "tiny-glob": "^0.2.9",
-    "tsc-alias": "^1.6.7",
     "typescript": "^4.6.4"
   },
   "packageManager": "yarn@3.2.0"
