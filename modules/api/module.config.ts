@@ -1,12 +1,31 @@
-import { defineConfig } from '@aviutil-toys/dev-tools'
-import fs from 'fs'
+import { defineConfig, PublishConfig } from '@aviutil-toys/dev-tools'
 import path from 'path'
 
-if (fs.existsSync(path.join(__dirname, 'dist')))
-    fs.rmSync(path.join(__dirname, 'dist'), { recursive: true })
+import packageJson from './package.json'
 
-export default defineConfig({
-    entriesPattern: '{server,client,root}/**/*.{ts,tsx}',
-    outdir: path.join(__dirname, 'dist'),
+const CONFIG = {
+    entryPoints: ['./server/index.ts', './client/index.ts', './root/index.ts'],
+    external: Object.keys(packageJson.dependencies),
+    bundle: true,
     dts: true,
-})
+}
+
+export default defineConfig(
+    {
+        ...CONFIG,
+        outdir: path.join(__dirname, 'dist'),
+        format: ['cjs'],
+    },
+    {
+        ...CONFIG,
+        outdir: path.join(__dirname, 'dist/esm'),
+        format: ['esm'],
+        outExtension: {
+            '.js': '.js',
+        },
+    },
+)
+
+export const publish: PublishConfig = {
+    root: './dist',
+}

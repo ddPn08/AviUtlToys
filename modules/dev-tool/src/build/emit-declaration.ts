@@ -19,7 +19,7 @@ export const emitDeclaration = (
         declarationDir: outDir,
         emitDeclarationOnly: true,
     }
-    
+
     const program = typescript.createProgram(files, compilerOptions)
     const emitResult = program.emit()
     const diagnostics = typescript.getPreEmitDiagnostics(program).concat(emitResult.diagnostics)

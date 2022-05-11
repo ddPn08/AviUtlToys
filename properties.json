@@ -9,6 +9,15 @@
     "@chakra-ui/react",
     "@chakra-ui/icons",
     "framer-motion",
-    "@aviutil-toys/api"
+    "@aviutil-toys/app",
+    "@aviutil-toys/api",
+    "@aviutil-toys/assets"
+  ],
+  "server.externals": [
+    "electron",
+    "esbuild",
+    "esbuild-windows-64",
+    "@aviutil-toys/api",
+    "@aviutil-toys/assets"
   ]
 }

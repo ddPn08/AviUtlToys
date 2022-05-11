@@ -32,6 +32,9 @@ export const buildModule = async () => {
 
         for (let config of Object.values(configs)) {
             config = { ...DEFAULT_CONFIG, ...config }
+
+            if (config.onStart) await config.onStart()
+
             if (config.entryPoints) {
                 config.entryPoints = config.entryPoints.map((entry) =>
                     path.isAbsolute(entry) ? entry : path.join(cwd, entry),
@@ -62,7 +65,7 @@ export const buildModule = async () => {
                         platform,
                         entryPoints: config.entryPoints,
                         bundle: config.bundle,
-                        outExtension: {
+                        outExtension: config.outExtension || {
                             '.js': format === 'cjs' ? '.js' : '.mjs',
                         },
                         external: config.external,
@@ -72,7 +75,7 @@ export const buildModule = async () => {
                 }
             }
 
-            if (config.onEnd) config.onEnd()
+            if (config.onEnd) await config.onEnd()
             if (config.dts) emitDeclaration(config.entryPoints, cwd, declarationDir, options)
         }
     }
