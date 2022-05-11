@@ -4,7 +4,9 @@ import '@aviutil-toys/api/client'
 
 import { App } from './app'
 
-module.exports.PLUGIN_LOADER
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+document.___LOADPLUGINS___
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

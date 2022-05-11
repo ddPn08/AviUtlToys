@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 
-import { Context } from '../context'
+import { Constants } from '../constants'
 
 import { futuresAtom, pluginsAtom } from '@/browser/state'
 
@@ -25,7 +25,7 @@ export const PluginLoader: React.FC = () => {
       )
       .flat()
     setPlugins(pluginDataList.map((v) => v.context))
-    setFutures([...Context.futures, ...futures])
+    setFutures([...Constants.futures, ...futures])
   }
 
   useEffect(() => {

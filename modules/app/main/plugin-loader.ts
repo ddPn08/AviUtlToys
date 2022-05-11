@@ -1,7 +1,9 @@
-import type { PluginMeta, Plugin } from '@aviutil-toys/api/server'
+import type { Plugin } from '@aviutil-toys/api/server'
 import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
+
+import type { PluginMeta } from '@/types'
 
 export namespace PluginLoader {
     export const pluginMetas: PluginMeta[] = []

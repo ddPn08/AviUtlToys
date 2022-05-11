@@ -13,5 +13,6 @@
   "include": [
     "preload",
     "browser",
+    "types"
   ],
 }

@@ -1,6 +1,5 @@
 import './__setup'
-import './_setup'
-import { registerApi } from '@aviutil-toys/api/server'
+import { Configuration } from '@aviutil-toys/api/server'
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
 
@@ -10,9 +9,10 @@ import { PluginLoader } from './plugin-loader'
 export const isDev = process.env['NODE_ENV'] === 'development'
 
 app.once('ready', async () => {
+    await import('./ipc/api')
+    await Configuration.load()
     await loadPLugins()
     await createWindow()
-    registerApi()
 })
 
 const createWindow = async () => {
@@ -36,12 +36,12 @@ const createWindow = async () => {
 }
 
 const loadPLugins = async () => {
-    const plugnsDirs = [path.join(app.getPath('userData'), 'plugins')]
-    if (isDev) plugnsDirs.push(path.join(__dirname, '../../..', 'plugins'))
-    else plugnsDirs.push(path.join(__dirname, 'plugins').replace('app.asar', 'app.asar.unpacked'))
+    const pluginDirs = [path.join(app.getPath('userData'), 'plugins')]
+    if (isDev) pluginDirs.push(path.join(__dirname, '../../..', 'plugins'))
+    else pluginDirs.push(path.join(__dirname, 'plugins').replace('app.asar', 'app.asar.unpacked'))
 
-    for (const dir of plugnsDirs) {
+    for (const dir of pluginDirs) {
         await PluginLoader.loadPlugins(dir)
     }
-    PluginLoader.importPlugins()
+    await PluginLoader.importPlugins()
 }

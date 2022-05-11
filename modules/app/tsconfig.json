@@ -11,7 +11,8 @@
     }
   },
   "include": [
-    "main"
+    "main",
+    "types"
   ],
   "references": [
     {

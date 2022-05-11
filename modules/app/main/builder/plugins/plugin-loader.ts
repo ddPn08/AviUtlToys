@@ -21,13 +21,12 @@ export const LoadPlugins: Plugin = {
         })
         build.onLoad({ filter: /\.js?$/ }, async (args) => {
             let contents = await fs.promises.readFile(args.path, 'utf8')
-            const match = contents.match(/module\.exports\.PLUGIN_LOADER/g)
-            if (match) {
+            if (contents.includes('document.___LOADPLUGINS___')) {
                 const plugins = PluginLoader.pluginMetas
-                    .map((v) => `require('${v.entry.client.replace(/\\/g, '\\\\')}')`)
+                    .map((v) => `await import('${v.entry.client.replace(/\\/g, '\\\\')}')`)
                     .join(',')
                 contents = contents.replace(
-                    /module\.exports\.PLUGIN_LOADER/g,
+                    'document.___LOADPLUGINS___',
                     `const plugins = [${plugins}]; window['plugins'] = plugins;`,
                 )
             }

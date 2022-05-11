@@ -14,15 +14,15 @@ export const BaseFuture: React.FC<FutureContextType> = ({ component: C, ...rest 
 
   const checkMissingConfig = async () => {
     const config = await api.invoke('config:get')
-    const missings = (rest.essentialConfig &&
+    const missing = (rest.essentialConfig &&
       config &&
       rest.essentialConfig.filter(
         (v) => !Object.keys(config).includes(v),
       )) as (keyof ConfigurationType)[]
-    if (missings && missings.length > 0) {
+    if (missing && missing.length > 0) {
       showErrorModal(
-        `Missing configuration: ${missings.join(', ')}`,
-        `この機能を使用するには次の項目の設定が必要です。: ${missings
+        `Missing configuration: ${missing.join(', ')}`,
+        `この機能を使用するには次の項目の設定が必要です。: ${missing
           .map((v) => Constants.configuration.keyMap[v])
           .join(', ')}`,
         () => {
