@@ -1,4 +1,3 @@
-export * from './api'
-export * from './plugin'
-export * from './constants'
-export * from './configuration'
+export * from './api/index.js'
+export * from './plugin.js'
+export * from './configuration.js'

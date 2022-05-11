@@ -4,9 +4,10 @@
     "lib": [
       "DOM"
     ],
+    "target": "ESNext",
+    "module": "NodeNext",
     "outDir": "dist",
     "baseUrl": "./",
-    "moduleResolution": "node",
     "declaration": true,
   },
   "include": [

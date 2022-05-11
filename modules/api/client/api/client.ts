@@ -1,6 +1,6 @@
 import type { IpcRendererEvent } from 'electron/renderer'
 
-import { ipcRenderer } from '../preload'
+import { ipcRenderer } from '../preload/index.js'
 
 export class ApiClient<
     StoC extends Record<string, any> = Record<string, any>,

@@ -1,6 +1,6 @@
 import type { IPackageJson } from 'package-json-type'
 
-import type { FutureContextType } from './future'
+import type { FutureContextType } from './future.js'
 
 export type PluginMeta = {
     futures: FutureContextType[]

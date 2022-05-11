@@ -1,19 +1,36 @@
 {
   "name": "@aviutil-toys/api",
   "main": "./root/index.ts",
-  "publishConfig": {},
+  "publishConfig": {
+    "main": "./root/index.js",
+    "module": "./esm/client/index.js",
+    "exports": {
+      "./client": {
+        "default": "./client/index.js",
+        "import": "./esm/client/index.js",
+        "require": "./client/index.js"
+      },
+      "./server": {
+        "default": "./server/index.js",
+        "import": "./esm/server/index.js",
+        "require": "./server/index.js"
+      },
+      ".": {
+        "default": "./root/index.js",
+        "import": "./esm/root/index.js",
+        "require": "./root/index.js"
+      }
+    }
+  },
   "devDependencies": {
     "@types/react": "^18.0.6",
-    "electron": "^18.2.0",
-    "esbuild": "^0.14.38",
-    "glob": "^8.0.1",
     "package-json-type": "^1.0.3",
-    "tsc-alias": "^1.6.7",
     "typescript": "^4.6.4"
   },
-  "peerDependencies": {
-    "react": "*",
-    "react-dom": "*"
+  "dependencies": {
+    "electron": "^18.2.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "packageManager": "yarn@3.2.0"
 }

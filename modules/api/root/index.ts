@@ -1,2 +1,3 @@
-export * from './api'
-export * from './config'
+export * from './api/index.js'
+export * from './config.js'
+export * from './plugin.js'

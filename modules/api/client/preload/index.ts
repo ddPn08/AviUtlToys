@@ -1,8 +1,8 @@
 import type { ipcRenderer } from 'electron'
 
-import type { ClientPlugin } from '../plugin'
+import type { ClientPlugin } from '../plugin.js'
 
-export * from './electron'
+export * from './electron.js'
 
 declare global {
     interface Window {

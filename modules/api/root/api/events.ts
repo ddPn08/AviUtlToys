@@ -1,6 +1,6 @@
 import type { OpenDialogOptions, OpenDialogReturnValue } from 'electron'
 
-import type { ConfigurationType } from '../config'
+import type { ConfigurationType } from '../config.js'
 
 export interface ServerToClientEvents {}
 
