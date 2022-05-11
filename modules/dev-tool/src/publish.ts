@@ -1,4 +1,4 @@
-import { execSync } from 'child_process'
+import { execSync, spawnSync } from 'child_process'
 import { register } from 'esbuild-register/dist/node'
 import fs from 'fs'
 import kleur from 'kleur'
@@ -20,6 +20,7 @@ export const publishModule = async (options: PublishOptions) => {
     const dirs = await fs.promises.readdir(path.join(__dirname, '../../'))
 
     for (const dir of dirs) {
+        if (options.name && dir !== options.name) continue
         const cwd = path.join(__dirname, '../../', dir)
         if (!fs.existsSync(path.join(cwd, 'module.config.ts'))) continue
         const config: PublishConfig = require(path.join(cwd, 'module.config.ts')).publish
@@ -39,6 +40,9 @@ export const publishModule = async (options: PublishOptions) => {
 
         const publishTempDir = path.join('node_modules', '.dev-tools', 'publish', dir)
 
+        if (fs.existsSync(publishTempDir)) await fs.promises.rm(publishTempDir, { recursive: true })
+        await fs.promises.mkdir(publishTempDir, { recursive: true })
+
         const root =
             typeof config === 'boolean'
                 ? cwd
@@ -56,8 +60,6 @@ export const publishModule = async (options: PublishOptions) => {
                 JSON.stringify(packageJson, null, 2),
             )
         }
-
-        if (fs.existsSync(publishTempDir)) await fs.promises.rm(publishTempDir, { recursive: true })
 
         await fs.promises.cp(root, publishTempDir, { recursive: true })
         await fs.promises.writeFile(path.join(publishTempDir, 'yarn.lock'), '')
@@ -78,21 +80,21 @@ export const publishModule = async (options: PublishOptions) => {
 
         if (options.dryRun) {
             console.log(kleur.yellow('Dry run, not publishing'))
-            continue
-        }
-        console.log(kleur.green(`Publish module ${dir}`))
-        // const result = spawnSync('yarn', ['npm', 'publish'], {
-        //     cwd: publishTempDir,
-        //     stdio: 'inherit',
-        // })
+        } else {
+            spawnSync('yarn', { cwd: publishTempDir, stdio: 'inherit' })
+            const result = spawnSync('yarn', ['npm', 'publish'], {
+                cwd: publishTempDir,
+                stdio: 'inherit',
+            })
 
-        // if (result.status !== 0) {
-        //     console.error(kleur.red(`Publish module ${dir} failed`))
-        //     continue
-        // } else {
-        //     console.log(kleur.green(`Publish module ${dir} success`))
-        //     continue
-        // }
+            if (result.status !== 0) {
+                console.error(kleur.red(`Publish module ${dir} failed`))
+            } else {
+                console.log(kleur.green(`Publish module ${dir} success`))
+            }
+        }
+
+        await fs.promises.rm(publishTempDir, { recursive: true })
     }
 
     unregister()

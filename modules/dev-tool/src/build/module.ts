@@ -5,7 +5,7 @@ import path from 'path'
 import glob from 'tiny-glob'
 import typescript from 'typescript'
 
-import type { ModuleConfig } from '../types'
+import type { ModuleConfig, ModuleOptions } from '../types'
 import { emitDeclaration } from './emit-declaration'
 
 const DEFAULT_CONFIG: ModuleConfig = {
@@ -20,10 +20,11 @@ const formatOutDir = (cwd: string, outdir: string, platform: string, format: str
     return path.isAbsolute(replaced) ? replaced : path.join(cwd, replaced)
 }
 
-export const buildModule = async () => {
+export const buildModule = async (options: ModuleOptions) => {
     const { unregister } = register()
     const dirs = await fs.promises.readdir(path.join(__dirname, '../../../'))
     for (const dir of dirs) {
+        if (options.name && dir !== options.name) continue
         const cwd = path.join(__dirname, '../../../', dir)
         if (!fs.existsSync(path.join(cwd, 'module.config.ts'))) continue
         const configs: Record<string, Required<ModuleConfig>> = {
@@ -50,7 +51,7 @@ export const buildModule = async () => {
             const declarationDir = formatOutDir(cwd, config.outdir, '', 'types')
 
             const tsconfigPath = path.join(cwd, 'tsconfig.json') || config.tsconfig
-            const { options } = typescript.parseJsonConfigFileContent(
+            typescript.parseJsonConfigFileContent(
                 typescript.readConfigFile(tsconfigPath, typescript.sys.readFile).config,
                 typescript.sys,
                 cwd,
@@ -63,6 +64,8 @@ export const buildModule = async () => {
                     const esbuildConfig: BuildOptions = {
                         format,
                         platform,
+                        logLevel: 'info',
+                        watch: !!options.watch,
                         entryPoints: config.entryPoints,
                         bundle: config.bundle,
                         outExtension: config.outExtension || {

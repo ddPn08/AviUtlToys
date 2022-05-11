@@ -20,6 +20,11 @@ export type ModuleConfig = Partial<{
     onEnd: () => Promise<void> | void
 }>
 
+export type ModuleOptions = {
+    watch?: boolean
+    name?: string
+}
+
 export type PublishConfig =
     | {
           root: string
@@ -28,4 +33,5 @@ export type PublishConfig =
 
 export type PublishOptions = {
     dryRun: boolean
+    name?: string
 }

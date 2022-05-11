@@ -5,7 +5,7 @@ import { buildApplication } from './build/app/build'
 import { bundleApplication } from './build/app/bundle'
 import { buildModule } from './build/module'
 import { publishModule } from './publish'
-import type { BuildApplicationOptions, ModuleConfig, PublishOptions } from './types'
+import type { BuildApplicationOptions, ModuleConfig, ModuleOptions, PublishOptions } from './types'
 
 const cli = cac('build-cli')
 
@@ -17,12 +17,16 @@ cli.command('build:app', 'build the project')
         if (!options.bundleOnly) await buildApplication()
     })
 
-cli.command('build:module', 'build modules').action(async () => {
-    buildModule()
-})
+cli.command('build:module', 'build modules')
+    .option('--watch', 'watch for changes')
+    .option('--name [name]', 'module name')
+    .action(async (options: ModuleOptions) => {
+        buildModule(options)
+    })
 
 cli.command('publish:module', 'publish modules')
     .option('--dry-run', 'dry run')
+    .option('--name [name]', 'module name')
     .action(async (options: PublishOptions) => {
         publishModule(options)
     })
