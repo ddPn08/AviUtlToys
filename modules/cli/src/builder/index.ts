@@ -1,4 +1,4 @@
-import { BuildConfig, isBuildConfig, OverrideEsbuildOptions } from '@aviutil-toys/api'
+import { BuildConfig, isBuildConfig } from '@aviutil-toys/api'
 import { build, BuildOptions, Plugin } from 'esbuild'
 import fs from 'fs'
 import kleur from 'kleur'
@@ -33,10 +33,11 @@ const packageJsonExporter = (config: BuildConfig, packageJson: Record<string, an
     }
 }
 
-const mergeConfig = (options: BuildOptions, overrides: Partial<OverrideEsbuildOptions>) => {
+const mergeConfig = (options: BuildOptions, overrides: Partial<BuildOptions>) => {
     const { external, plugins, inject, ...rest } = options
     return {
         ...rest,
+        ...overrides,
         external: [...(external || []), ...(overrides.external || [])],
         inject: [...(inject || []), ...(overrides.inject || [])],
         plugins: [...(plugins || []), ...(overrides.plugins || [])],

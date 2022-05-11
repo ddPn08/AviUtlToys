@@ -1,6 +1,7 @@
 export type BuildApplicationOptions = {
     dev: boolean
     bundleOnly: boolean
+    production: boolean
 }
 
 export type ModuleConfig = Partial<{

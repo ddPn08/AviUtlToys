@@ -1,19 +1,13 @@
-import type { Plugin } from 'esbuild'
-
-export type OverrideEsbuildOptions = {
-    external: string[]
-    plugins: Plugin[]
-    inject: string[]
-}
+import type { BuildOptions } from 'esbuild'
 
 export type BuildConfig = {
     server: {
         entry: string
-        esbuild?: Partial<OverrideEsbuildOptions>
+        esbuild?: Partial<BuildOptions>
     }
     client: {
         entry: string
-        esbuild?: Partial<OverrideEsbuildOptions>
+        esbuild?: Partial<BuildOptions>
     }
 }
 

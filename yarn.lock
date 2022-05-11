@@ -12,7 +12,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aviutil-toys/api@workspace:^, @aviutil-toys/api@workspace:modules/api":
+"@aviutil-toys/api@0.0.1, @aviutil-toys/api@workspace:^, @aviutil-toys/api@workspace:modules/api":
   version: 0.0.0-use.local
   resolution: "@aviutil-toys/api@workspace:modules/api"
   dependencies:
@@ -57,7 +57,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@aviutil-toys/cli@workspace:^, @aviutil-toys/cli@workspace:modules/cli":
+"@aviutil-toys/cli@0.0.3, @aviutil-toys/cli@workspace:^, @aviutil-toys/cli@workspace:modules/cli":
   version: 0.0.0-use.local
   resolution: "@aviutil-toys/cli@workspace:modules/cli"
   dependencies:
@@ -2111,8 +2111,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aviutil-toys-plugin@workspace:plugin-templates/basic"
   dependencies:
-    "@aviutil-toys/api": "workspace:^"
-    "@aviutil-toys/cli": "workspace:^"
+    "@aviutil-toys/api": 0.0.1
+    "@aviutil-toys/cli": 0.0.3
     "@chakra-ui/icons": ^1.1.7
     "@chakra-ui/react": ^1.8.8
     "@emotion/react": ^11

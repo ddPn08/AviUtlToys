@@ -12,6 +12,7 @@ const cli = cac('build-cli')
 cli.command('build:app', 'build the project')
     .option('--bundle-only', 'bundle only')
     .option('--dev', 'watch for changes')
+    .option('--production', 'build for production')
     .action(async (options: BuildApplicationOptions) => {
         await bundleApplication(options)
         if (!options.bundleOnly) await buildApplication()

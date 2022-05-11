@@ -36,20 +36,25 @@ const bundlePlugins = async () => {
     console.log(kleur.green('APP'), 'Bundle plugins complete')
 }
 
-export const bundleApplication = async ({ dev }: BuildApplicationOptions) => {
+export const bundleApplication = async ({ dev, production }: BuildApplicationOptions) => {
     const outdir = path.join(cwd, 'dist')
 
     if (fs.existsSync(outdir)) await fs.promises.rm(outdir, { recursive: true })
 
+    const config = {
+        bundle: true,
+        sourcemap: dev,
+        minify: production,
+    }
+
     const options: Record<'server' | 'client', BuildOptions> = {
         client: {
+            ...config,
             entryPoints: [path.join(cwd, 'browser', 'index.tsx')],
             outfile: path.join(outdir, 'client', 'index.js'),
             external: properties['client.externals'],
             format: 'esm',
             platform: 'browser',
-            bundle: true,
-            sourcemap: dev,
             loader: {
                 '.svg': 'text',
             },
@@ -64,6 +69,7 @@ export const bundleApplication = async ({ dev }: BuildApplicationOptions) => {
             inject: [path.join(__dirname, 'shims', 'react.js')],
         },
         server: {
+            ...config,
             entryPoints: {
                 index: path.join(cwd, 'main', 'index.ts'),
                 preload: path.join(cwd, 'preload', 'index.ts'),
@@ -71,28 +77,25 @@ export const bundleApplication = async ({ dev }: BuildApplicationOptions) => {
             outdir,
             external: properties['server.externals'],
             format: 'cjs',
-            bundle: true,
-            sourcemap: dev,
             platform: 'node',
             plugins: [
-                {
-                    name: 'define esbuild binary path',
-                    setup(build) {
-                        build.onEnd(async () => {
-                            const file = path.join(outdir, 'index.js')
-                            const line = `process.env['ESBUILD_BINARY_PATH']=require.resolve('esbuild-windows-64/esbuild.exe').replace('app.asar', 'app.asar.unpacked')\n`
-                            const content = await fs.promises.readFile(file, 'utf8')
-                            const newContent = `${line}\n${content}`
-                            await fs.promises.writeFile(file, newContent)
-                        })
-                    },
-                },
+                // {
+                //     name: 'define esbuild binary path',
+                //     setup(build) {
+                //         build.onEnd(async () => {
+                //             const file = path.join(outdir, 'index.js')
+                //             const line = `process.env['ESBUILD_BINARY_PATH']=require.resolve('esbuild-windows-64/esbuild.exe').replace('app.asar', 'app.asar.unpacked')\n`
+                //             const content = await fs.promises.readFile(file, 'utf8')
+                //             const newContent = `${line}\n${content}`
+                //             await fs.promises.writeFile(file, newContent)
+                //         })
+                //     },
+                // },
             ],
         },
     }
     try {
-        await build(options.server)
-        await build(options.client)
+        await Promise.all([build(options.server), build(options.client)])
     } catch (_) {}
 
     await fs.promises.copyFile(

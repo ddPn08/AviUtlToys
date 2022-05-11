@@ -29,14 +29,9 @@ export const buildApplication = async () => {
                     },
                 ],
             },
-            compression: 'maximum',
+            compression: 'store',
             files: ['dist/**/*', ...Array.from(externals).map((v) => `${NODE_MODULES}/${v}`)],
-            asarUnpack: [
-                'dist/client',
-                'dist/plugins',
-                ...Array.from(externals).map((v) => `node_modules/${v}`),
-            ],
-            asar: true,
+            asar: false,
         },
     }
 

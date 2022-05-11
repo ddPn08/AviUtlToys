@@ -24,5 +24,5 @@ export default defineConfig({
 })
 
 export const publish: PublishConfig = {
-    root: '.'
+    root: '.',
 }
