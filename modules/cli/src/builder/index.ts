@@ -1,9 +1,10 @@
+import { BuildConfig, isBuildConfig, OverrideEsbuildOptions } from '@aviutil-toys/api'
 import { build, BuildOptions, Plugin } from 'esbuild'
 import fs from 'fs'
 import kleur from 'kleur'
 import path from 'path'
 
-import { BuildConfig, isBuildConfig, OverrideEsbuildOptions } from '../../common/define-config'
+import properties from '../../../../properties.json'
 
 const packageJsonExporter = (config: BuildConfig, packageJson: Record<string, any>): Plugin => {
     return {
@@ -42,13 +43,26 @@ const mergeConfig = (options: BuildOptions, overrides: Partial<OverrideEsbuildOp
     }
 }
 
-export const run = async (context: { args: { watch: boolean } }) => {
-    console.log(kleur.cyan('Building plugin...'))
-    const config: BuildConfig = require(path.resolve('./toys.config.ts')).default
+const loadConfig = async (cwd: string) => {
+    await build({
+        entryPoints: [path.join(cwd, 'aut.config.ts')],
+        outdir: path.resolve('node_modules/.aviutil-toys'),
+        bundle: false,
+        format: 'cjs',
+        platform: 'node',
+    })
+    const config = require(path.resolve('node_modules/.aviutil-toys/aut.config.js')).default
     if (!isBuildConfig(config)) {
-        console.error(kleur.red('Invalid config!'))
+        console.error(kleur.red('ERROR'), 'Invalid config!')
         process.exit(1)
     }
+    return config
+}
+
+export const run = async (context: { args: { watch: boolean } }) => {
+    console.log(kleur.cyan('INFO'), 'Building plugin...')
+
+    const config = await loadConfig('.')
     const serverEntry = config.server.entry
     const clientEntry = config.client.entry
     const packageJsonPath = path.join(process.cwd(), 'package.json')
@@ -58,11 +72,11 @@ export const run = async (context: { args: { watch: boolean } }) => {
         process.exit(1)
     }
     if (!fs.existsSync(serverEntry)) {
-        console.error(kleur.red(`Missing server entry: ${serverEntry}`))
+        console.error(kleur.red(`Missing server entry ${serverEntry}!`))
         process.exit(1)
     }
     if (!fs.existsSync(clientEntry)) {
-        console.error(kleur.red(`Missing client entry: ${clientEntry}`))
+        console.error(kleur.red(`Missing client entry ${clientEntry}!`))
         process.exit(1)
     }
 
@@ -73,8 +87,9 @@ export const run = async (context: { args: { watch: boolean } }) => {
     const watchOption: BuildOptions['watch'] = {
         onRebuild(error, result) {
             if (!error) {
-                console.log(kleur.green('Build success!'))
-                if (result?.outputFiles) console.log(kleur.cyan(result.outputFiles.join('\n')))
+                console.log(kleur.green('INFO'), 'Build success!')
+                if (result?.outputFiles)
+                    console.log('INFO', kleur.cyan(result.outputFiles.join('\n')))
             }
         },
     }
@@ -89,6 +104,7 @@ export const run = async (context: { args: { watch: boolean } }) => {
                 mergeConfig(
                     {
                         entryPoints: [serverEntry],
+                        logLevel: 'info',
                         external: ['electron', '@aviutil-toys/api', '@aviutil-toys/api/*'],
                         outfile: './dist/server.js',
                         format: 'cjs',
@@ -98,32 +114,27 @@ export const run = async (context: { args: { watch: boolean } }) => {
                     config.server.esbuild || {},
                 ),
             ),
-            (async () => {
-                const external = [
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    //@ts-ignore
-                    ...global['__aviutil_toys']['client.externals'],
-                    ...(config.client.esbuild?.external ?? []),
-                ]
-                await build(
-                    mergeConfig(
-                        {
-                            entryPoints: [clientEntry],
-                            external,
-                            outfile: './dist/client.js',
-                            format: 'cjs',
-                            platform: 'node',
-                            inject: (
-                                await fs.promises.readdir(path.join(__dirname, 'shims'))
-                            ).map((file) => path.join(__dirname, 'shims', file)),
-                            ...commonConfig,
-                        },
-                        config.client.esbuild || {},
-                    ),
-                )
-            })(),
+            build(
+                mergeConfig(
+                    {
+                        entryPoints: [clientEntry],
+                        logLevel: 'info',
+                        external: [
+                            ...properties['client.externals'],
+                            ...(config.client.esbuild?.external ?? []),
+                        ],
+                        outfile: './dist/client.js',
+                        format: 'esm',
+                        inject: (
+                            await fs.promises.readdir(path.join(__dirname, 'shims'))
+                        ).map((file) => path.join(__dirname, 'shims', file)),
+                        ...commonConfig,
+                    },
+                    config.client.esbuild || {},
+                ),
+            ),
         ])
-        console.log(kleur.green('Build success!'))
+        console.log(kleur.green('INFO'), 'Build success!')
     } catch (error) {
         console.error(error)
         process.exit(1)

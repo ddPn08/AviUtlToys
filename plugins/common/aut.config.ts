@@ -1,6 +1,6 @@
-import { defineConfig } from '@aviutil-toys/plugin-sdk'
+import { definePluginConfig } from '@aviutil-toys/api'
 
-export default defineConfig({
+export default definePluginConfig({
     server: {
         entry: './server/index.ts',
         esbuild: {

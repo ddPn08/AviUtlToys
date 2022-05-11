@@ -2,7 +2,8 @@
   "name": "aviutil-toys",
   "workspaces": [
     "plugins/*",
-    "modules/*"
+    "modules/*",
+    "plugin-templates/*"
   ],
   "scripts": {
     "lint": "eslint '**/*.{tsx,ts}'",

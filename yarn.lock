@@ -18,14 +18,10 @@ __metadata:
   dependencies:
     "@types/react": ^18.0.6
     electron: ^18.2.0
-    esbuild: ^0.14.38
-    glob: ^8.0.1
     package-json-type: ^1.0.3
-    tsc-alias: ^1.6.7
+    react: ^18.0.0
+    react-dom: ^18.0.0
     typescript: ^4.6.4
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
   languageName: unknown
   linkType: soft
 
@@ -61,6 +57,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@aviutil-toys/cli@workspace:^, @aviutil-toys/cli@workspace:modules/cli":
+  version: 0.0.0-use.local
+  resolution: "@aviutil-toys/cli@workspace:modules/cli"
+  dependencies:
+    "@types/degit": ^2.8.3
+    "@types/node": ^17.0.31
+    cac: ^6.7.12
+    degit: ^2.8.4
+    enquirer: ^2.3.6
+    esbuild: ^0.14.38
+    esbuild-register: ^3.3.2
+    kleur: ^4.1.4
+    replace-in-file: ^6.3.2
+  bin:
+    aviutil-toys: ./dist/index.js
+  languageName: unknown
+  linkType: soft
+
 "@aviutil-toys/dev-tools@workspace:^, @aviutil-toys/dev-tools@workspace:modules/dev-tool":
   version: 0.0.0-use.local
   resolution: "@aviutil-toys/dev-tools@workspace:modules/dev-tool"
@@ -76,21 +90,6 @@ __metadata:
     typescript: ^4.6.4
   bin:
     dev-tools: ./bin.js
-  languageName: unknown
-  linkType: soft
-
-"@aviutil-toys/plugin-sdk@workspace:^, @aviutil-toys/plugin-sdk@workspace:modules/plugin-sdk":
-  version: 0.0.0-use.local
-  resolution: "@aviutil-toys/plugin-sdk@workspace:modules/plugin-sdk"
-  dependencies:
-    "@types/node": ^17.0.31
-    commander: ^9.2.0
-    enquirer: ^2.3.6
-    esbuild: ^0.14.38
-    esbuild-register: ^3.3.2
-    kleur: ^4.1.4
-  bin:
-    aut: ./dist/cli/index.js
   languageName: unknown
   linkType: soft
 
@@ -1439,6 +1438,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/degit@npm:^2.8.3":
+  version: 2.8.3
+  resolution: "@types/degit@npm:2.8.3"
+  checksum: 5dcc4aa614a361486ad6ff8ea7f830fd0d1916a19b1d832d7dcef98b1dd7c04fde40bb4c915ad7ee89482f6d56085c3d3d0eb32572eda975ef0d912677a90ae7
+  languageName: node
+  linkType: hard
+
 "@types/eslint@npm:^8.4.1":
   version: 8.4.1
   resolution: "@types/eslint@npm:8.4.1"
@@ -2101,6 +2107,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"aviutil-toys-plugin@workspace:plugin-templates/basic":
+  version: 0.0.0-use.local
+  resolution: "aviutil-toys-plugin@workspace:plugin-templates/basic"
+  dependencies:
+    "@aviutil-toys/api": "workspace:^"
+    "@aviutil-toys/cli": "workspace:^"
+    "@chakra-ui/icons": ^1.1.7
+    "@chakra-ui/react": ^1.8.8
+    "@emotion/react": ^11
+    "@emotion/styled": ^11
+    "@tsconfig/create-react-app": ^1.0.2
+    "@tsconfig/node16-strictest-esm": ^1.0.1
+    "@types/node": ^17.0.31
+    "@types/react": ^18
+    electron: ^18.2.0
+    framer-motion: ^6
+    react: ^18
+    react-router-dom: ^6.3.0
+  languageName: unknown
+  linkType: soft
+
 "aviutil-toys@workspace:.":
   version: 0.0.0-use.local
   resolution: "aviutil-toys@workspace:."
@@ -2396,7 +2423,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:4.x, chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.1":
+"chalk@npm:4.x, chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -2588,7 +2615,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^9.0.0, commander@npm:^9.2.0":
+"commander@npm:^9.0.0":
   version: 9.2.0
   resolution: "commander@npm:9.2.0"
   checksum: 7c82e4cd969712aa6d7c055b8351807a7230f9f31ef7ec7881e11a1147511de85adf5d6ccfd200240a118eecf693b220caf6865b8efbcea558a70d35aa9ed711
@@ -2600,7 +2627,7 @@ __metadata:
   resolution: "common@workspace:plugins/common"
   dependencies:
     "@aviutil-toys/api": "workspace:^"
-    "@aviutil-toys/plugin-sdk": "workspace:^"
+    "@aviutil-toys/cli": "workspace:^"
     "@aviutil/exo": ^0.1.0
     "@chakra-ui/icons": ^1.1.7
     "@chakra-ui/react": ^1.8.8
@@ -2842,6 +2869,15 @@ __metadata:
     has-property-descriptors: ^1.0.0
     object-keys: ^1.1.1
   checksum: ce0aef3f9eb193562b5cfb79b2d2c86b6a109dfc9fdcb5f45d680631a1a908c06824ddcdb72b7573b54e26ace07f0a23420aaba0d5c627b34d2c1de8ef527e2b
+  languageName: node
+  linkType: hard
+
+"degit@npm:^2.8.4":
+  version: 2.8.4
+  resolution: "degit@npm:2.8.4"
+  bin:
+    degit: degit
+  checksum: bb58c48ff1ae3828825d7e614db703afd69905abc2d666009bb4affecb8d87be993511556395889dffc99a5eba7a058117402050c509a6e2c3dd56a579120236
   languageName: node
   linkType: hard
 
@@ -6148,6 +6184,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"replace-in-file@npm:^6.3.2":
+  version: 6.3.2
+  resolution: "replace-in-file@npm:6.3.2"
+  dependencies:
+    chalk: ^4.1.2
+    glob: ^7.2.0
+    yargs: ^17.2.1
+  bin:
+    replace-in-file: bin/cli.js
+  checksum: ae3a0486711edfc1d7d769782764902934aeb327e54a56fbf8a92df22862a56312d86dbe0067274fb3666da668457576f6a775f814742acceea70f5aedb01f49
+  languageName: node
+  linkType: hard
+
 "require-directory@npm:^2.1.1":
   version: 2.1.1
   resolution: "require-directory@npm:2.1.1"
@@ -7269,7 +7318,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^17.0.1":
+"yargs@npm:^17.0.1, yargs@npm:^17.2.1":
   version: 17.4.1
   resolution: "yargs@npm:17.4.1"
   dependencies:

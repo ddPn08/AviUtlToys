@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/node16-strictest-esm",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "declaration": true,
+  },
+  "include": [
+    "src",
+    "src"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "extends": "@tsconfig/node16-strictest-esm",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "*"
+      ],
+    }
+  },
+  "include": [
+    "server",
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.browser.json"
+    }
+  ]
+}
