@@ -10,6 +10,7 @@
     "format": "prettier --write '**/*.{tsx,ts}'",
     "build:module": "yarn dev-tools build:module",
     "build:app": "yarn dev-tools build:app",
+    "publish:module": "yarn dev-tools publish:module",
     "dev": "yarn dev-tools build:app --dev --bundle-only"
   },
   "devDependencies": {

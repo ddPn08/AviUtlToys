@@ -1,6 +1,25 @@
 {
   "name": "@aviutil-toys/api",
   "main": "./root/index.ts",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/ddPn08/aviutil-toys/tree/main/modules/api#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddPn08/aviutil-toys.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ddPn08/aviutil-toys/issues"
+  },
+  "keywords": [
+    "aviutil",
+    "aviutil-toys",
+    "utility"
+  ],
+  "author": {
+    "name": "ddpn08",
+    "url": "https://me.ddpn.world"
+  },
   "publishConfig": {
     "main": "./root/index.js",
     "module": "./esm/client/index.js",

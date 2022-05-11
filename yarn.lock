@@ -71,7 +71,7 @@ __metadata:
     kleur: ^4.1.4
     replace-in-file: ^6.3.2
   bin:
-    aviutil-toys: ./dist/index.js
+    aviutil-toys: ./cli.js
   languageName: unknown
   linkType: soft
 

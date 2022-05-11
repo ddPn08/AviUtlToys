@@ -1,7 +1,7 @@
 import degit from 'degit'
 import Enquirer from 'enquirer'
 import fs from 'fs'
-import { bold, gray, green, red } from 'kleur/colors'
+import { bold, cyan, gray, green, red } from 'kleur/colors'
 import path from 'path'
 import replace from 'replace-in-file'
 
@@ -24,7 +24,7 @@ export const run = async (options: NewProjectOptions) => {
             type: 'select',
             name: 'template',
             message: 'Which template would you like to use?',
-            choices: TEMPLATES.map((v) => v.title),
+            choices: TEMPLATES.map((template) => template.title),
         },
     ])
 
@@ -48,7 +48,7 @@ export const run = async (options: NewProjectOptions) => {
 
     const templateTarget = template.includes('/')
         ? template
-        : `${officialTemplatesPath}/${template}`
+        : `${officialTemplatesPath}/${TEMPLATES.find((t) => t.title === template)!.value}`
 
     const emitter = degit(`${templateTarget}`, {
         cache: false,
@@ -85,4 +85,13 @@ export const run = async (options: NewProjectOptions) => {
     }
 
     console.log(bold(green('🍡') + ' Done! Go!'))
+
+    let i = 1
+
+    const relative = path.relative(process.cwd(), name)
+    if (relative !== '') {
+        console.log(`  ${i++}: ${bold(cyan(`cd ${relative}`))}`)
+    }
+
+    console.log(`  ${i++}: ${bold(cyan('npm install'))} (or pnpm install, yarn, etc)`)
 }
