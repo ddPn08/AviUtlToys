@@ -15,7 +15,7 @@ export default createPlugin(async () => {
       {
         id: 'Files',
         title: 'Files',
-        description: 'ファイルを管理できます。',
+        description: 'ファイルを管理できます。プラグインやスクリプトの有効無効の管理等に使えます。',
         component: () => <Files />,
         essentialConfig: ['aviutilDir'],
       },

@@ -5,7 +5,7 @@
   "description": "Aviutil Toys の基礎機能を提供します。",
   "homepage": "https://github.com/ddPn08/aviutil-toys",
   "scripts": {
-    "build": "aut build"
+    "build": "aviutil-toys build"
   },
   "dependencies": {
     "@aviutil-toys/api": "workspace:^",

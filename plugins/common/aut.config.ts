@@ -5,9 +5,13 @@ export default definePluginConfig({
         entry: './server/index.ts',
         esbuild: {
             external: ['@aviutil-toys/assets'],
+            minify: true,
         },
     },
     client: {
         entry: './client/index.tsx',
+        esbuild: {
+            minify: true,
+        },
     },
 })
