@@ -35,6 +35,7 @@ const packageJsonExporter = (config: BuildConfig, packageJson: Record<string, an
 
 const mergeConfig = (options: BuildOptions, overrides: Partial<BuildOptions>) => {
     const { external, plugins, inject, ...rest } = options
+    rest.minify = false
     return {
         ...rest,
         ...overrides,
@@ -94,7 +95,8 @@ export const run = async (context: { args: { watch: boolean } }) => {
             }
         },
     }
-    const commonConfig = {
+    const commonConfig: BuildOptions = {
+        logLevel: 'info',
         bundle: true,
         watch: context.args.watch ? watchOption : false,
         plugins: [packageJsonExporter(config, packageJson)],
@@ -105,7 +107,6 @@ export const run = async (context: { args: { watch: boolean } }) => {
                 mergeConfig(
                     {
                         entryPoints: [serverEntry],
-                        logLevel: 'info',
                         external: ['electron', '@aviutil-toys/api', '@aviutil-toys/api/*'],
                         outfile: './dist/server.js',
                         format: 'cjs',
@@ -119,13 +120,10 @@ export const run = async (context: { args: { watch: boolean } }) => {
                 mergeConfig(
                     {
                         entryPoints: [clientEntry],
-                        logLevel: 'info',
-                        external: [
-                            ...properties['client.externals'],
-                            ...(config.client.esbuild?.external ?? []),
-                        ],
+                        external: properties['client.externals'],
                         outfile: './dist/client.js',
                         format: 'esm',
+                        platform: 'browser',
                         inject: (
                             await fs.promises.readdir(path.join(__dirname, 'shims'))
                         ).map((file) => path.join(__dirname, 'shims', file)),

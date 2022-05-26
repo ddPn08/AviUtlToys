@@ -1,8 +1,9 @@
 {
-  "extends": "@tsconfig/create-react-app",
+  "extends": "../modules/config/browser.tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "outDir": "dist.test",
+    "noEmit": false,
+    "outDir": "dist",
     "baseUrl": "./",
     "paths": {
       "@/*": [

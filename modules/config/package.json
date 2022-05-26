@@ -1,5 +1,5 @@
 {
-  "name": "@aviutil-toys/assets",
+  "name": "@aviutil-toys/config",
   "version": "0.0.0",
   "main": "index.js",
   "packageManager": "yarn@3.2.0"

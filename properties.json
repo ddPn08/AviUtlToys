@@ -9,7 +9,6 @@
     "@chakra-ui/react",
     "@chakra-ui/icons",
     "framer-motion",
-    "@aviutil-toys/app",
     "@aviutil-toys/api",
     "@aviutil-toys/assets"
   ],

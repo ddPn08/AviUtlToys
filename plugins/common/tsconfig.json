@@ -1,8 +1,8 @@
 {
-  "extends": "@tsconfig/node16-strictest-esm",
+  "extends": "@aviutil-toys/config/base.tsconfig.json",
   "compilerOptions": {
-    "moduleResolution": "node",
     "baseUrl": "./",
+    "noEmit": false,
     "paths": {
       "@/*": [
         "*"

@@ -3,7 +3,8 @@
   "workspaces": [
     "plugins/*",
     "modules/*",
-    "plugin-templates/*"
+    "plugin-templates/*",
+    "core"
   ],
   "scripts": {
     "lint": "eslint '**/*.{tsx,ts}'",

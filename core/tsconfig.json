@@ -1,8 +1,6 @@
 {
-  "extends": "@tsconfig/node16-strictest-esm",
+  "extends": "../modules/config/base.tsconfig.json",
   "compilerOptions": {
-    "composite": true,
-    "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
       "@/*": [

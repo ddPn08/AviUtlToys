@@ -3,20 +3,15 @@ import fs from 'fs'
 
 import { PluginLoader } from '../../plugin-loader'
 
-import { isDev } from '@/main'
+// import { isDev } from '@/main'
 
-export const LoadPlugins: Plugin = {
-    name: 'plugin loader',
+export const PluginLoaderPlugin: Plugin = {
+    name: 'aviutil-toys:plugin-loader',
     setup(build) {
         console.log('Loading plugins...')
         build.onResolve({ filter: new RegExp('^[^.]+$') }, (args) => {
-            if (!isDev) {
-                args.path = args.path.replace(/@aviutil-toys\/api/g, '@aviutil-toys/api/dist')
-                if (args.path === '@aviutil-toys/api/dist')
-                    args.path = '@aviutil-toys/api/dist/root'
-            }
             return {
-                path: require.resolve(args.path).replace('app.asar', 'app.asar.unpacked'),
+                path: require.resolve(args.path),
             }
         })
         build.onLoad({ filter: /\.js?$/ }, async (args) => {

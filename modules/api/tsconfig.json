@@ -1,18 +1,6 @@
 {
-  "extends": "@tsconfig/node16-strictest-esm",
+  "extends": "../config/base.tsconfig.json",
   "compilerOptions": {
-    "lib": [
-      "DOM"
-    ],
-    "target": "ESNext",
-    "module": "NodeNext",
-    "outDir": "dist",
-    "baseUrl": "./",
-    "declaration": true,
-  },
-  "include": [
-    "server",
-    "client",
-    "root"
-  ]
+    "outDir": "./dist"
+  }
 }

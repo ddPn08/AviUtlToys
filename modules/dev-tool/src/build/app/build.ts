@@ -1,17 +1,14 @@
 import { build, CliOptions } from 'electron-builder'
 import path from 'path'
 
-import { properties } from '../../properties'
 import { getAllDependencies } from '../../util/dependencies'
 import { NODE_MODULES } from '../../util/node_modules'
 
-const cwd = path.join(__dirname, '../../../../app')
+const cwd = path.join(__dirname, '../../../../../core')
 
 export const buildApplication = async () => {
-    const externals = new Set(
-        (await Promise.all([...properties['client.externals']].map(getAllDependencies))).flat(),
-    )
-    externals.delete('@aviutil-toys/app')
+    const modules = new Set(await getAllDependencies('@aviutil-toys/app'))
+    modules.delete('@aviutil-toys/app')
 
     const options: CliOptions = {
         config: {
@@ -30,7 +27,7 @@ export const buildApplication = async () => {
                 ],
             },
             compression: 'store',
-            files: ['dist/**/*', ...Array.from(externals).map((v) => `${NODE_MODULES}/${v}`)],
+            files: ['dist/**/*', ...Array.from(modules).map((v) => `${NODE_MODULES}/${v}`)],
             asar: false,
         },
     }

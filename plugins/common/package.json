@@ -10,19 +10,22 @@
   "dependencies": {
     "@aviutil-toys/api": "workspace:^",
     "@aviutil-toys/cli": "workspace:^",
+    "@aviutil-toys/config": "workspace:^",
     "@aviutil/exo": "^0.1.0",
-    "@chakra-ui/icons": "^1.1.7",
-    "@chakra-ui/react": "^1.8.8",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
-    "framer-motion": "^6",
+    "@chakra-ui/icons": "1.1.7",
+    "@chakra-ui/react": "1.8.8",
+    "@emotion/react": "11",
+    "@emotion/styled": "11",
+    "framer-motion": "6",
     "react": "^18",
+    "react-dom": "^18",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.31",
     "@types/react": "^18",
-    "electron": "^18.2.0",
+    "@types/react-dom": "^18",
+    "electron": "^19.0.0",
     "iconv-lite": "^0.6.3"
   },
   "packageManager": "yarn@3.2.0"

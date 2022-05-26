@@ -7,7 +7,7 @@ import path from 'path'
 import { properties } from '../../properties'
 import type { BuildApplicationOptions } from '../../types'
 
-const cwd = path.join(__dirname, '../../../../app')
+const cwd = path.join(__dirname, '../../../../../core')
 
 const bundlePlugins = async () => {
     const pluginsDir = path.join(__dirname, '../../../../../plugins')
@@ -78,20 +78,6 @@ export const bundleApplication = async ({ dev, production }: BuildApplicationOpt
             external: properties['server.externals'],
             format: 'cjs',
             platform: 'node',
-            plugins: [
-                // {
-                //     name: 'define esbuild binary path',
-                //     setup(build) {
-                //         build.onEnd(async () => {
-                //             const file = path.join(outdir, 'index.js')
-                //             const line = `process.env['ESBUILD_BINARY_PATH']=require.resolve('esbuild-windows-64/esbuild.exe').replace('app.asar', 'app.asar.unpacked')\n`
-                //             const content = await fs.promises.readFile(file, 'utf8')
-                //             const newContent = `${line}\n${content}`
-                //             await fs.promises.writeFile(file, newContent)
-                //         })
-                //     },
-                // },
-            ],
         },
     }
     try {
@@ -110,7 +96,7 @@ export const bundleApplication = async ({ dev, production }: BuildApplicationOpt
     if (dev)
         spawn('yarn', ['electron', 'dist/index.js', '--remote-debugging-port=9222'], {
             stdio: 'inherit',
-            cwd: cwd,
             env: { ...process.env, NODE_ENV: 'development' },
+            cwd,
         }).on('exit', process.exit)
 }

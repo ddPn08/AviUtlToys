@@ -37,7 +37,7 @@ const createWindow = async () => {
 
 const loadPLugins = async () => {
     const pluginDirs = [path.join(app.getPath('userData'), 'plugins')]
-    if (isDev) pluginDirs.push(path.join(__dirname, '../../..', 'plugins'))
+    if (isDev) pluginDirs.push(path.join(__dirname, '../..', 'plugins'))
     else pluginDirs.push(path.join(__dirname, 'plugins').replace('app.asar', 'app.asar.unpacked'))
 
     for (const dir of pluginDirs) {

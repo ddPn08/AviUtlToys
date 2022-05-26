@@ -6,7 +6,7 @@ import path from 'path'
 
 import { isDev } from '..'
 import { PluginLoader } from '../plugin-loader'
-import { LoadPlugins } from './plugins/plugin-loader'
+import { PluginLoaderPlugin } from './plugins/plugin-loader'
 
 const createBuildMeta = () => {
     return Promise.all(
@@ -56,7 +56,7 @@ export const buildClient = async (window: BrowserWindow) => {
                 window.loadURL(`file://${path.join(outdir, 'index.html')}${url.hash}`)
             },
         },
-        plugins: [LoadPlugins],
+        plugins: [PluginLoaderPlugin],
     }
     await build(options)
     await fs.promises.copyFile(path.join(srcDir, 'index.html'), path.join(outdir, 'index.html'))
