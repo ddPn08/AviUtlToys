@@ -19,7 +19,7 @@ import { useContext, useState } from 'react'
 import { ExosContext } from '.'
 
 import { client } from '@/client/context'
-import { ExoMeta } from '@/types/exos'
+import type { ExoMeta } from '@/types/exos'
 
 export const ExoDraggable: React.FC<{
   exo: ExoMeta

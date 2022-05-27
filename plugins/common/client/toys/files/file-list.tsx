@@ -1,6 +1,6 @@
 import { Box, Grid, GridItem, Input, Text, useColorMode } from '@chakra-ui/react'
 
-import { AviutilFile, AviutilFileSet } from '@/types/files'
+import type { AviutilFile, AviutilFileSet } from '@/types/files'
 
 export const FileList: React.FC<{
   fileSet: AviutilFileSet

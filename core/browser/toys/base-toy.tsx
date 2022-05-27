@@ -1,14 +1,14 @@
 import type { ConfigurationType } from '@aviutil-toys/api'
-import { api, FutureContextType } from '@aviutil-toys/api/client'
+import { api, ToyContextType } from '@aviutil-toys/api/client'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useErrorModal } from '../components/error-modal'
 import { Constants } from '../constants'
 
-import { FutureContainer } from '@/browser/futures/future-container'
+import { ToyContainer } from '@/browser/toys/toy-container'
 
-export const BaseFuture: React.FC<FutureContextType> = ({ component: C, ...rest }) => {
+export const BaseToy: React.FC<ToyContextType> = ({ component: C, ...rest }) => {
   const showErrorModal = useErrorModal()
   const navigate = useNavigate()
 
@@ -35,7 +35,7 @@ export const BaseFuture: React.FC<FutureContextType> = ({ component: C, ...rest 
   useEffect(() => {
     if (
       window.location.pathname !==
-      `/futures/${rest.parentPlugin ? `${rest.parentPlugin}/` : ''}${rest.id}`
+      `/toys/${rest.parentPlugin ? `${rest.parentPlugin}/` : ''}${rest.id}`
     ) {
       checkMissingConfig()
     }
@@ -43,8 +43,8 @@ export const BaseFuture: React.FC<FutureContextType> = ({ component: C, ...rest 
   }, [rest.essentialConfig, rest.id, rest.parentPlugin])
 
   return (
-    <FutureContainer {...rest}>
+    <ToyContainer {...rest}>
       <C />
-    </FutureContainer>
+    </ToyContainer>
   )
 }

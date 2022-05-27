@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { ExoDraggable } from './exo-draggable'
 
-import { ExoMeta } from '@/types/exos'
+import type { ExoMeta } from '@/types/exos'
 
 export const ExoList: React.FC<{ exos: ExoMeta[] }> = ({ exos }) => {
   const [search, setSearch] = useState('')

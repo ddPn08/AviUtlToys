@@ -6,12 +6,12 @@ import React from 'react'
 import { ipcSystem } from '../api/system'
 import { Constants } from '../constants'
 
-import { futuresAtom, pluginsAtom } from '@/browser/state'
+import { toysAtom, pluginsAtom } from '@/browser/state'
 
 // eslint-disable-next-line react/display-name
 export const PluginLoader = React.memo(() => {
   const [, setPlugins] = useAtom(pluginsAtom)
-  const [, setFutures] = useAtom(futuresAtom)
+  const [, setToys] = useAtom(toysAtom)
 
   const update = async () => {
     const plugins = await ipcSystem.invoke('plugin:list')
@@ -25,16 +25,16 @@ export const PluginLoader = React.memo(() => {
       }),
     )
 
-    const futures = pluginDataList
+    const toys = pluginDataList
       .map((plugin) =>
-        plugin.context.futures.map((future) => ({
-          ...future,
+        plugin.context.toys.map((toy) => ({
+          ...toy,
           parentPlugin: plugin.meta['id'],
         })),
       )
       .flat()
     setPlugins(pluginDataList)
-    setFutures([...Constants.futures, ...futures])
+    setToys([...Constants.toys, ...toys])
   }
 
   useEffect(() => {

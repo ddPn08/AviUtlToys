@@ -1,14 +1,14 @@
 import type { ConfigurationType } from '@aviutil-toys/api'
-import type { FutureContextType } from '@aviutil-toys/api/client'
+import type { ToyContextType } from '@aviutil-toys/api/client'
 import { SettingsIcon } from '@chakra-ui/icons'
 
-import { Settings } from './futures/settings'
+import { Settings } from './toys/settings'
 
 type Constants = {
   configuration: {
     keyMap: Record<keyof ConfigurationType, string>
   }
-  futures: FutureContextType[]
+  toys: ToyContextType[]
 }
 export const Constants: Constants = {
   configuration: {
@@ -16,7 +16,7 @@ export const Constants: Constants = {
       aviutilDir: 'Aviutilのフォルダ',
     },
   },
-  futures: [
+  toys: [
     {
       id: 'settings',
       title: 'Settings',

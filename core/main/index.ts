@@ -30,7 +30,7 @@ const createWindow = async () => {
         backgroundColor: '#ffffff',
     })
 
-    window.loadURL(`file://${path.join(__dirname, 'client', 'index.html')}#/futures/settings`)
+    window.loadURL(`file://${path.join(__dirname, 'client', 'index.html')}#/toys/settings`)
     if (isDev) window.webContents.openDevTools()
 }
 

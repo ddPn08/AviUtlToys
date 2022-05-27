@@ -1,11 +1,11 @@
-import type { FutureContextType } from '@aviutil-toys/api/client'
+import type { ToyContextType } from '@aviutil-toys/api/client'
 import { LinkIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, HStack, VStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { useAtom } from 'jotai'
 import { To, useNavigate } from 'react-router-dom'
 
-import { futuresAtom, pluginsAtom } from '@/browser/state'
+import { toysAtom, pluginsAtom } from '@/browser/state'
 
 const StyledBox = styled(Box)`
   width: 100%;
@@ -34,10 +34,10 @@ const NavButton: React.FC<{
 }
 
 export const Menu: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) => {
-  const [futures] = useAtom(futuresAtom)
+  const [toys] = useAtom(toysAtom)
   const [plugins] = useAtom(pluginsAtom)
-  const grouped: Record<string, FutureContextType[]> = {}
-  for (const future of futures) {
+  const grouped: Record<string, ToyContextType[]> = {}
+  for (const future of toys) {
     const group = future.parentPlugin || 'system'
     grouped[group] = [...(grouped[group] || []), future]
   }
@@ -54,7 +54,7 @@ export const Menu: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) =
               {grouped[group]?.map(({ id, title, icon, parentPlugin }, i) => (
                 <NavButton
                   key={i}
-                  to={`/futures/${parentPlugin ? `${parentPlugin}/` : ''}${id}`}
+                  to={`/toys/${parentPlugin ? `${parentPlugin}/` : ''}${id}`}
                   icon={icon}
                   label={title}
                 />

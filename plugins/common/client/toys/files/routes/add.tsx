@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom'
 import { FilesContext } from '..'
 
 import { client } from '@/client/context'
-import { AviutilFileType } from '@/types/files'
+import type { AviutilFileType } from '@/types/files'
 
 export const Add: React.FC = () => {
   const navigate = useNavigate()

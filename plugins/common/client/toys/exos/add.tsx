@@ -71,7 +71,7 @@ export const Add: React.FC<{
                     })
                     setDialogIsOpen(false)
                     if (res.canceled) return
-                    setFile(res.filePaths[0])
+                    setFile(res.filePaths[0]!)
                   }}
                 >
                   参照

@@ -10,8 +10,8 @@ import { Menu } from './menu'
 import { PluginLoader } from './plugin-loader'
 import { theme } from './theme'
 
-import { BaseFuture } from '@/browser/futures/base-future'
-import { futuresAtom } from '@/browser/state'
+import { toysAtom } from '@/browser/state'
+import { BaseToy } from '@/browser/toys/base-toy'
 
 const GlobalStyles = () => {
   const { colorMode } = useColorMode()
@@ -59,7 +59,7 @@ const Providers: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
 )
 
 export const App: React.FC = () => {
-  const [futures] = useAtom(futuresAtom)
+  const [toys] = useAtom(toysAtom)
 
   return (
     <Providers>
@@ -67,15 +67,13 @@ export const App: React.FC = () => {
         <Frame gridColumn="1 / 3" />
         <Box gridColumn="2 / 3" h="100%" overflowY="auto">
           <Routes>
-            {futures.map((future, i) => (
+            {toys.map((toy, i) => (
               <Route
                 key={i}
-                path={`/futures/${future.parentPlugin ? `${future.parentPlugin}/` : ''}${
-                  future.id
-                }/*`}
+                path={`/toys/${toy.parentPlugin ? `${toy.parentPlugin}/` : ''}${toy.id}/*`}
                 element={
                   <Suspense fallback={'loading'}>
-                    <BaseFuture {...future} />
+                    <BaseToy {...toy} />
                   </Suspense>
                 }
               />

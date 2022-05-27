@@ -6,7 +6,7 @@ import { Add } from './routes/add'
 import { Edit } from './routes/edit'
 
 import { client } from '@/client/context'
-import { AviutilFileSet } from '@/types/files'
+import type { AviutilFileSet } from '@/types/files'
 
 export const FilesContext = createContext<{
   update: () => void

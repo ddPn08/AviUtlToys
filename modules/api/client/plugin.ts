@@ -1,7 +1,7 @@
-import type { FutureContextType } from './future.js'
+import type { ToyContextType } from './toy.js'
 
 export type PluginMeta = {
-    futures: FutureContextType[]
+    toys: ToyContextType[]
 }
 export type ClientPluginFn = () => PluginMeta | Promise<PluginMeta>
 export type ClientPlugin = {

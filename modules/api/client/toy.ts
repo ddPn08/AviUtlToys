@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react'
 
-export type FutureContextType = {
+export type ToyContextType = {
     id: string
     title: string
     description: string
@@ -11,5 +11,5 @@ export type FutureContextType = {
     essentialConfig?: string[]
 }
 
-export const FutureContext = createContext({} as Omit<FutureContextType, 'component'>)
-export const useFutureContext = () => useContext(FutureContext)
+export const ToyContext = createContext({} as Omit<ToyContextType, 'component'>)
+export const useToyContext = () => useContext(ToyContext)

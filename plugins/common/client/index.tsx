@@ -1,11 +1,11 @@
 import { createPlugin } from '@aviutil-toys/api/client'
 
-import { Exos } from './futures/exos'
-import { Files } from './futures/files'
+import { Exos } from './toys/exos'
+import { Files } from './toys/files'
 
 export default createPlugin(async () => {
   return {
-    futures: [
+    toys: [
       {
         id: 'Exos',
         title: 'Exos',

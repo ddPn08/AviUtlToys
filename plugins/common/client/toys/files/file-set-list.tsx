@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { FilesContext } from '.'
 
 import { client } from '@/client/context'
-import { AviutilFileSet } from '@/types/files'
+import type { AviutilFileSet } from '@/types/files'
 
 export const FileSetList: React.FC<{
   fileSets: AviutilFileSet[]

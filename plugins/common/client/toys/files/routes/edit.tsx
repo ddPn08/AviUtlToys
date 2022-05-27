@@ -6,7 +6,7 @@ import { FilesContext } from '..'
 import { FileList } from '../file-list'
 
 import { client } from '@/client/context'
-import { AviutilFileSet } from '@/types/files'
+import type { AviutilFileSet } from '@/types/files'
 
 export const Edit: React.FC = () => {
   const location = useLocation()

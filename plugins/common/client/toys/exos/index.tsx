@@ -6,7 +6,7 @@ import { client } from '../../context'
 import { Add } from './add'
 import { ExoList } from './exo-list'
 
-import { ExoMeta } from '@/types/exos'
+import type { ExoMeta } from '@/types/exos'
 
 export const ExosContext = createContext<{
   update: () => void
