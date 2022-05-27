@@ -25,7 +25,7 @@
     "@types/node": "^17.0.31",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "electron": "^19.0.0",
+    "electron": "^19.0.1",
     "iconv-lite": "^0.6.3"
   },
   "packageManager": "yarn@3.2.0"

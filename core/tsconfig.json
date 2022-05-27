@@ -1,5 +1,5 @@
 {
-  "extends": "../modules/config/base.tsconfig.json",
+  "extends": "../modules/config/browser.tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
@@ -7,14 +7,5 @@
         "*"
       ]
     }
-  },
-  "include": [
-    "main",
-    "types"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.browser.json"
-    }
-  ]
+  }
 }

@@ -1,11 +1,11 @@
-import { FutureContextType } from '@aviutil-toys/api/client'
+import type { FutureContextType } from '@aviutil-toys/api/client'
 import { LinkIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, HStack, VStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { useAtom } from 'jotai'
 import { To, useNavigate } from 'react-router-dom'
 
-import { futuresAtom } from '@/browser/state'
+import { futuresAtom, pluginsAtom } from '@/browser/state'
 
 const StyledBox = styled(Box)`
   width: 100%;
@@ -35,6 +35,7 @@ const NavButton: React.FC<{
 
 export const Menu: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) => {
   const [futures] = useAtom(futuresAtom)
+  const [plugins] = useAtom(pluginsAtom)
   const grouped: Record<string, FutureContextType[]> = {}
   for (const future of futures) {
     const group = future.parentPlugin || 'system'
@@ -45,12 +46,12 @@ export const Menu: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) =
     <Box {...props}>
       <StyledBox>
         {Object.keys(grouped).map((group) => {
-          const plugin = window.plugins.find((v) => v.meta['id'] === group)
+          const plugin = plugins.find((v) => v.meta['id'] === group)
           const heading = plugin?.meta['name'] || group
           return (
             <VStack key={group} marginTop="5">
               <Heading size="sm">{heading}</Heading>
-              {grouped[group].map(({ id, title, icon, parentPlugin }, i) => (
+              {grouped[group]?.map(({ id, title, icon, parentPlugin }, i) => (
                 <NavButton
                   key={i}
                   to={`/futures/${parentPlugin ? `${parentPlugin}/` : ''}${id}`}
@@ -61,14 +62,6 @@ export const Menu: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) =
             </VStack>
           )
         })}
-        {/* {futures.map(({ id, title, icon, parentPlugin }, i) => (
-          <NavButton
-            key={i}
-            to={`/futures/${parentPlugin ? `${parentPlugin}/` : ''}${id}`}
-            icon={icon}
-            label={title}
-          />
-        ))} */}
       </StyledBox>
     </Box>
   )

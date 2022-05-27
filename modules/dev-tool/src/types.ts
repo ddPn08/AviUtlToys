@@ -1,9 +1,3 @@
-export type BuildApplicationOptions = {
-    dev: boolean
-    bundleOnly: boolean
-    production: boolean
-}
-
 export type ModuleConfig = Partial<{
     entryPoints: string[]
     entriesPattern: string
@@ -13,6 +7,7 @@ export type ModuleConfig = Partial<{
     platform: ('browser' | 'node')[]
     bundle: boolean
     external: string[]
+    internal: string[]
 
     dts: boolean
     tsconfig: string

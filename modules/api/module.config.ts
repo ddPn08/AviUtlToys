@@ -1,23 +1,20 @@
-import { defineConfig, PublishConfig } from '@aviutil-toys/dev-tools'
+import { defineConfig, ModuleConfig, PublishConfig } from '@aviutil-toys/dev-tools'
 import path from 'path'
 
-import packageJson from './package.json'
-
-const CONFIG = {
+const config: ModuleConfig = {
     entryPoints: ['./server/index.ts', './client/index.ts', './root/index.ts'],
-    external: Object.keys(packageJson.dependencies),
     bundle: true,
     dts: true,
 }
 
 export default defineConfig(
     {
-        ...CONFIG,
+        ...config,
         outdir: path.join(__dirname, 'dist'),
         format: ['cjs'],
     },
     {
-        ...CONFIG,
+        ...config,
         outdir: path.join(__dirname, 'dist/esm'),
         format: ['esm'],
         outExtension: {

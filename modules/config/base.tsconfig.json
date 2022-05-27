@@ -22,15 +22,12 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-		"resolveJsonModule": true,
+    "resolveJsonModule": true,
     "importsNotUsedAsValues": "error",
     "checkJs": true,
     "paths": {
-      "@aviutil-toys/api": [
-        "../../modules/api"
-      ],
-      "@aviutil-toys/assets": [
-        "../../modules/assets"
+      "@aviutil-toys/*": [
+        "../../modules/*"
       ]
     }
   },

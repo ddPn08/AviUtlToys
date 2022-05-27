@@ -1,11 +1,8 @@
-import { definePluginConfig } from '@aviutil-toys/api'
+import { definePluginConfig } from '@aviutil-toys/cli'
 
 export default definePluginConfig({
     server: {
         entry: './server/index.ts',
-        esbuild: {
-            external: ['@aviutil-toys/assets'],
-        },
     },
     client: {
         entry: './client/index.tsx',

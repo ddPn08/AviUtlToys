@@ -33,10 +33,10 @@ export const Configuration: React.FC = () => {
                   })
                   setDialogIsOpen(false)
                   if (res.canceled) return
-                  setAviutilDir(res.filePaths[0])
+                  setAviutilDir(res.filePaths[0]!)
 
                   const config = await api.invoke('config:get')
-                  config.aviutilDir = res.filePaths[0]
+                  config.aviutilDir = res.filePaths[0]!
                   await api.invoke('config:update', config)
                 }}
               >

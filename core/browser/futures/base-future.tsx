@@ -1,4 +1,4 @@
-import { ConfigurationType } from '@aviutil-toys/api'
+import type { ConfigurationType } from '@aviutil-toys/api'
 import { api, FutureContextType } from '@aviutil-toys/api/client'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'

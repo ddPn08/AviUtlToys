@@ -1,6 +1,7 @@
 {
-  "extends": "../config/base.tsconfig.json",
+  "extends": "../config/browser.tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist"
-  }
+  },
+  "exclude": ["dist"]
 }

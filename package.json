@@ -10,9 +10,8 @@
     "lint": "eslint '**/*.{tsx,ts}'",
     "format": "prettier --write '**/*.{tsx,ts}'",
     "build:module": "yarn dev-tools build:module",
-    "build:app": "yarn dev-tools build:app",
-    "publish:module": "yarn dev-tools publish:module",
-    "dev": "yarn dev-tools build:app --dev --bundle-only"
+    "build:app": "yarn workspace @aviutil-toys/core build",
+    "publish:module": "yarn dev-tools publish:module"
   },
   "devDependencies": {
     "@aviutil-toys/dev-tools": "workspace:^",

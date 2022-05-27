@@ -1,6 +1,10 @@
-import { extendTheme, type Theme } from '@chakra-ui/react'
+import { extendTheme, Theme as ChakraTheme } from '@chakra-ui/react'
 
-const config: Partial<Theme> = {
+declare module '@emotion/react' {
+  export interface Theme extends ChakraTheme {}
+}
+
+const config: Partial<ChakraTheme> = {
   fonts: {
     heading: 'Segoe UI, Yu Gothic UI',
     body: 'Segoe UI, Yu Gothic UI',
@@ -12,4 +16,4 @@ const config: Partial<Theme> = {
   },
 }
 
-export const theme = extendTheme(config) as Theme
+export const theme = extendTheme(config) as ChakraTheme

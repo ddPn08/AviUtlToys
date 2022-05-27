@@ -1,8 +1,8 @@
 import cac from 'cac'
 
+import packageJson from '../../package.json'
 import * as builder from './builder'
 import * as newProject from './new'
-import { packageJson } from './package'
 
 export type BaseCliContext = {
     args: {}

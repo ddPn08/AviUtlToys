@@ -1,13 +1,5 @@
-import {
-  Box,
-  ChakraProvider,
-  Heading,
-  Spinner,
-  ColorModeScript,
-  useTheme,
-  useColorMode,
-} from '@chakra-ui/react'
-import { css, Global } from '@emotion/react'
+import { Box, ChakraProvider, ColorModeScript, useColorMode } from '@chakra-ui/react'
+import { css, useTheme, Global } from '@emotion/react'
 import { useAtom } from 'jotai'
 import { Suspense } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
@@ -55,38 +47,9 @@ const GlobalStyles = () => {
   )
 }
 
-const ContextSuspender: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-  if (!window.ready)
-    throw new Promise<void>((resolve) => {
-      const timer = setInterval(() => {
-        if (!window.ready) return
-        clearInterval(timer)
-        resolve()
-      }, 500)
-    })
-  return <>{children}</>
-}
-
-const LoadingFallback: React.FC<React.ComponentProps<typeof Box>> = (props) => {
-  return (
-    <Box
-      w="100%"
-      h="100%"
-      display="flex"
-      gap="1rem"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection="column"
-      {...props}
-    >
-      <Heading>Loading...</Heading>
-      <Spinner size="xl" />
-    </Box>
-  )
-}
-
 const Providers: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
   <HashRouter>
+    <PluginLoader />
     <ColorModeScript />
     <ChakraProvider theme={theme}>
       <GlobalStyles />
@@ -102,29 +65,24 @@ export const App: React.FC = () => {
     <Providers>
       <Box display="grid" gridTemplateColumns="1fr 4fr" gridTemplateRows="31px 1fr" h="100%">
         <Frame gridColumn="1 / 3" />
-        <Suspense fallback={<LoadingFallback gridColumn="1 / 3" />}>
-          <ContextSuspender />
-          <PluginLoader />
-
-          <Box gridColumn="2 / 3" h="100%" overflowY="auto">
-            <Routes>
-              {futures.map((future, i) => (
-                <Route
-                  key={i}
-                  path={`/futures/${future.parentPlugin ? `${future.parentPlugin}/` : ''}${
-                    future.id
-                  }/*`}
-                  element={
-                    <Suspense fallback={'loading'}>
-                      <BaseFuture {...future} />
-                    </Suspense>
-                  }
-                />
-              ))}
-            </Routes>
-          </Box>
-          <Menu gridRow="2 / 3" gridColumn="1 / 2" />
-        </Suspense>
+        <Box gridColumn="2 / 3" h="100%" overflowY="auto">
+          <Routes>
+            {futures.map((future, i) => (
+              <Route
+                key={i}
+                path={`/futures/${future.parentPlugin ? `${future.parentPlugin}/` : ''}${
+                  future.id
+                }/*`}
+                element={
+                  <Suspense fallback={'loading'}>
+                    <BaseFuture {...future} />
+                  </Suspense>
+                }
+              />
+            ))}
+          </Routes>
+        </Box>
+        <Menu gridRow="2 / 3" gridColumn="1 / 2" />
       </Box>
     </Providers>
   )

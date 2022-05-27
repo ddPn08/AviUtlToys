@@ -1,24 +1,33 @@
 {
-  "name": "@aviutil-toys/app",
+  "name": "@aviutil-toys/core",
   "version": "0.0.1",
   "main": "./dist/index.js",
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "dev": "NODE_ENV='development' yarn build --bundle-only && yarn go:dev",
+    "go": "electron dist/index.js --remote-debugging-port=9222",
+    "go:dev": "NODE_ENV='development' yarn go"
+  },
   "devDependencies": {
     "@types/node": "^17.0.35",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "electron": "^19.0.0",
+    "electron": "^19.0.1",
+    "electron-builder": "^23.0.3",
+    "esbuild": "^0.14.38",
+    "esbuild-register": "^3.3.2",
     "package-json-type": "^1.0.3",
     "source-map-support": "^0.5.21",
     "typescript": "^4.6.4"
   },
   "dependencies": {
     "@aviutil-toys/api": "workspace:^",
+    "@aviutil-toys/assets": "workspace:^",
+    "@aviutil-toys/config": "workspace:^",
     "@chakra-ui/icons": "1.1.7",
     "@chakra-ui/react": "1.8.8",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "esbuild": "^0.14.38",
-    "esbuild-register": "^3.3.2",
     "framer-motion": "^6",
     "jotai": "^1.6.4",
     "react": "^18",

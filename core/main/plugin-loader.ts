@@ -10,43 +10,27 @@ export namespace PluginLoader {
     export const plugins: Plugin[] = []
 
     export const loadPlugins = async (pluginDir: string) => {
-        if (!fs.existsSync(pluginDir)) await fs.promises.mkdir(pluginDir)
+        if (!fs.existsSync(pluginDir)) return
 
         const files = await fs.promises.readdir(pluginDir)
-        const pluginDirs = await Promise.all(
+
+        const dirs = await Promise.all(
             files.filter(async (file) =>
                 (await fs.promises.lstat(path.join(pluginDir, file))).isDirectory(),
             ),
         )
-        for (const dir of pluginDirs) {
-            if (!fs.existsSync(path.join(pluginDir, dir, 'package.json'))) {
-                console.warn(`Plugin ${dir} is missing package.json`)
-                continue
-            }
-            if (!fs.existsSync(path.join(pluginDir, dir, 'dist', 'client.js'))) {
-                console.warn(`Plugin ${dir} is missing client.js`)
-                continue
-            }
-            if (!fs.existsSync(path.join(pluginDir, dir, 'dist', 'server.js'))) {
-                console.warn(`Plugin ${dir} is missing server.js`)
-                continue
-            }
-
-            const meta: PluginMeta['meta'] = JSON.parse(
-                await fs.promises.readFile(path.join(pluginDir, dir, 'package.json'), 'utf-8'),
-            )
-
+        for (let plugin of dirs) {
+            if (fs.existsSync(path.join(pluginDir, plugin, 'dist')))
+                plugin = path.join(plugin, 'dist')
+            const meta: PluginMeta['meta'] = require(path.join(pluginDir, plugin, 'package.json'))
             if (!meta.name || !meta.description || !meta['id'] || !meta.version) {
-                console.warn(`Plugin ${dir} is missing a required field.`)
+                console.warn(`Plugin ${plugin} is missing a required field.`)
                 continue
             }
-
-            console.log(`Loading plugin ${meta.name}`)
-
             pluginMetas.push({
                 entry: {
-                    server: path.join(pluginDir, dir, 'dist', 'server.js'),
-                    client: path.join(pluginDir, dir, 'dist', 'client.js'),
+                    server: path.join(pluginDir, plugin, 'server.js'),
+                    client: path.join(pluginDir, plugin, 'client.js'),
                 },
                 meta,
             })

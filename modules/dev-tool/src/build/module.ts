@@ -30,6 +30,9 @@ export const buildModule = async (options: ModuleOptions) => {
         const configs: Record<string, Required<ModuleConfig>> = {
             ...require(path.join(cwd, 'module.config.ts')).default,
         }
+        const packageJson = JSON.parse(
+            await fs.promises.readFile(path.join(cwd, 'package.json'), 'utf8'),
+        )
 
         for (let config of Object.values(configs)) {
             config = { ...DEFAULT_CONFIG, ...config }
@@ -57,22 +60,30 @@ export const buildModule = async (options: ModuleOptions) => {
                 cwd,
             )
 
+            const dependencies = [
+                ...Object.keys(packageJson.dependencies || {}),
+                ...Object.keys(packageJson.peerDependencies || {}),
+            ]
+            if (config.internal)
+                for (const dep of config.internal)
+                    delete dependencies[dependencies.findIndex((d) => d === dep)]
+
             for (const format of config.format) {
                 for (const platform of config.platform) {
                     const outdir = formatOutDir(cwd, config.outdir, platform, format)
 
                     const esbuildConfig: BuildOptions = {
-                        format,
+                        outdir,
                         platform,
+                        format,
                         logLevel: 'info',
                         watch: !!options.watch,
                         entryPoints: config.entryPoints,
-                        bundle: config.bundle,
+                        bundle: config.bundle || true,
                         outExtension: config.outExtension || {
                             '.js': format === 'cjs' ? '.js' : '.mjs',
                         },
-                        external: config.external,
-                        outdir,
+                        external: [...(config.external || []), ...dependencies],
                     }
                     await build(esbuildConfig)
                 }

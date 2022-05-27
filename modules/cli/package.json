@@ -4,6 +4,8 @@
   "bin": {
     "aviutil-toys": "./cli.js"
   },
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/types/index.d.ts",
   "files": [
     "dist",
     "cli.js"
@@ -30,6 +32,8 @@
     "dev": "node -r esbuild-register cli/index.ts"
   },
   "dependencies": {
+    "@aviutil-toys/api": "workspace:^",
+    "@aviutil-toys/config": "workspace:^",
     "cac": "^6.7.12",
     "degit": "^2.8.4",
     "enquirer": "^2.3.6",

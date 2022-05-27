@@ -14,9 +14,8 @@
   ],
   "server.externals": [
     "electron",
-    "esbuild",
-    "esbuild-windows-64",
     "@aviutil-toys/api",
+    "@aviutil-toys/api/*",
     "@aviutil-toys/assets"
   ]
 }

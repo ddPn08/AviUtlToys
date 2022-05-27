@@ -9,6 +9,7 @@ export type BuildConfig = {
         entry: string
         esbuild?: Partial<BuildOptions>
     }
+    outdir?: string
 }
 
 export const definePluginConfig = (config: BuildConfig) => config
