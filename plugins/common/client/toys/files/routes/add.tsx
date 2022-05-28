@@ -14,9 +14,10 @@ import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { FilesContext } from '..'
+import { FileList } from '../components/file-list'
 
 import { client } from '@/client/context'
-import type { AviutilFileType } from '@/types/files'
+import type { AviutilFile, AviutilFileType } from '@/types/files'
 
 export const Add: React.FC = () => {
   const navigate = useNavigate()
@@ -24,9 +25,8 @@ export const Add: React.FC = () => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
   const [error, setError] = useState<string | undefined>()
   const [id, setId] = useState('')
-  const [dir, setDir] = useState('')
   const [type, setType] = useState<AviutilFileType>('plugin')
-  const [files, setFiles] = useState<string[]>([])
+  const [files, setFiles] = useState<AviutilFile[]>([])
 
   return (
     <>
@@ -41,20 +41,6 @@ export const Add: React.FC = () => {
               openDelay={500}
             >
               <Input placeholder="ID" value={id} onChange={(e) => setId(e.currentTarget.value)} />
-            </Tooltip>
-
-            <FormLabel>設置場所</FormLabel>
-            <Tooltip
-              label="ファイルを設置する場所を指定します。"
-              hasArrow
-              arrowSize={15}
-              openDelay={500}
-            >
-              <Input
-                placeholder="/Plugins"
-                value={dir}
-                onChange={(e) => setDir(e.currentTarget.value)}
-              />
             </Tooltip>
 
             <FormLabel>タイプ</FormLabel>
@@ -79,24 +65,29 @@ export const Add: React.FC = () => {
                 })
                 setDialogIsOpen(false)
                 if (res.canceled) return
-                setFiles(res.filePaths)
+                setFiles(
+                  res.filePaths.map((file) => ({
+                    dir: type === 'plugin' ? '/Plugins' : type === 'script' ? '/Scripts' : '/',
+                    filename: file.split(/\\|\//).pop()!,
+                    origin: file,
+                  })),
+                )
               }}
             >
               ファイルを選択
             </Button>
-            <Box>
-              {files.map((file, i) => (
-                <Box key={i}>{file}</Box>
-              ))}
-            </Box>
+            <FileList files={files} editable />
           </Stack>
         </FormControl>
         <Button
           onClick={async () => {
             if (!id) return setError('IDを入力してください。')
-            if (!dir) return setError('設置場所を入力してください。')
             if (!files.length) return setError('ファイルを選択してください。')
-            await client.invoke('files:add', id, type, dir, files)
+            await client.invoke('files:add', {
+              id,
+              type,
+              files,
+            })
             update()
             navigate('..')
           }}

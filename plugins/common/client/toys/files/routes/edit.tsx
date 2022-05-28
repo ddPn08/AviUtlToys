@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { FilesContext } from '..'
-import { FileList } from '../file-list'
+import { FileList } from '../components/file-list'
 
 import { client } from '@/client/context'
 import type { AviutilFileSet } from '@/types/files'
@@ -50,7 +50,7 @@ export const Edit: React.FC = () => {
         </ButtonGroup>
       </Flex>
       <FileList
-        fileSet={fileSet}
+        files={fileSet.files}
         editable
         onEditFile={(file, index) => {
           setFileSet({

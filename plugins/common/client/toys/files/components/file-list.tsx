@@ -1,16 +1,16 @@
 import { Box, Grid, GridItem, Input, Text, useColorMode } from '@chakra-ui/react'
 
-import type { AviutilFile, AviutilFileSet } from '@/types/files'
+import type { AviutilFile } from '@/types/files'
 
 export const FileList: React.FC<{
-  fileSet: AviutilFileSet
+  files: AviutilFile[]
   editable?: boolean
   onEditFile?: (file: AviutilFile, index: number) => void
-}> = ({ fileSet, editable, onEditFile }) => {
+}> = ({ files, editable, onEditFile }) => {
   const { colorMode } = useColorMode()
   return (
     <Box>
-      {fileSet.files.map((file, i) => (
+      {files.map((file, i) => (
         <Grid
           key={file.filename}
           templateColumns="repeat(2, 1fr)"
@@ -29,6 +29,7 @@ export const FileList: React.FC<{
           </GridItem>
           <GridItem>
             <Input
+              size="md"
               value={file.dir}
               disabled={!editable}
               onChange={(e) => {

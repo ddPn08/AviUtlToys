@@ -3,7 +3,7 @@ import { Divider, Flex, IconButton, Stack, Switch, Text, useColorMode } from '@c
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { FilesContext } from '.'
+import { FilesContext } from '..'
 
 import { client } from '@/client/context'
 import type { AviutilFileSet } from '@/types/files'
@@ -38,7 +38,7 @@ export const FileSetList: React.FC<{
               <EditIcon />
             </IconButton>
             <Switch
-              defaultChecked={file.enabled}
+              defaultChecked={!!file.enabled}
               disabled={togglePending}
               onChange={async (e) => {
                 setTogglePending(true)

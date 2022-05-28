@@ -1,19 +1,9 @@
-import path from 'path'
-
 import { server } from '..'
 
 import { FileManager } from '@/server/files/manager'
 
-server.handle('files:add', (_, id, type, dir, files) => {
-    return FileManager.add({
-        id,
-        type,
-        files: files.map((file) => ({
-            dir,
-            filename: path.basename(file),
-            origin: file,
-        })),
-    })
+server.handle('files:add', (_, files) => {
+    return FileManager.add(files)
 })
 server.handle('files:delete', (_, id) => {
     return FileManager.remove(id)

@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { FilesContext } from '..'
-import { FileSetList } from '../file-set-list'
+import { FileSetList } from '../components/file-set-list'
 
 export const Index = () => {
   const { files } = useContext(FilesContext)

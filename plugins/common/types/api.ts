@@ -1,5 +1,5 @@
 import type { ExoMeta } from './exos'
-import { AviutilFileSet, AviutilFileType } from './files'
+import type { AviutilFileSet } from './files'
 
 export type ServerToClientEvents = {}
 export type ClientToServerEvents = {
@@ -11,7 +11,7 @@ export type ClientToServerEvents = {
     'exos:delete': (id: string) => void
     'exos:drag': (id: string) => void
 
-    'files:add': (id: string, type: AviutilFileType, dir: string, files: string[]) => void
+    'files:add': (files: AviutilFileSet) => void
     'files:get': (id: string) => AviutilFileSet | undefined
     'files:list': () => AviutilFileSet[]
     'files:update': (id: string, file: AviutilFileSet) => void
