@@ -21,12 +21,6 @@ export type ModuleOptions = {
     name?: string
 }
 
-export type PublishConfig =
-    | {
-          root: string
-      }
-    | boolean
-
 export type PublishOptions = {
     dryRun: boolean
     name?: string

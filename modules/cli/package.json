@@ -1,11 +1,11 @@
 {
   "name": "@aviutil-toys/cli",
-  "version": "0.0.3",
+  "version": "0.1.1",
   "bin": {
     "aviutil-toys": "./cli.js"
   },
-  "main": "./dist/cjs/index.js",
-  "types": "./dist/types/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "cli.js"
@@ -29,11 +29,11 @@
     "url": "https://me.ddpn.world"
   },
   "scripts": {
+    "publish": "yarn npm publish --access public",
     "dev": "node -r esbuild-register cli/index.ts"
   },
   "dependencies": {
     "@aviutil-toys/api": "workspace:^",
-    "@aviutil-toys/config": "workspace:^",
     "cac": "^6.7.12",
     "degit": "^2.8.4",
     "enquirer": "^2.3.6",

@@ -1,4 +1,4 @@
-import { defineConfig, ModuleConfig, PublishConfig } from '@aviutil-toys/dev-tools'
+import { defineConfig, ModuleConfig } from '@aviutil-toys/dev-tools'
 import path from 'path'
 
 const config: ModuleConfig = {
@@ -22,7 +22,3 @@ export default defineConfig(
         },
     },
 )
-
-export const publish: PublishConfig = {
-    root: './dist',
-}

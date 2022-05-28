@@ -1,4 +1,4 @@
-import { defineConfig, PublishConfig } from '@aviutil-toys/dev-tools'
+import { defineConfig } from '@aviutil-toys/dev-tools'
 import fs from 'fs'
 import path from 'path'
 
@@ -24,12 +24,8 @@ export default defineConfig(
     },
     {
         entryPoints: ['src/common/index.ts'],
-        outdir: path.join(__dirname, 'dist/<format>'),
+        outdir: path.join(__dirname, 'dist'),
         format: ['cjs'],
         dts: true,
     },
 )
-
-export const publish: PublishConfig = {
-    root: '.',
-}
