@@ -15,6 +15,7 @@
     "electron": "^19.0.1",
     "electron-builder": "^23.0.3",
     "esbuild": "^0.14.38",
+    "esbuild-plugin-svgr": "^1.0.1",
     "esbuild-register": "^3.3.2",
     "package-json-type": "^1.0.3",
     "source-map-support": "^0.5.21",

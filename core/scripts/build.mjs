@@ -2,6 +2,7 @@ import properties from '@aviutil-toys/config/properties.json' assert { type: 'js
 import { spawn } from 'child_process'
 import electronBuilder from 'electron-builder'
 import esbuild from 'esbuild'
+import svgrPlugin from 'esbuild-plugin-svgr'
 import fs from 'fs'
 import { createRequire } from 'module'
 import path from 'path'
@@ -60,10 +61,7 @@ const bundle = async (watch) => {
             outfile: path.join(outdir, 'client', 'index.js'),
             format: 'esm',
             platform: 'browser',
-            loader: {
-                '.svg': 'text',
-            },
-            plugins: [ExternalExporter],
+            plugins: [ExternalExporter, svgrPlugin()],
             inject: [path.join(__dirname, 'shims', 'react.js')],
         },
         server: {
