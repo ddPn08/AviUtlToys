@@ -1,6 +1,7 @@
 {
   "name": "aviutil-toys",
   "workspaces": [
+    ".github/actions/*",
     "plugins/*",
     "modules/*",
     "plugin-templates/*",
@@ -9,6 +10,7 @@
   "scripts": {
     "lint": "eslint '**/*.{tsx,ts}'",
     "format": "prettier --write '**/*.{tsx,ts}'",
+    "build:plugin": "yarn dev-tools build:plugin",
     "build:module": "yarn dev-tools build:module",
     "build:app": "yarn workspace @aviutil-toys/core build",
     "publish:module": "yarn dev-tools publish:module"

@@ -2,6 +2,10 @@
   "name": "@aviutil-toys/core",
   "version": "0.0.1",
   "main": "./dist/index.js",
+  "author": {
+    "name": "ddpn08",
+    "url": "https://me.ddpn.world"
+  },
   "scripts": {
     "build": "node ./scripts/build.mjs",
     "dev": "NODE_ENV='development' yarn build --bundle-only --watch --run",

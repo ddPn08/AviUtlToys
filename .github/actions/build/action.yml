@@ -1,0 +1,29 @@
+name: Build
+description: Build the application
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v2
+      with:
+        node-version: "18"
+
+    - name: Setup yarn
+      shell: bash
+      run: npm install -g yarn
+
+    - name: YARN install
+      shell: bash
+      run: yarn install
+
+    - name: Build modules
+      shell: bash
+      run: yarn build:module
+
+    - name: Build plugins
+      shell: bash
+      run: yarn build:plugin
+
+    - name: Build application
+      shell: bash
+      run: yarn build:app

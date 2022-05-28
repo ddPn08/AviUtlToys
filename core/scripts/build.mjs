@@ -9,7 +9,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = fileURLToPath(path.dirname(import.meta.url))
-const __dev = process.env['NODE_ENV'] !== 'production'
+const __dev = process.env['NODE_ENV'] === 'development'
 const require = createRequire(import.meta.url)
 const cwd = path.dirname(__dirname)
 const NODE_MODULES = path.join(cwd, '../node_modules')
@@ -114,11 +114,15 @@ const bundlePlugin = async () => {
 }
 
 const build = async () => {
+    /** @type {string[]} */
+    const resolved = []
+
     /**
      * @param {string} module
      * @returns {Promise<string[]>}
      */
     const getAllDependencies = async (module) => {
+        resolved.push(module)
         const result = [module]
         if (!fs.existsSync(path.join(NODE_MODULES, module, 'package.json'))) return result
         const { dependencies, optionalDependencies, peerDependencies } = JSON.parse(
@@ -129,7 +133,10 @@ const build = async () => {
             ...Object.keys(optionalDependencies || {}),
             ...Object.keys(peerDependencies || {}),
         ]
-        for (const dep of all) result.push(dep, ...(await getAllDependencies(dep)))
+        for (const dep of all) {
+            if (resolved.includes(dep)) continue
+            result.push(dep, ...(await getAllDependencies(dep)))
+        }
         return result
     }
 

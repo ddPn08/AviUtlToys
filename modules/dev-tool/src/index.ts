@@ -1,10 +1,15 @@
 import { cac } from 'cac'
 
 import { buildModule } from './build/module'
+import { buildPlugins } from './build/plugins'
 import { publishModule } from './publish'
 import type { ModuleConfig, ModuleOptions, PublishOptions } from './types'
 
 const cli = cac('build-cli')
+
+cli.command('build:plugin').action(() => {
+    buildPlugins()
+})
 
 cli.command('build:module', 'build modules')
     .option('--watch', 'watch for changes')
