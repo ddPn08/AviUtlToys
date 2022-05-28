@@ -9,8 +9,8 @@
   "dependencies": {
     "@aviutil-toys/api": "0.0.1",
     "@aviutil-toys/cli": "0.0.3",
-    "@chakra-ui/icons": "1.1.7",
-    "@chakra-ui/react": "1.8.8",
+    "@chakra-ui/icons": "^2.0.1",
+    "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "framer-motion": "^6",

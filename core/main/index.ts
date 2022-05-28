@@ -3,6 +3,7 @@ import { Configuration } from '@aviutil-toys/api/server'
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
 
+import { Development } from './development'
 import { PluginLoader } from './plugin-loader'
 
 export const isDev = process.env['NODE_ENV'] === 'development'
@@ -13,6 +14,7 @@ app.once('ready', async () => {
     await Configuration.load()
     await loadPLugins()
     await createWindow()
+    if (isDev) Development.init()
 })
 
 const createWindow = async () => {
@@ -30,7 +32,7 @@ const createWindow = async () => {
         backgroundColor: '#ffffff',
     })
 
-    window.loadURL(`file://${path.join(__dirname, 'client', 'index.html')}#/toys/settings`)
+    window.loadURL(`file://${path.join(__dirname, 'client', 'index.html')}#/toys/system/settings`)
     if (isDev) window.webContents.openDevTools()
 }
 

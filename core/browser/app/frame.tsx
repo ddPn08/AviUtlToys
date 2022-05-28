@@ -1,5 +1,5 @@
 import { api } from '@aviutil-toys/api/client'
-import { Box, Button, ButtonGroup, useColorMode } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Heading, useColorMode } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { VscChromeClose, VscChromeMinimize, VscChromeMaximize } from 'react-icons/vsc'
@@ -49,7 +49,9 @@ export const Frame: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) 
       }
       {...props}
     >
-      <Box />
+      <Box p="2">
+        <Heading size="sm">Aviutil-Toys</Heading>
+      </Box>
       <ButtonGroup
         size="md"
         isAttached

@@ -56,7 +56,7 @@ export const ExoDraggable: React.FC<{
             if (e.button === 0) setDragging(false)
           }}
         >
-          <Heading as="h4" size="lg" isTruncated userSelect="none">
+          <Heading as="h4" size="lg" userSelect="none">
             {exo.displayName}
           </Heading>
           <IconButton aria-label="delete" size="lg" onClick={onOpen}>

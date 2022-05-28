@@ -4,7 +4,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "node ./scripts/build.mjs",
-    "dev": "NODE_ENV='development' yarn build --bundle-only && yarn go:dev",
+    "dev": "NODE_ENV='development' yarn build --bundle-only --watch --run",
     "go": "electron dist/index.js --remote-debugging-port=9222",
     "go:dev": "NODE_ENV='development' yarn go"
   },
@@ -24,8 +24,8 @@
     "@aviutil-toys/api": "workspace:^",
     "@aviutil-toys/assets": "workspace:^",
     "@aviutil-toys/config": "workspace:^",
-    "@chakra-ui/icons": "1.1.7",
-    "@chakra-ui/react": "1.8.8",
+    "@chakra-ui/icons": "^2.0.1",
+    "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "framer-motion": "^6",

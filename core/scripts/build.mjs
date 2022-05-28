@@ -1,4 +1,5 @@
 import properties from '@aviutil-toys/config/properties.json' assert { type: 'json' }
+import { spawn } from 'child_process'
 import electronBuilder from 'electron-builder'
 import esbuild from 'esbuild'
 import fs from 'fs'
@@ -36,7 +37,10 @@ export const ExternalExporter = {
     },
 }
 
-const bundle = async () => {
+/**
+ * @param {boolean} watch
+ */
+const bundle = async (watch) => {
     const outdir = path.join(cwd, 'dist')
     if (fs.existsSync(outdir)) await fs.promises.rm(outdir, { recursive: true })
 
@@ -76,6 +80,13 @@ const bundle = async () => {
     }
 
     await Promise.all([esbuild.build(options.server), esbuild.build(options.client)])
+
+    if (watch) {
+        esbuild.build({
+            ...options.client,
+            watch: true,
+        })
+    }
 
     await fs.promises.copyFile(
         path.join(cwd, 'browser', 'index.html'),
@@ -160,10 +171,14 @@ const build = async () => {
 }
 
 const bundleOnly = process.argv.includes('--bundle-only')
+const watch = process.argv.includes('--watch')
+const run = process.argv.includes('--run')
 
 ;(async () => {
-    await bundle()
+    await bundle(watch)
+    if (run) spawn('yarn', ['go:dev'], { stdio: 'inherit' })
     if (bundleOnly) return
     await bundlePlugin()
     await build()
+    return
 })()

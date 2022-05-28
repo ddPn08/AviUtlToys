@@ -3,6 +3,8 @@ import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
 
+import { Development } from './development'
+
 import type { PluginMeta } from '@/types'
 
 export namespace PluginLoader {
@@ -34,6 +36,7 @@ export namespace PluginLoader {
                 },
                 meta,
             })
+            Development.addClientWatchFile(path.join(pluginDir, plugin, 'client.js'))
         }
     }
     export const importPlugins = async () => {

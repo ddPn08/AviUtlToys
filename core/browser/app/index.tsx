@@ -65,7 +65,7 @@ export const App: React.FC = () => {
     <Providers>
       <Box display="grid" gridTemplateColumns="1fr 4fr" gridTemplateRows="31px 1fr" h="100%">
         <Frame gridColumn="1 / 3" />
-        <Box gridColumn="2 / 3" h="100%" overflowY="auto">
+        <Box gridRow="2 / 3" gridColumn="2 / 3" h="100%" overflowY="auto">
           <Routes>
             {toys.map((toy, i) => (
               <Route

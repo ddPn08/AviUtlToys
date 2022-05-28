@@ -37,7 +37,7 @@ export const PluginList: React.FC = () => {
             <Text color="gray.500" letterSpacing="wide" fontSize="xs">
               {v.meta['version']}
             </Text>
-            <Heading size="md" fontWeight="semibold" isTruncated>
+            <Heading size="md" fontWeight="semibold">
               {v.meta['name']}
             </Heading>
             <Text fontSize="sm">{v.meta['id']}</Text>
