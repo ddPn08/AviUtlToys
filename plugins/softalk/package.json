@@ -1,0 +1,31 @@
+{
+  "name": "softalk",
+  "version": "v1.0.0",
+  "id": "world.ddpn.softalk",
+  "description": "Aviutilでのゆっくりを、もっと便利に。",
+  "homepage": "https://github.com/ddPn08/aviutil-toys",
+  "scripts": {
+    "build": "aviutil-toys build"
+  },
+  "dependencies": {
+    "@aviutil-toys/api": "workspace:^",
+    "@aviutil-toys/cli": "workspace:^",
+    "@chakra-ui/icons": "^2.0.1",
+    "@chakra-ui/react": "^2.1.2",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^6",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-router-dom": "^6.3.0",
+    "softalk": "^0.0.2"
+  },
+  "devDependencies": {
+    "@tsconfig/create-react-app": "^1.0.2",
+    "@tsconfig/node16-strictest-esm": "^1.0.1",
+    "@types/node": "^17.0.31",
+    "@types/react": "^18",
+    "electron": "^19.0.1"
+  },
+  "packageManager": "yarn@3.2.0"
+}
