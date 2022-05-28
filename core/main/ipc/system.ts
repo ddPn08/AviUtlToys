@@ -1,4 +1,6 @@
-import { ApiServer } from '@aviutil-toys/api/server'
+import { ApiServer, Configuration } from '@aviutil-toys/api/server'
+import { spawn } from 'child_process'
+import fs from 'fs'
 
 import { PluginLoader } from '../plugin-loader'
 
@@ -11,4 +13,10 @@ ipcSystem.handle('plugin:list', () => {
         meta: v.meta,
         entry: v.entry.client,
     }))
+})
+ipcSystem.handle('aviutil:run', () => {
+    const config = Configuration.get()
+    if (!config.aviutilExec) throw new Error('Aviutilの実行ファイルが設定されていません。')
+    if (!fs.existsSync(config.aviutilExec)) throw new Error('Aviutilの実行ファイルが存在しません。')
+    spawn(config.aviutilExec, { detached: true })
 })

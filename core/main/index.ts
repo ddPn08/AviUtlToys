@@ -22,7 +22,7 @@ const createWindow = async () => {
         width: 1280,
         height: 720,
         minWidth: 960,
-        minHeight: 720,
+        minHeight: 480,
         frame: false,
         webPreferences: {
             nodeIntegration: false,
@@ -32,7 +32,7 @@ const createWindow = async () => {
         backgroundColor: '#ffffff',
     })
 
-    window.loadURL(`file://${path.join(__dirname, 'client', 'index.html')}#/toys/system/settings`)
+    window.loadURL(`file://${path.join(__dirname, 'client', 'index.html')}#/toys/system/general`)
     if (isDev) window.webContents.openDevTools()
 }
 

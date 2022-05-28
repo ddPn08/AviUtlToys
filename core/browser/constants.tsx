@@ -2,12 +2,13 @@ import type { ConfigurationType } from '@aviutil-toys/api'
 import type { ToyContextType } from '@aviutil-toys/api/client'
 import { SettingsIcon } from '@chakra-ui/icons'
 
-import { Settings } from './toys/settings'
+import { Settings } from './toys/general'
 
 type Constants = {
   configuration: {
     keyMap: Record<keyof ConfigurationType, string>
   }
+  links: { name: string; url: string }[]
   toys: ToyContextType[]
 }
 export const Constants: Constants = {
@@ -17,12 +18,22 @@ export const Constants: Constants = {
       aviutilExec: 'Aviutilの実行ファイル',
     },
   },
+  links: [
+    {
+      name: 'GitHubリポジトリ',
+      url: 'https://github.com/ddpn08/aviutil-toys',
+    },
+    {
+      name: 'バグを報告',
+      url: 'https://github.com/ddPn08/aviutil-toys/issues/new',
+    }
+  ],
   toys: [
     {
-      id: 'settings',
+      id: 'general',
       parentPlugin: 'system',
-      title: 'Settings',
-      description: 'Aviutil Toys は Aviutilをより便利にするユーティリティのセットです。',
+      title: 'General',
+      description: '',
       icon: <SettingsIcon />,
       component: Settings,
     },
