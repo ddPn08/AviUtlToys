@@ -17,7 +17,7 @@ export const ToyContainer: React.FC<React.PropsWithChildren<Omit<ToyContextType,
           {context.title}
         </Heading>
         <Text>{context.description}</Text>
-        <Box padding="1rem">{context.children}</Box>
+        <Box py="1rem">{context.children}</Box>
       </FutureContainerInner>
     </ToyContext.Provider>
   )

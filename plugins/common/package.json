@@ -10,7 +10,6 @@
   "dependencies": {
     "@aviutil-toys/api": "workspace:^",
     "@aviutil-toys/cli": "workspace:^",
-    "@aviutil-toys/config": "workspace:^",
     "@aviutil/exo": "^0.1.0",
     "@chakra-ui/icons": "^2.0.1",
     "@chakra-ui/react": "^2.1.2",
