@@ -8,10 +8,13 @@ import { InputItem } from '@/browser/components/input-item'
 export const Configuration: React.FC = () => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
   const [aviutilDir, setAviutilDir] = useState('')
+  const [aviutilExec, setAviutilExec] = useState('')
   const effect = async () => {
     const config = await api.invoke('config:get')
     setAviutilDir(config.aviutilDir || '')
+    setAviutilExec(config.aviutilExec || '')
   }
+
   useEffect(() => {
     effect()
   }, [])
@@ -37,6 +40,39 @@ export const Configuration: React.FC = () => {
 
                   const config = await api.invoke('config:get')
                   config.aviutilDir = res.filePaths[0]!
+                  await api.invoke('config:update', config)
+                }}
+              >
+                参照
+              </InputRightAddon>
+            </InputGroup>
+          }
+        />
+        <InputItem
+          label={<Text>Aviutilの実行ファイル</Text>}
+          input={
+            <InputGroup>
+              <Input value={aviutilExec} readOnly />
+              <InputRightAddon
+                cursor="pointer"
+                onClick={async () => {
+                  if (dialogIsOpen) return
+                  setDialogIsOpen(true)
+                  const res = await api.invoke('native:show-open-dialog', {
+                    properties: ['openFile'],
+                    filters: [
+                      {
+                        name: 'exe',
+                        extensions: ['exe'],
+                      },
+                    ],
+                  })
+                  setDialogIsOpen(false)
+                  if (res.canceled) return
+                  setAviutilExec(res.filePaths[0]!)
+
+                  const config = await api.invoke('config:get')
+                  config.aviutilExec = res.filePaths[0]!
                   await api.invoke('config:update', config)
                 }}
               >

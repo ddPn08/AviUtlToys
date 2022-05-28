@@ -14,11 +14,13 @@ export const Constants: Constants = {
   configuration: {
     keyMap: {
       aviutilDir: 'Aviutilのフォルダ',
+      aviutilExec: 'Aviutilの実行ファイル',
     },
   },
   toys: [
     {
       id: 'settings',
+      parentPlugin: 'system',
       title: 'Settings',
       description: 'Aviutil Toys は Aviutilをより便利にするユーティリティのセットです。',
       icon: <SettingsIcon />,
