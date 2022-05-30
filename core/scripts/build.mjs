@@ -1,6 +1,7 @@
 import properties from '@aviutil-toys/config/properties.json' assert { type: 'json' }
 import AdmZip from 'adm-zip'
 import { spawn } from 'child_process'
+import crypto from 'crypto'
 import electronBuilder from 'electron-builder'
 import esbuild from 'esbuild'
 import svgrPlugin from 'esbuild-plugin-svgr'
@@ -8,6 +9,7 @@ import fs from 'fs'
 import { createRequire } from 'module'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import yaml from 'yaml'
 
 import packageJson from '../package.json' assert { type: 'json' }
 
@@ -179,9 +181,23 @@ const build = async () => {
     await electronBuilder.build(options)
     await fs.promises.writeFile(path.join(cwd, 'product/win-unpacked/resources/.portable'), '')
 
-    const zip = new AdmZip()
-    zip.addLocalFolder(path.join(cwd, 'product/win-unpacked'))
-    zip.writeZip(path.join(cwd, `product/aviutil-toys-${packageJson.version}.zip`))
+    const application = new AdmZip()
+    application.addLocalFolder(path.join(cwd, 'product/win-unpacked'))
+    application.writeZip(path.join(cwd, `product/aviutil-toys-${packageJson.version}.zip`))
+
+    const app = new AdmZip()
+    app.addLocalFolder(path.join(cwd, 'product/win-unpacked/resources/app'))
+    app.writeZip(path.join(cwd, `product/app.zip`))
+
+    const file = await fs.promises.readFile(path.join(cwd, 'product/app.zip'))
+    const size = file.byteLength
+    const md5 = crypto.createHash('md5').update(file).digest('hex')
+    const meta = {
+        version: packageJson.version,
+        size,
+        md5,
+    }
+    await fs.promises.writeFile(path.join(cwd, 'product/meta.yaml'), yaml.stringify(meta))
 }
 
 const bundleOnly = process.argv.includes('--bundle-only')

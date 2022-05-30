@@ -6,15 +6,13 @@ import path from 'path'
 import { Development } from './development'
 import { PluginLoader } from './plugin-loader'
 
-export const isDev = process.env['NODE_ENV'] === 'development'
-
 app.once('ready', async () => {
     await import('./ipc/api')
     await import('./ipc/system')
     await Configuration.load()
     await loadPLugins()
     await createWindow()
-    if (isDev) Development.init()
+    Development.init()
 })
 
 const createWindow = async () => {
@@ -33,13 +31,13 @@ const createWindow = async () => {
     })
 
     window.loadURL(`file://${path.join(__dirname, 'client', 'index.html')}#/toys/system/general`)
-    if (isDev) window.webContents.openDevTools()
+    if (Development.isDev) window.webContents.openDevTools()
 }
 
 const loadPLugins = async () => {
     const pluginDirs = [path.join(app.getPath('userData'), 'plugins')]
 
-    if (isDev) pluginDirs.push(path.join(__dirname, '../../plugins'))
+    if (Development.isDev) pluginDirs.push(path.join(__dirname, '../../plugins'))
     else pluginDirs.push(path.join(__dirname, 'plugins'))
 
     for (const dir of pluginDirs) {

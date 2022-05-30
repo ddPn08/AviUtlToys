@@ -3,13 +3,12 @@ import fs from 'fs'
 import path from 'path'
 
 const isDev = process.env['NODE_ENV'] === 'development'
-const isPortable = !isDev && fs.existsSync(path.join(__dirname, '..', '..', '.portable'))
+const appRoot = path.join(__dirname, '../../../')
+const isPortable = !isDev && fs.existsSync(path.join(appRoot, 'resources/.portable'))
+const userData = isPortable
+    ? path.join(appRoot, 'userData')
+    : path.join(app.getPath('appData'), 'aviutil-toys')
 
 if (isDev) for (const v of ['source-map-support', 'esbuild-register']) require(v)
 
-app.setPath(
-    'userData',
-    isPortable
-        ? path.join(__dirname, '../../../userData')
-        : path.join(app.getPath('appData'), 'aviutil-toys'),
-)
+app.setPath('userData', userData)

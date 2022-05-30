@@ -3,6 +3,7 @@ import { spawn } from 'child_process'
 import fs from 'fs'
 
 import { PluginLoader } from '../plugin-loader'
+import { update } from '../updater'
 
 import type { ClientToServerEvents, ServerToClientEvents } from '@/types'
 
@@ -17,3 +18,4 @@ ipcSystem.handle('aviutil:run', () => {
     if (!fs.existsSync(config.aviutilExec)) throw new Error('Aviutilの実行ファイルが存在しません。')
     spawn(config.aviutilExec, { detached: true })
 })
+ipcSystem.handle('update:check', update)

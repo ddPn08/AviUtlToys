@@ -9,6 +9,7 @@ import { Frame } from './frame'
 import { Menu } from './menu'
 import { PluginLoader } from './plugin-loader'
 import { theme } from './theme'
+import { UpdateAlert } from './update-alert'
 
 import { toysAtom } from '@/browser/state'
 import { BaseToy } from '@/browser/toys/base-toy'
@@ -50,6 +51,7 @@ const GlobalStyles = () => {
 const Providers: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
   <HashRouter>
     <PluginLoader />
+    <UpdateAlert />
     <ColorModeScript />
     <ChakraProvider theme={theme}>
       <GlobalStyles />
