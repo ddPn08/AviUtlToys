@@ -7,8 +7,7 @@ export class ApiServer<
     constructor(private readonly key: string) {}
     public emit<K extends keyof StoC & string>(key: K, ...args: Parameters<StoC[K]>) {
         BrowserWindow.getAllWindows().forEach((window) => {
-            window.webContents.send(key, ...args)
-            ipcMain.emit(`${this.key}:${key}`, ...args)
+            window.webContents.send(`${this.key}:${key}`, ...args)
         })
     }
     public handle<K extends keyof CtoS & string>(
