@@ -1,4 +1,5 @@
 import properties from '@aviutil-toys/config/properties.json' assert { type: 'json' }
+import AdmZip from 'adm-zip'
 import { spawn } from 'child_process'
 import electronBuilder from 'electron-builder'
 import esbuild from 'esbuild'
@@ -7,6 +8,8 @@ import fs from 'fs'
 import { createRequire } from 'module'
 import path from 'path'
 import { fileURLToPath } from 'url'
+
+import packageJson from '../package.json' assert { type: 'json' }
 
 const __dirname = fileURLToPath(path.dirname(import.meta.url))
 const __dev = process.env['NODE_ENV'] === 'development'
@@ -175,6 +178,10 @@ const build = async () => {
 
     await electronBuilder.build(options)
     await fs.promises.writeFile(path.join(cwd, 'product/win-unpacked/resources/.portable'), '')
+
+    const zip = new AdmZip()
+    zip.addLocalFolder(path.join(cwd, 'product/win-unpacked'))
+    zip.writeZip(path.join(cwd, `product/aviutil-toys-${packageJson.version}.zip`))
 }
 
 const bundleOnly = process.argv.includes('--bundle-only')

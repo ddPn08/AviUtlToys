@@ -126,9 +126,11 @@ __metadata:
     "@chakra-ui/react": ^2.1.2
     "@emotion/react": ^11
     "@emotion/styled": ^11
+    "@types/adm-zip": ^0.5.0
     "@types/node": ^17.0.35
     "@types/react": ^18
     "@types/react-dom": ^18
+    adm-zip: ^0.5.9
     electron: ^19.0.1
     electron-builder: ^23.0.3
     esbuild: ^0.14.38
@@ -2069,6 +2071,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/adm-zip@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@types/adm-zip@npm:0.5.0"
+  dependencies:
+    "@types/node": "*"
+  checksum: 11dd013584e47d431bdf7c115b73cd3162c1a1eca0fbb911f691c9734e904cfe4a01ac1d2d3cbf76d0a952e01fcce8a01fd6fb1c150675a29d740a7fb15325b2
+  languageName: node
+  linkType: hard
+
 "@types/debug@npm:^4.1.6":
   version: 4.1.7
   resolution: "@types/debug@npm:4.1.7"
@@ -2438,6 +2449,13 @@ __metadata:
     "@actions/github": ^5.0.3
   languageName: unknown
   linkType: soft
+
+"adm-zip@npm:^0.5.9":
+  version: 0.5.9
+  resolution: "adm-zip@npm:0.5.9"
+  checksum: 4909bc04119fdd5e8f8ba43826e50623e5c427cf0a939c809d4f9456a6a03c6aa0544e82088739de9ba16b7649f71b99ccbbddc7b2c38bd6143f9c4726cc7ed9
+  languageName: node
+  linkType: hard
 
 "agent-base@npm:6, agent-base@npm:^6.0.2":
   version: 6.0.2
@@ -7442,7 +7460,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"softalk@npm:0.0.5":
+"softalk@npm:^0.0.5":
   version: 0.0.5
   resolution: "softalk@npm:0.0.5"
   checksum: fb0e69baf758828b69957232182c4ac209c0b2fab1dfd0a45d35ec9c2c2657e326ac3713eed67d23a83e2d0ef10e426f0b0ef1f46689e0aad53ba4235b7e3be6
@@ -7468,7 +7486,7 @@ __metadata:
     react: ^18
     react-dom: ^18
     react-router-dom: ^6.3.0
-    softalk: 0.0.5
+    softalk: ^0.0.5
   languageName: unknown
   linkType: soft
 
