@@ -28,4 +28,6 @@ jobs:
         with:
           files: |
             core/product/aviutil-toys-${{ steps.get_tag.outputs.tag }}.zip
+            core/product/app.zip
+            core/product/meta.yaml
           body: "# ${{ steps.get_tag.outputs.tag }}"
