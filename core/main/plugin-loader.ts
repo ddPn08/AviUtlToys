@@ -7,8 +7,10 @@ import { Development } from './development'
 
 import type { PluginMeta } from '@/types'
 
+const PLUGIN_DATA_DIR = path.join(app.getPath('userData'), 'pluginData')
+
 export namespace PluginLoader {
-    export const pluginMetas: PluginMeta[] = []
+    export const pluginMetaList: PluginMeta[] = []
     export const plugins: Plugin[] = []
 
     export const loadPlugins = async (pluginDir: string) => {
@@ -29,7 +31,8 @@ export namespace PluginLoader {
                 console.warn(`Plugin ${plugin} is missing a required field.`)
                 continue
             }
-            pluginMetas.push({
+            meta['pluginDataPath'] = path.join(PLUGIN_DATA_DIR, meta['id'])
+            pluginMetaList.push({
                 entry: {
                     server: path.join(pluginDir, plugin, 'server.js'),
                     client: path.join(pluginDir, plugin, 'client.js'),
@@ -40,12 +43,11 @@ export namespace PluginLoader {
         }
     }
     export const importPlugins = async () => {
-        const pluginDataDir = path.join(app.getPath('userData'), 'pluginData')
-        if (!fs.existsSync(pluginDataDir)) await fs.promises.mkdir(pluginDataDir)
+        if (!fs.existsSync(PLUGIN_DATA_DIR)) await fs.promises.mkdir(PLUGIN_DATA_DIR)
 
-        for (const pluginMeta of pluginMetas) {
+        for (const pluginMeta of pluginMetaList) {
             const plugin: Plugin = require(pluginMeta.entry.server)
-            const dataFolder = path.join(pluginDataDir, pluginMeta.meta['id'])
+            const dataFolder = path.join(PLUGIN_DATA_DIR, pluginMeta.meta['id'])
             if (!fs.existsSync(dataFolder)) await fs.promises.mkdir(dataFolder)
             plugin.default({
                 dataFolder,

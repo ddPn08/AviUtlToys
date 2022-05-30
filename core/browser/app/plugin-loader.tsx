@@ -17,7 +17,7 @@ export const PluginLoader = React.memo(() => {
     const plugins = await ipcSystem.invoke('plugin:list')
     const pluginDataList = await Promise.all(
       plugins.map(async (plugin) => {
-        const { default: context }: ClientPlugin = await import(plugin.entry)
+        const { default: context }: ClientPlugin = await import(plugin.entry.client)
         return {
           context: await context(),
           meta: plugin.meta,
@@ -29,6 +29,7 @@ export const PluginLoader = React.memo(() => {
       .map((plugin) =>
         plugin.context.toys.map((toy) => ({
           ...toy,
+          pluginDataPath: plugin.meta['pluginDataPath'],
           parentPlugin: plugin.meta['id'],
         })),
       )

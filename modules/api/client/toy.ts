@@ -4,6 +4,7 @@ export type ToyContextType = {
     id: string
     title: string
     description: string
+    pluginDataPath?: string
     icon?: React.ReactNode
     component: React.FC
     routes?: Record<string, React.FC>

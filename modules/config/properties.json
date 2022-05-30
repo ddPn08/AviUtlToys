@@ -11,6 +11,7 @@
     "@chakra-ui/icons",
     "framer-motion",
     "@aviutil-toys/api",
+    "@aviutil-toys/api/client",
     "@aviutil-toys/assets"
   ],
   "server.externals": [

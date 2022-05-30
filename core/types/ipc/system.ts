@@ -1,6 +1,8 @@
+import type { PluginMeta } from '../plugin'
+
 export interface ServerToClientEvents {}
 
 export interface ClientToServerEvents {
-    'plugin:list': () => { entry: string; meta: Record<string, any> }[]
+    'plugin:list': () => PluginMeta[]
     'aviutil:run': () => void
 }
