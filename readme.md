@@ -13,6 +13,11 @@ Aviutil Toys は Aviutil をより便利にするユーティリティのセッ�
 - 🤐 Softalk を使った音声合成機能
 - 🔌 プラグインシステム
 
+# インストール
+[リリース](https://github.com/ddPn08/Aviutil-Toys/releases/latest)から`aviutil-toys-1.0.0-beta.0.zip` をダウンロードし、解凍します。  
+中にある`aviutil-toys.exe` を実行します。  
+アプリが起動します。
+
 # お問い合わせ
 
 [Github の Issues](https://github.com/ddPn08/Aviutil-Toys/issues)、もしくは[Discord サーバー](https://dn5.run/discord)の[#aviutil-toys](https://discord.com/channels/694433205620572191/980807335012335636) にてお問い合わせください。
