@@ -150,6 +150,7 @@ const build = async () => {
 
     /** @type {import('electron-builder').CliOptions} */
     const options = {
+        dir: true,
         config: {
             electronVersion: '19.0.1',
             appId: 'world.ddpn.aviutil-toys',
@@ -173,6 +174,7 @@ const build = async () => {
     }
 
     await electronBuilder.build(options)
+    await fs.promises.writeFile(path.join(cwd, 'product/win-unpacked/resources/.portable'), '')
 }
 
 const bundleOnly = process.argv.includes('--bundle-only')
