@@ -1,5 +1,6 @@
 import type { ConfigurationType } from '@aviutil-toys/api'
 import { api, ToyContextType } from '@aviutil-toys/api/client'
+import { Code, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -22,9 +23,10 @@ export const BaseToy: React.FC<ToyContextType> = ({ component: C, ...rest }) => 
     if (missing && missing.length > 0) {
       showErrorModal(
         `Missing configuration: ${missing.join(', ')}`,
-        `この機能を使用するには次の項目の設定が必要です。: ${missing
-          .map((v) => Constants.configuration.keyMap[v])
-          .join(', ')}`,
+        <>
+          <Text>{`この機能を使用するには次の項目の設定が必要です。`}</Text>
+          <Code>{missing.map((v) => Constants.configuration.keyMap[v]).join(', ')}</Code>
+        </>,
         () => {
           navigate(-1)
         },

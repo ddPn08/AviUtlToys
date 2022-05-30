@@ -5,7 +5,7 @@ import path from 'path'
 export namespace Development {
     const clientWatcher: { watcher: FSWatcher; filename: string }[] = []
 
-    const clientWatcherListener: WatchListener<string> = (event, filename) => {
+    const clientWatcherListener: WatchListener<string> = (_, filename) => {
         console.log(`Client file changed: ${filename}`)
         console.log(`Reloading client...`)
         BrowserWindow.getAllWindows().forEach((window) => {

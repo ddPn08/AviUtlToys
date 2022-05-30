@@ -3,7 +3,7 @@ import { LinkIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, HStack, VStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { useAtom } from 'jotai'
-import { To, useNavigate } from 'react-router-dom'
+import { To, useLocation, useNavigate } from 'react-router-dom'
 
 import { toysAtom, pluginsAtom } from '@/browser/state'
 
@@ -15,10 +15,16 @@ const NavButton: React.FC<{
   to: To
   label: string
   icon?: React.ReactNode
-}> = ({ to, label, icon }) => {
+  disabled?: boolean
+}> = ({ to, label, icon, disabled }) => {
   const navigate = useNavigate()
   return (
-    <Button w="100%" variant="ghost" onClick={() => navigate(to)}>
+    <Button
+      w="100%"
+      variant="ghost"
+      color={disabled ? 'gray.500' : 'inherit'}
+      onClick={() => navigate(to)}
+    >
       <HStack width="100%">
         {icon ? (
           icon
@@ -34,6 +40,7 @@ const NavButton: React.FC<{
 }
 
 export const Menu: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) => {
+  const location = useLocation()
   const [toys] = useAtom(toysAtom)
   const [plugins] = useAtom(pluginsAtom)
   const grouped: Record<string, ToyContextType[]> = {}
@@ -57,6 +64,9 @@ export const Menu: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) =
                   to={`/toys/${parentPlugin ? `${parentPlugin}/` : ''}${id}`}
                   icon={icon}
                   label={title}
+                  disabled={
+                    location.pathname === `/toys/${parentPlugin ? `${parentPlugin}/` : ''}${id}`
+                  }
                 />
               ))}
             </VStack>

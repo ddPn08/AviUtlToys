@@ -9,13 +9,14 @@ export default createPlugin(async () => {
       {
         id: 'Exos',
         title: 'Exos',
-        description: 'Exoファイルを管理できます。',
+        description:
+          'Exoファイルを管理できます。ドラッグアンドドロップでAviutilに読み込ませられます。',
         component: () => <Exos />,
       },
       {
         id: 'Files',
         title: 'Files',
-        description: 'ファイルを管理できます。プラグインやスクリプトの有効無効の管理等に使えます。',
+        description: 'ファイルを管理できます。プラグインやスクリプトの管理等に使えます。',
         component: () => <Files />,
         essentialConfig: ['aviutilDir'],
       },

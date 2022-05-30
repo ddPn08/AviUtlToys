@@ -18,7 +18,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-router-dom": "^6.3.0",
-    "softalk": "^0.0.2"
+    "softalk": "^0.0.5"
   },
   "devDependencies": {
     "@tsconfig/create-react-app": "^1.0.2",

@@ -7442,10 +7442,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"softalk@npm:^0.0.2":
-  version: 0.0.2
-  resolution: "softalk@npm:0.0.2"
-  checksum: 23b006d78b74c16c4bad03089e3b6c258a7d1febaecb0dbb365be938062603d0be68d7f450d99731e4941a64810c04f5898adb228dd03d3c4e1267afca2c4209
+"softalk@npm:0.0.5":
+  version: 0.0.5
+  resolution: "softalk@npm:0.0.5"
+  checksum: fb0e69baf758828b69957232182c4ac209c0b2fab1dfd0a45d35ec9c2c2657e326ac3713eed67d23a83e2d0ef10e426f0b0ef1f46689e0aad53ba4235b7e3be6
   languageName: node
   linkType: hard
 
@@ -7468,7 +7468,7 @@ __metadata:
     react: ^18
     react-dom: ^18
     react-router-dom: ^6.3.0
-    softalk: ^0.0.2
+    softalk: 0.0.5
   languageName: unknown
   linkType: soft
 

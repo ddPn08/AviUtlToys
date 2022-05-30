@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import React, { createContext, useContext, useState } from 'react'
 
-type ShowFn = (title: string, message: string, onClose?: () => void) => void
+type ShowFn = (title: string, message: React.ReactNode, onClose?: () => void) => void
 
 const ErrorModalContext = createContext((() => {}) as ShowFn)
 export const useErrorModal = () => {
@@ -19,7 +19,7 @@ export const useErrorModal = () => {
 
 export const ErrorModal: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const [title, setTitle] = useState<string>()
-  const [message, setMessage] = useState<string>()
+  const [message, setMessage] = useState<React.ReactNode>()
   const [onCloseFn, setOnClose] = useState<() => () => void>()
 
   const { isOpen, onOpen, onClose } = useDisclosure()

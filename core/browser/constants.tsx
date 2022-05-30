@@ -26,7 +26,7 @@ export const Constants: Constants = {
     {
       name: 'バグを報告',
       url: 'https://github.com/ddPn08/aviutil-toys/issues/new',
-    }
+    },
   ],
   toys: [
     {

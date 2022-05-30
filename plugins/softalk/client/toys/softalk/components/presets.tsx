@@ -95,21 +95,27 @@ export const Presets: React.FC = () => {
           {presets.map((preset) => (
             <Popover key={preset.name} isOpen={popover.isOpen}>
               <PopoverTrigger>
-                <Button onClick={popover.onOpen}>{preset.name}</Button>
+                <Button
+                  onClick={() => {
+                    setReadOptions(preset.readOptions)
+                  }}
+                  onContextMenu={(e) => {
+                    e.preventDefault()
+                    popover.onOpen()
+                  }}
+                >
+                  {preset.name}
+                </Button>
               </PopoverTrigger>
               <PopoverContent>
                 <PopoverArrow />
-                <PopoverCloseButton />
+                <PopoverCloseButton
+                  onClick={() => {
+                    popover.onClose()
+                  }}
+                />
                 <PopoverBody>
                   <ButtonGroup>
-                    <Button
-                      onClick={() => {
-                        setReadOptions(preset.readOptions)
-                        popover.onClose()
-                      }}
-                    >
-                      読み込む
-                    </Button>
                     <Button
                       bgColor="red.500"
                       onClick={async () => {

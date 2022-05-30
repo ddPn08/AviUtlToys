@@ -17,7 +17,6 @@ import { SofTalkContext } from '..'
 
 import { VoiceNumberMap } from '@/types'
 
-// eslint-disable-next-line react/display-name
 export const Options: React.FC = () => {
   const { readOptions, setReadOptions } = useContext(SofTalkContext)
   return (
@@ -40,6 +39,37 @@ export const Options: React.FC = () => {
               </option>
             ))}
           </Select>
+
+          <FormLabel>音量</FormLabel>
+          <Grid gap="2" gridTemplateColumns="1fr 100px">
+            <Slider
+              aria-label="speed-slider"
+              value={readOptions.volume || 100}
+              onChange={(v) => {
+                setReadOptions({
+                  ...readOptions,
+                  volume: v,
+                })
+              }}
+              max={100}
+            >
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
+            <Input
+              type="number"
+              value={readOptions.volume}
+              onChange={(e) => {
+                setReadOptions({
+                  ...readOptions,
+                  volume: parseInt(e.target.value || '0'),
+                })
+              }}
+            />
+          </Grid>
+
           <FormLabel>速さ</FormLabel>
           <Grid gap="2" gridTemplateColumns="1fr 100px">
             <Slider
@@ -69,6 +99,7 @@ export const Options: React.FC = () => {
               }}
             />
           </Grid>
+
           <FormLabel>音程</FormLabel>
           <Grid gap="2" gridTemplateColumns="1fr 100px">
             <Slider

@@ -1,6 +1,24 @@
-import { api } from '@aviutil-toys/api/client'
-import { Box, Button, ButtonGroup, Flex, Heading, Textarea, useToast } from '@chakra-ui/react'
+import { api, useToyContext } from '@aviutil-toys/api/client'
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  Heading,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  Textarea,
+  useDisclosure,
+  useToast,
+} from '@chakra-ui/react'
 import React, { createContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { ReadOptions } from 'softalk'
 
 import { Options } from './components/options'
@@ -11,6 +29,9 @@ import { ipc } from '@/client/api'
 const StatusChecker: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isEnabled, setIsEnabled] = useState(false)
+  const navigate = useNavigate()
+  const ToyContext = useToyContext()
+  const discolousure = useDisclosure()
   if (isLoading) {
     ipc.invoke('enabled').then((enabled) => {
       setIsLoading(false)
@@ -18,13 +39,27 @@ const StatusChecker: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
     })
     return <></>
   }
+  discolousure.isOpen = true
   return isEnabled ? (
     <>{children}</>
   ) : (
     <Box>
-      <Heading size="md" color="red">
-        Softalk is not enabled.
-      </Heading>
+      <Modal onClose={discolousure.onClose} isOpen={discolousure.isOpen} size="xl">
+        <ModalOverlay />
+        <ModalContent w="80%">
+          <ModalHeader>SofTalkがインストールされていません。</ModalHeader>
+          <ModalCloseButton
+            onClick={() => {
+              discolousure.onClose()
+              navigate(-1)
+            }}
+          />
+          <ModalBody>
+            <Input value={ToyContext.pluginDataPath + '\\softalk'} readOnly />
+            <Text>にsoftalkのフォルダをコピーしてください。</Text>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }
@@ -39,7 +74,11 @@ const CheckReadOptions = (options: Partial<ReadOptions>): options is ReadOptions
     options.interval !== undefined &&
     options.interval >= 0 &&
     options.interval <= 200 &&
-    options.interval % 1 === 0
+    options.interval % 1 === 0 &&
+    options.volume !== undefined &&
+    options.volume >= 0 &&
+    options.volume <= 100 &&
+    options.volume % 1 === 0
   )
 }
 
@@ -58,6 +97,7 @@ export const SofTalk: React.FC = () => {
     voice: 0,
     speed: 100,
     interval: 100,
+    volume: 100,
   })
   return (
     <StatusChecker>
