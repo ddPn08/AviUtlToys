@@ -5,44 +5,49 @@ import { Context } from '../context'
 
 import type { ExoMeta } from '@/types/exos'
 
-export namespace EXOManager {
-    export const exos: ExoMeta[] = []
+class ExoManagerClass {
+    private readonly FILE_PATH = path.join(Context.dataFolder, 'exos', 'data.json')
 
-    const FILE_PATH = path.join(Context.dataFolder, 'exos', 'data.json')
+    public readonly exos: ExoMeta[] = []
 
-    const save = () => {
-        return fs.promises.writeFile(FILE_PATH, JSON.stringify(exos, null, 4))
+    constructor() {
+        this.load()
     }
-    const load = async () => {
-        exos.length = 0
-        if (!fs.existsSync(path.dirname(FILE_PATH)))
-            await fs.promises.mkdir(path.dirname(FILE_PATH))
-        if (!fs.existsSync(FILE_PATH)) fs.promises.writeFile(FILE_PATH, '[]')
-        const data = JSON.parse(await fs.promises.readFile(FILE_PATH, 'utf-8'))
-        exos.push(...data)
+
+    private save = () => {
+        return fs.promises.writeFile(this.FILE_PATH, JSON.stringify(this.exos, null, 4))
     }
-    export const get = (id: string) => {
-        return exos.find((exo) => exo.id === id)
+    private load = async () => {
+        this.exos.length = 0
+        if (!fs.existsSync(path.dirname(this.FILE_PATH)))
+            await fs.promises.mkdir(path.dirname(this.FILE_PATH))
+        if (!fs.existsSync(this.FILE_PATH)) fs.promises.writeFile(this.FILE_PATH, '[]')
+        const data = JSON.parse(await fs.promises.readFile(this.FILE_PATH, 'utf-8'))
+        this.exos.push(...data)
     }
-    export const exists = (id: string) => {
-        return !!get(id)
+    public get = (id: string) => {
+        return this.exos.find((exo) => exo.id === id)
     }
-    export const add = (exo: ExoMeta) => {
-        if (exists(exo.id)) throw new Error(`Exo ${exo.id} already exists`)
-        exos.push(exo)
-        save()
+    public exists = (id: string) => {
+        return !!this.get(id)
     }
-    export const remove = (id: string) => {
-        const index = exos.findIndex((exo) => exo.id === id)
+    public add = (exo: ExoMeta) => {
+        if (this.exists(exo.id)) throw new Error(`Exo ${exo.id} already exists`)
+        this.exos.push(exo)
+        this.save()
+    }
+    public remove = (id: string) => {
+        const index = this.exos.findIndex((exo) => exo.id === id)
         if (index === -1) throw new Error(`Exo ${id} does not exist`)
-        exos.splice(index, 1)
-        save()
+        this.exos.splice(index, 1)
+        this.save()
     }
-    export const update = (id: string, exo: ExoMeta) => {
-        const index = exos.findIndex((exo) => id === exo.id)
+    public update = (id: string, exo: ExoMeta) => {
+        const index = this.exos.findIndex((exo) => id === exo.id)
         if (index === -1) throw new Error(`Exo ${exo.id} does not exist`)
-        exos[index] = exo
-        save()
+        this.exos[index] = exo
+        this.save()
     }
-    load()
 }
+
+export const ExoManager = new ExoManagerClass()

@@ -1,6 +1,7 @@
 export type AviutilFileType = 'plugin' | 'script' | 'other'
 
 export type AviutilFile = {
+    type: 'file' | 'dir'
     dir: string
     filename: string
     origin?: string

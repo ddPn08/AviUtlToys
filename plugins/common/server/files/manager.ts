@@ -6,100 +6,144 @@ import { Context } from '../context'
 
 import type { AviutilFileSet } from '@/types/files'
 
-export namespace FileManager {
-    export const filesList: AviutilFileSet[] = []
-    const FILE_PATH = path.join(Context.dataFolder, 'files', 'data.json')
+class FileManagerClass {
+    public readonly filesList: AviutilFileSet[] = []
 
-    const save = () => {
-        return fs.promises.writeFile(FILE_PATH, JSON.stringify(filesList, null, 4))
+    constructor() {
+        this.load()
     }
-    const load = async () => {
-        filesList.length = 0
-        if (!fs.existsSync(path.dirname(FILE_PATH)))
-            await fs.promises.mkdir(path.dirname(FILE_PATH))
-        if (!fs.existsSync(FILE_PATH)) fs.promises.writeFile(FILE_PATH, '[]')
-        if (!fs.existsSync(path.join(aviutilDir(), '.auts')))
-            await fs.promises.mkdir(path.join(aviutilDir(), '.auts'))
-        const data = JSON.parse(await fs.promises.readFile(FILE_PATH, 'utf-8'))
-        filesList.push(...data)
+
+    private async migrate() {
+        const oldDataPath = path.join(Context.dataFolder, 'files', 'data.json')
+        if (fs.existsSync(oldDataPath)) {
+            const aviutilDir = this.getAviUtilDir()
+            if (!aviutilDir) return
+            await fs.promises.copyFile(oldDataPath, path.join(aviutilDir, '.auts', 'data.json'))
+            await fs.promises.rm(oldDataPath)
+        }
     }
-    const aviutilDir = () => {
+
+    private save() {
+        const aviutilDir = this.getAviUtilDir()
+        if (!aviutilDir) return
+        return fs.promises.writeFile(
+            path.join(aviutilDir, '.auts', 'data.json'),
+            JSON.stringify(this.filesList),
+        )
+    }
+
+    private getAviUtilDir() {
         const config = Configuration.get()
-        if (!config.aviutilDir) throw new Error('aviutilDir is not set')
+        if (!config.aviutilDir) return
         return config.aviutilDir
     }
-    load()
 
-    export const add = async (file: AviutilFileSet) => {
+    public async load() {
+        const aviutilDir = this.getAviUtilDir()
+        if (!aviutilDir) return
+
+        this.filesList.length = 0
+        const dataPath = path.join(aviutilDir, '.auts', 'data.json')
+        await this.migrate()
+        if (!fs.existsSync(path.dirname(dataPath))) await fs.promises.mkdir(path.dirname(dataPath))
+        if (!fs.existsSync(dataPath)) await fs.promises.writeFile(dataPath, '[]')
+        const data = JSON.parse(await fs.promises.readFile(dataPath, 'utf-8'))
+        this.filesList.push(...data)
+    }
+    public async update(id: string, file: AviutilFileSet) {
+        await this.delete(id)
+        await this.add(file)
+    }
+
+    public async add(file: AviutilFileSet) {
+        const aviutilDir = this.getAviUtilDir()
+        if (!aviutilDir) return
+
         file.enabled = true
-        filesList.push(file)
-        for (const { origin, dir, filename } of file.files) {
+        this.filesList.push(file)
+        for (const { origin, dir, filename, type } of file.files) {
             if (!origin) throw new Error(`File ${file.id} is not valid (origin is not set)`)
 
-            const dest = path.join(aviutilDir(), dir, filename)
+            const dest = path.join(aviutilDir, dir, filename)
             if (dest === origin) continue
             if (!fs.existsSync(path.dirname(dest)))
                 await fs.promises.mkdir(path.dirname(dest), { recursive: true })
             if (fs.existsSync(dest))
                 throw new Error(`File ${file.id} is not valid (file ${filename} already exists)`)
 
-            await fs.promises.copyFile(origin, dest)
+            await fs.promises.cp(origin, dest, { recursive: type === 'dir' })
         }
-        save()
+        this.save()
     }
-    export const remove = async (id: string) => {
-        const file = filesList.find((file) => file.id === id)
+
+    public async delete(id: string) {
+        const aviutilDir = this.getAviUtilDir()
+        if (!aviutilDir) return
+
+        const file = this.filesList.find((file) => file.id === id)
         if (!file) throw new Error(`File ${id} does not exist`)
 
-        filesList.splice(
-            filesList.findIndex((file) => file.id === id),
+        this.filesList.splice(
+            this.filesList.findIndex((file) => file.id === id),
             1,
         )
-        for (const { dir, filename } of file.files) {
-            if (!fs.existsSync(path.join(aviutilDir(), dir, filename))) continue
-            await fs.promises.unlink(path.join(aviutilDir(), dir, filename))
+        for (const { dir, filename, type } of file.files) {
+            if (!fs.existsSync(path.join(aviutilDir, dir, filename))) continue
+            await fs.promises.rm(path.join(aviutilDir, dir, filename), {
+                recursive: type === 'dir',
+            })
         }
-        save()
+        this.save()
     }
-    export const update = (id: string, file: AviutilFileSet) => {
-        remove(id)
-        add(file)
+
+    public get(id: string) {
+        const file = this.filesList.find((file) => file.id === id)
+        if (!file) throw new Error(`File ${id} does not exist`)
+        return file
     }
-    export const get = (id: string) => {
-        return filesList.find((file) => file.id === id)
+
+    public exists(id: string) {
+        return this.filesList.some((file) => file.id === id)
     }
-    export const exists = (id: string) => {
-        return !!get(id)
-    }
-    export const disable = async (id: string) => {
-        const file = get(id)
+
+    public async disable(id: string) {
+        const aviutilDir = this.getAviUtilDir()
+        if (!aviutilDir) return
+
+        const file = this.get(id)
         if (!file) throw new Error(`File ${id} does not exist`)
         if (!file.enabled) throw new Error(`File ${id} is already disabled`)
 
         file.enabled = false
-        const disabledDir = path.join(aviutilDir(), '.auts', 'disabled')
+        const disabledDir = path.join(aviutilDir, '.auts', 'disabled')
         if (!fs.existsSync(disabledDir)) await fs.promises.mkdir(disabledDir)
         for (const { dir, filename } of file.files) {
             const dest = path.join(disabledDir, dir, filename)
             if (!fs.existsSync(path.dirname(dest)))
                 await fs.promises.mkdir(path.dirname(dest), { recursive: true })
             if (fs.existsSync(dest)) throw new Error(`File ${dest} already exists`)
-            await fs.promises.rename(path.join(aviutilDir(), dir, filename), dest)
+            await fs.promises.rename(path.join(aviutilDir, dir, filename), dest)
         }
-        save()
+        this.save()
     }
-    export const enable = async (id: string) => {
-        const file = get(id)
+
+    public async enable(id: string) {
+        const aviutilDir = this.getAviUtilDir()
+        if (!aviutilDir) return
+
+        const file = this.get(id)
         if (!file) throw new Error(`File ${id} does not exist`)
         if (file.enabled) throw new Error(`File ${id} is already enabled`)
 
         file.enabled = true
-        const disabledDir = path.join(aviutilDir(), '.auts', 'disabled')
+        const disabledDir = path.join(aviutilDir, '.auts', 'disabled')
         if (!fs.existsSync(disabledDir)) throw new Error(`Disabled directory does not exist`)
         for (const { dir, filename } of file.files) {
             const src = path.join(disabledDir, dir, filename)
-            await fs.promises.rename(src, path.join(aviutilDir(), dir, filename))
+            await fs.promises.rename(src, path.join(aviutilDir, dir, filename))
         }
-        save()
+        this.save()
     }
 }
+
+export const FileManager = new FileManagerClass()

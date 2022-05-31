@@ -11,8 +11,7 @@ const config: Partial<ChakraTheme> = {
     mono: 'Segoe UI, Yu Gothic UI',
   },
   config: {
-    initialColorMode:
-      (localStorage.getItem('chakra-ui-color-mode') as 'dark') || 'light' || 'system' || 'light',
+    initialColorMode: (localStorage.getItem('chakra-ui-color-mode') as 'dark') || 'dark',
   },
 }
 

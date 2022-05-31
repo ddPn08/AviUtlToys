@@ -1,3 +1,4 @@
+import { api } from '@aviutil-toys/api/client'
 import { createContext, useEffect, useState } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 
@@ -35,3 +36,7 @@ export const Files = () => {
     </FilesContext.Provider>
   )
 }
+
+api.once('config:update', (_) => {
+  client.invoke('files:reload')
+})

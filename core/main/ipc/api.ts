@@ -35,6 +35,7 @@ ipcApi.handle('native:drag-file', (e, file, icon) => {
 ipcApi.handle('config:get', () => {
     return Configuration.get()
 })
-ipcApi.handle('config:update', (_, newConfig) => {
-    Configuration.save(newConfig)
+ipcApi.handle('config:update', async (_, newConfig) => {
+    await Configuration.save(newConfig)
+    ipcApi.emit('config:update', newConfig)
 })
