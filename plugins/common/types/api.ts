@@ -11,6 +11,7 @@ export type ClientToServerEvents = {
     'exos:delete': (id: string) => void
     'exos:drag': (id: string) => void
 
+    'files:reload': () => void
     'files:add': (files: AviutilFileSet) => void
     'files:get': (id: string) => AviutilFileSet | undefined
     'files:list': () => AviutilFileSet[]

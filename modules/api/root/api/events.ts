@@ -2,7 +2,9 @@ import type { OpenDialogOptions, OpenDialogReturnValue } from 'electron'
 
 import type { ConfigurationType } from '../config.js'
 
-export interface ServerToClientEvents {}
+export interface ServerToClientEvents {
+    'config:update': (config: ConfigurationType) => void
+}
 
 export interface ClientToServerEvents {
     'window:close': () => void

@@ -1,16 +1,17 @@
-import { Box, Grid, GridItem, Input, Text, useColorMode } from '@chakra-ui/react'
+import { DeleteIcon } from '@chakra-ui/icons'
+import { Box, Button, Grid, GridItem, Input, Text, useColorMode } from '@chakra-ui/react'
 
-import type { AviutilFile } from '@/types/files'
+import type { AviutilFileSet } from '@/types/files'
 
 export const FileList: React.FC<{
-  files: AviutilFile[]
+  fileSet: AviutilFileSet
+  setFileSet: (fileSet: AviutilFileSet) => void
   editable?: boolean
-  onEditFile?: (file: AviutilFile, index: number) => void
-}> = ({ files, editable, onEditFile }) => {
+}> = ({ fileSet, setFileSet, editable }) => {
   const { colorMode } = useColorMode()
   return (
     <Box>
-      {files.map((file, i) => (
+      {fileSet.files.map((file, i) => (
         <Grid
           key={file.filename}
           templateColumns="repeat(2, 1fr)"
@@ -26,16 +27,29 @@ export const FileList: React.FC<{
           </GridItem>
           <GridItem>
             <Text>{file.filename}</Text>
+            <Text fontSize="xs" color="gray.300">
+              {file.type === 'dir' ? 'ディレクトリ' : 'ファイル'}
+            </Text>
           </GridItem>
-          <GridItem>
+          <GridItem display="flex" gap="2">
             <Input
               size="md"
               value={file.dir}
               disabled={!editable}
               onChange={(e) => {
-                onEditFile && onEditFile({ ...file, dir: e.target.value }, i)
+                file.dir = e.currentTarget.value
+                setFileSet({ ...fileSet })
               }}
             />
+            <Button
+              bg="red.300"
+              onClick={() => {
+                fileSet.files.splice(i, 1)
+                setFileSet({ ...fileSet })
+              }}
+            >
+              <DeleteIcon />
+            </Button>
           </GridItem>
         </Grid>
       ))}

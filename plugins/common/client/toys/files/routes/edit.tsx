@@ -1,9 +1,22 @@
-import { Button, ButtonGroup, Flex, Heading } from '@chakra-ui/react'
+import {
+  Button,
+  ButtonGroup,
+  Flex,
+  Heading,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+} from '@chakra-ui/react'
 import { useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { FilesContext } from '..'
 import { FileList } from '../components/file-list'
+import { FileSelectButton } from '../components/file-select-button'
 
 import { client } from '@/client/context'
 import type { AviutilFileSet } from '@/types/files'
@@ -12,9 +25,11 @@ export const Edit: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const state = location.state as AviutilFileSet
+
   const { update } = useContext(FilesContext)
   const [previousId] = useState(state.id)
   const [fileSet, setFileSet] = useState<AviutilFileSet>(state)
+
   return (
     <>
       <Flex justifyContent="space-between">
@@ -37,28 +52,32 @@ export const Edit: React.FC = () => {
           >
             保存
           </Button>
-          <Button
-            colorScheme="red"
-            onClick={async () => {
-              await client.invoke('files:delete', previousId)
-              update()
-              navigate('..')
-            }}
-          >
-            削除
-          </Button>
+          <Popover>
+            <PopoverTrigger>
+              <Button bg="red.300">削除</Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverHeader>削除します、よろしいですか？</PopoverHeader>
+              <PopoverBody>
+                <Button
+                  bg="red.300"
+                  onClick={async () => {
+                    await client.invoke('files:delete', previousId)
+                    update()
+                    navigate('..')
+                  }}
+                >
+                  削除
+                </Button>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
         </ButtonGroup>
       </Flex>
-      <FileList
-        files={fileSet.files}
-        editable
-        onEditFile={(file, index) => {
-          setFileSet({
-            ...fileSet,
-            files: [...fileSet.files.slice(0, index), file, ...fileSet.files.slice(index + 1)],
-          })
-        }}
-      />
+      <FileList fileSet={fileSet} setFileSet={setFileSet} editable />
+      <FileSelectButton fileSet={fileSet} setFileSet={setFileSet} />
     </>
   )
 }
