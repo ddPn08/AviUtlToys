@@ -31,7 +31,7 @@ const StatusChecker: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const [isEnabled, setIsEnabled] = useState(false)
   const navigate = useNavigate()
   const ToyContext = useToyContext()
-  const discolousure = useDisclosure()
+  const disclosure = useDisclosure()
   if (isLoading) {
     ipc.invoke('enabled').then((enabled) => {
       setIsLoading(false)
@@ -39,18 +39,18 @@ const StatusChecker: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
     })
     return <></>
   }
-  discolousure.isOpen = true
+  disclosure.isOpen = true
   return isEnabled ? (
     <>{children}</>
   ) : (
     <Box>
-      <Modal onClose={discolousure.onClose} isOpen={discolousure.isOpen} size="xl">
+      <Modal onClose={disclosure.onClose} isOpen={disclosure.isOpen} size="xl">
         <ModalOverlay />
         <ModalContent w="80%">
           <ModalHeader>SofTalkがインストールされていません。</ModalHeader>
           <ModalCloseButton
             onClick={() => {
-              discolousure.onClose()
+              disclosure.onClose()
               navigate(-1)
             }}
           />
