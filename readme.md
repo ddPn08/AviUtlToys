@@ -1,8 +1,8 @@
 <p align="center"><img src="./modules/assets/image/icon.svg" width="150px" height="150px" alt="aviutil toys icon"/></p>
 <h1 align="center">Aviutil Toys</h1>
 
-[![](https://img.shields.io/badge/dynamic/json?color=%23bbff78&label=build&query=%24%5B0%5D.name&url=https://api.github.com/repos/ddpn08/Aviutil-Toys/tags&style=for-the-badge)]()
-[![](https://img.shields.io/github/downloads/ddpn08/Aviutil-Toys/total.svg?style=for-the-badge)](https://github.com/ddPn08/Aviutil-Toys/releases/tag/1.0.0-beta.0)
+[![](https://img.shields.io/badge/dynamic/json?color=%23bbff78&label=build&query=%24%5B0%5D.name&url=https://api.github.com/repos/ddpn08/Aviutil-Toys/tags&style=for-the-badge)](https://github.com/ddPn08/Aviutil-Toys/releases/latest)
+[![](https://img.shields.io/github/downloads/ddpn08/Aviutil-Toys/total.svg?style=for-the-badge)](https://github.com/ddPn08/Aviutil-Toys/releases/latest)
 
 Aviutil Toys は Aviutil をより便利にするユーティリティのセットです。
 
