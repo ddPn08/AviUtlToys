@@ -1,11 +1,24 @@
 {
   "extends": "../modules/config/browser.tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "*"
-      ]
+      "@/browser/*": [
+        "./browser/*"
+      ],
+      "@/main/*": [
+        "./main/*"
+      ],
+      "@/types": [
+        "./types"
+      ],
+      "@/types/*": [
+        "./types/*"
+      ],
     }
-  }
+  },
+  "include": [
+    "./browser",
+    "./main",
+    "./types"
+  ]
 }
