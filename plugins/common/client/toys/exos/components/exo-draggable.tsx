@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 import { useContext, useState } from 'react'
 
-import { ExosContext } from '.'
+import { ExosContext } from '..'
 
 import { client } from '@/client/context'
 import type { ExoMeta } from '@/types/exos'

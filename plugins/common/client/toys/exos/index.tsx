@@ -3,8 +3,8 @@ import { Box } from '@chakra-ui/react'
 import { useState, useEffect, createContext } from 'react'
 
 import { client } from '../../context'
-import { Add } from './add'
-import { ExoList } from './exo-list'
+import { Add } from './components/add'
+import { ExoList } from './components/exo-list'
 
 import type { ExoMeta } from '@/types/exos'
 
