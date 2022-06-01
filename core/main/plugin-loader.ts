@@ -1,4 +1,4 @@
-import type { Plugin } from '@aviutil-toys/api/server'
+import { AviUtilToys, PluginModule } from '@aviutil-toys/api/server'
 import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
@@ -9,30 +9,32 @@ import type { PluginMeta } from '@/types'
 
 const PLUGIN_DATA_DIR = path.join(app.getPath('userData'), 'pluginData')
 
-export namespace PluginLoader {
-    export const pluginMetaList: PluginMeta[] = []
-    export const plugins: Plugin[] = []
+class PluginLoaderClass {
+    public plugins: PluginModule[] = []
+    public readonly pluginMetaList: PluginMeta[] = []
 
-    export const loadPlugins = async (pluginDir: string) => {
+    public async preLoadPlugins(pluginDir: string) {
         if (!fs.existsSync(pluginDir)) return
-
         const files = await fs.promises.readdir(pluginDir)
-
         const dirs = await Promise.all(
             files.filter(async (file) =>
                 (await fs.promises.lstat(path.join(pluginDir, file))).isDirectory(),
             ),
         )
+
         for (let plugin of dirs) {
             if (fs.existsSync(path.join(pluginDir, plugin, 'dist')))
                 plugin = path.join(plugin, 'dist')
-            const meta: PluginMeta['meta'] = require(path.join(pluginDir, plugin, 'package.json'))
-            if (!meta.name || !meta.description || !meta['id'] || !meta.version) {
+
+            const meta: PluginMeta['meta'] = JSON.parse(
+                await fs.promises.readFile(path.join(pluginDir, plugin, 'package.json'), 'utf8'),
+            )
+            if (!meta.name || !meta.description || !meta.version || !meta['id']) {
                 console.warn(`Plugin ${plugin} is missing a required field.`)
                 continue
             }
             meta['pluginDataPath'] = path.join(PLUGIN_DATA_DIR, meta['id'])
-            pluginMetaList.push({
+            this.pluginMetaList.push({
                 entry: {
                     server: path.join(pluginDir, plugin, 'server.js'),
                     client: path.join(pluginDir, plugin, 'client.js'),
@@ -42,18 +44,20 @@ export namespace PluginLoader {
             Development.addClientWatchFile(path.join(pluginDir, plugin, 'client.js'))
         }
     }
-    export const importPlugins = async () => {
+
+    public async loadPlugins() {
         if (!fs.existsSync(PLUGIN_DATA_DIR)) await fs.promises.mkdir(PLUGIN_DATA_DIR)
 
-        for (const pluginMeta of pluginMetaList) {
-            const plugin: Plugin = require(pluginMeta.entry.server)
-            const dataFolder = path.join(PLUGIN_DATA_DIR, pluginMeta.meta['id'])
-            if (!fs.existsSync(dataFolder)) await fs.promises.mkdir(dataFolder)
-            plugin.default({
-                dataFolder,
-                meta: pluginMeta.meta,
+        for (const pluginMeta of this.pluginMetaList) {
+            AviUtilToys.plugins.registerPlugin({
+                context: {
+                    dataFolder: path.join(PLUGIN_DATA_DIR, pluginMeta.meta['id']),
+                    meta: pluginMeta.meta,
+                },
+                default: require(pluginMeta.entry.server).default,
             })
-            plugins.push(plugin)
         }
     }
 }
+
+export const PluginLoader = new PluginLoaderClass()

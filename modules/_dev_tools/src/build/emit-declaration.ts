@@ -1,7 +1,12 @@
 import kleur from 'kleur'
 import path from 'path'
 import { replaceTscAliasPaths } from 'tsc-alias'
-import typescript, { CompilerOptions } from 'typescript'
+import typescript, {
+    CompilerOptions,
+    ModuleKind,
+    ModuleResolutionKind,
+    ScriptTarget,
+} from 'typescript'
 
 export const emitDeclaration = (
     files: string[],
@@ -14,6 +19,9 @@ export const emitDeclaration = (
      * Emit declaration files
      */
     const compilerOptions: CompilerOptions = {
+        target: ScriptTarget.ESNext,
+        module: ModuleKind.ESNext,
+        moduleResolution: ModuleResolutionKind.NodeJs,
         esModuleInterop: true,
         declaration: true,
         declarationDir: outDir,

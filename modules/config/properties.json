@@ -17,7 +17,7 @@
   "server.externals": [
     "electron",
     "@aviutil-toys/api",
-    "@aviutil-toys/api/*",
+    "@aviutil-toys/api/server",
     "@aviutil-toys/assets"
   ]
 }

@@ -2,8 +2,12 @@ import { createPlugin } from '@aviutil-toys/api/server'
 
 import { Context } from './context'
 
-export default createPlugin((c) => {
-    Context.dataFolder = c.dataFolder
-    Context.meta = c.meta
-    import('./api')
+export default createPlugin({
+    preInitialization(ctx) {
+        Context.dataFolder = ctx.dataFolder
+        Context.meta = ctx.meta
+    },
+    async postInitialization() {
+        await import('./api')
+    },
 })
