@@ -1,15 +1,12 @@
 import type { ClientPlugin } from '@aviutil-toys/api/client'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
-import React from 'react'
 
-import { ipcSystem } from '../api/system'
-import { Constants } from '../constants'
+import { ipcSystem } from '@/browser/api/system'
+import { Constants } from '@/browser/constants'
+import { pluginsAtom, toysAtom } from '@/browser/state'
 
-import { toysAtom, pluginsAtom } from '@/browser/state'
-
-// eslint-disable-next-line react/display-name
-export const PluginLoader = React.memo(() => {
+export const usePluginLoader = () => {
   const [, setPlugins] = useAtom(pluginsAtom)
   const [, setToys] = useAtom(toysAtom)
 
@@ -41,6 +38,4 @@ export const PluginLoader = React.memo(() => {
   useEffect(() => {
     update()
   }, [])
-
-  return <></>
-})
+}

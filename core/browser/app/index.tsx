@@ -6,10 +6,10 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 
 import { ErrorModal } from '../components/error-modal'
 import { Frame } from './frame'
+import { usePluginLoader } from './hooks/plugin-loader'
+import { useUpdateAlert } from './hooks/update-alert'
 import { Menu } from './menu'
-import { PluginLoader } from './plugin-loader'
 import { theme } from './theme'
-import { UpdateAlert } from './update-alert'
 
 import { toysAtom } from '@/browser/state'
 import { BaseToy } from '@/browser/toys/base-toy'
@@ -50,8 +50,6 @@ const GlobalStyles = () => {
 
 const Providers: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
   <HashRouter>
-    <PluginLoader />
-    <UpdateAlert />
     <ColorModeScript />
     <ChakraProvider theme={theme}>
       <GlobalStyles />
@@ -62,6 +60,8 @@ const Providers: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
 
 export const App: React.FC = () => {
   const [toys] = useAtom(toysAtom)
+  usePluginLoader()
+  useUpdateAlert()
 
   return (
     <Providers>

@@ -1,9 +1,9 @@
 import { useToast } from '@chakra-ui/react'
-import { Fragment, useEffect } from 'react'
+import { useEffect } from 'react'
 
-import { ipcSystem } from '../api/system'
+import { ipcSystem } from '@/browser/api/system'
 
-export const UpdateAlert: React.FC = () => {
+export const useUpdateAlert = () => {
   const toast = useToast()
 
   useEffect(() => {
@@ -19,6 +19,4 @@ export const UpdateAlert: React.FC = () => {
       })
     })
   }, [])
-
-  return <Fragment />
 }
