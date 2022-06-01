@@ -1,10 +1,10 @@
-import { ApiServer } from '@aviutil-toys/api/server'
+import { IpcServer } from '@aviutil-toys/api/server'
 
 import { voiceManager } from './voice-manager'
 
 import type { ClientToServerEvents, ServerToClientEvents } from '@/types'
 
-export const api = new ApiServer<ServerToClientEvents, ClientToServerEvents>(
+export const api = new IpcServer<ServerToClientEvents, ClientToServerEvents>(
     'system:plugin:softalk',
 )
 

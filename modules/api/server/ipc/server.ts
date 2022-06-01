@@ -1,6 +1,6 @@
 import { BrowserWindow, ipcMain, IpcMainInvokeEvent } from 'electron'
 
-export class ApiServer<
+export class IpcServer<
     StoC extends Record<string, any> = Record<string, any>,
     CtoS extends Record<string, any> = Record<string, any>,
 > {

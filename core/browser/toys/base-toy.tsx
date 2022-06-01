@@ -1,5 +1,5 @@
 import type { ConfigurationType } from '@aviutil-toys/api'
-import { api, ToyContextType } from '@aviutil-toys/api/client'
+import { ipcApi, ToyContextType } from '@aviutil-toys/api/client'
 import { Code, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -14,7 +14,7 @@ export const BaseToy: React.FC<ToyContextType> = ({ component: C, ...rest }) => 
   const navigate = useNavigate()
 
   const checkMissingConfig = async () => {
-    const config = await api.invoke('config:get')
+    const config = await ipcApi.invoke('config:get')
     const missing = (rest.essentialConfig &&
       config &&
       rest.essentialConfig.filter(

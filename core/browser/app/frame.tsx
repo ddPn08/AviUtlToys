@@ -1,4 +1,4 @@
-import { api } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutil-toys/api/client'
 import { Box, Button, ButtonGroup, Heading, useColorMode } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
@@ -63,17 +63,17 @@ export const Frame: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) 
         <FrameButton
           aria-label="minimize"
           label={<VscChromeMinimize />}
-          onClick={() => api.invoke('window:minimize')}
+          onClick={() => ipcApi.invoke('window:minimize')}
         />
         <FrameButton
           aria-label="maximize"
           label={<VscChromeMaximize />}
-          onClick={() => api.invoke('window:toggleMaximize')}
+          onClick={() => ipcApi.invoke('window:toggleMaximize')}
         />
         <FrameButton
           aria-label="close"
           label={<VscChromeClose />}
-          onClick={() => api.invoke('window:close')}
+          onClick={() => ipcApi.invoke('window:close')}
         />
       </ButtonGroup>
     </Box>

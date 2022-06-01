@@ -1,4 +1,4 @@
-import { api } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutil-toys/api/client'
 import { Badge, Box, Heading, HStack, Stack, Text, useColorMode } from '@chakra-ui/react'
 import { useAtom } from 'jotai'
 
@@ -27,7 +27,7 @@ export const PluginList: React.FC = () => {
                   cursor="pointer"
                   colorScheme="cyan"
                   onClick={() => {
-                    api.invoke('shell:open-external', v.meta['homepage'])
+                    ipcApi.invoke('shell:open-external', v.meta['homepage'])
                   }}
                 >
                   HomePage

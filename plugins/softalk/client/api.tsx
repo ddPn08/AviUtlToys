@@ -1,7 +1,7 @@
-import { ApiClient } from '@aviutil-toys/api/client'
+import { IpcClient } from '@aviutil-toys/api/client'
 
 import type { ClientToServerEvents, ServerToClientEvents } from '@/types'
 
-export const ipc = new ApiClient<ServerToClientEvents, ClientToServerEvents>(
+export const ipc = new IpcClient<ServerToClientEvents, ClientToServerEvents>(
   'system:plugin:softalk',
 )

@@ -1,5 +1,5 @@
-import { ApiClient } from '@aviutil-toys/api/client'
+import { IpcClient } from '@aviutil-toys/api/client'
 
 import type { ClientToServerEvents, ServerToClientEvents } from '@/types'
 
-export const ipcSystem = new ApiClient<ServerToClientEvents, ClientToServerEvents>('system')
+export const ipcSystem = new IpcClient<ServerToClientEvents, ClientToServerEvents>('system')

@@ -1,4 +1,4 @@
-import { ApiServer, Configuration } from '@aviutil-toys/api/server'
+import { IpcServer, Configuration } from '@aviutil-toys/api/server'
 import { spawn } from 'child_process'
 import fs from 'fs'
 
@@ -7,7 +7,7 @@ import { update } from '../updater'
 
 import type { ClientToServerEvents, ServerToClientEvents } from '@/types'
 
-export const ipcSystem = new ApiServer<ServerToClientEvents, ClientToServerEvents>('system')
+export const ipcSystem = new IpcServer<ServerToClientEvents, ClientToServerEvents>('system')
 
 ipcSystem.handle('plugin:list', () => {
     return PluginLoader.pluginMetaList

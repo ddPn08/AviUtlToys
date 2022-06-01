@@ -1,4 +1,4 @@
-import { api } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutil-toys/api/client'
 import { Input, InputGroup, InputRightAddon, Stack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -10,7 +10,7 @@ export const Configuration: React.FC = () => {
   const [aviutilDir, setAviutilDir] = useState('')
   const [aviutilExec, setAviutilExec] = useState('')
   const effect = async () => {
-    const config = await api.invoke('config:get')
+    const config = await ipcApi.invoke('config:get')
     setAviutilDir(config.aviutilDir || '')
     setAviutilExec(config.aviutilExec || '')
   }
@@ -31,16 +31,16 @@ export const Configuration: React.FC = () => {
                 onClick={async () => {
                   if (dialogIsOpen) return
                   setDialogIsOpen(true)
-                  const res = await api.invoke('native:show-open-dialog', {
+                  const res = await ipcApi.invoke('native:show-open-dialog', {
                     properties: ['openDirectory'],
                   })
                   setDialogIsOpen(false)
                   if (res.canceled) return
                   setAviutilDir(res.filePaths[0]!)
 
-                  const config = await api.invoke('config:get')
+                  const config = await ipcApi.invoke('config:get')
                   config.aviutilDir = res.filePaths[0]!
-                  await api.invoke('config:update', config)
+                  await ipcApi.invoke('config:update', config)
                 }}
               >
                 参照
@@ -58,7 +58,7 @@ export const Configuration: React.FC = () => {
                 onClick={async () => {
                   if (dialogIsOpen) return
                   setDialogIsOpen(true)
-                  const res = await api.invoke('native:show-open-dialog', {
+                  const res = await ipcApi.invoke('native:show-open-dialog', {
                     properties: ['openFile'],
                     filters: [
                       {
@@ -71,9 +71,9 @@ export const Configuration: React.FC = () => {
                   if (res.canceled) return
                   setAviutilExec(res.filePaths[0]!)
 
-                  const config = await api.invoke('config:get')
+                  const config = await ipcApi.invoke('config:get')
                   config.aviutilExec = res.filePaths[0]!
-                  await api.invoke('config:update', config)
+                  await ipcApi.invoke('config:update', config)
                 }}
               >
                 参照

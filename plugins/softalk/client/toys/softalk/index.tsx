@@ -1,4 +1,4 @@
-import { api, useToyContext } from '@aviutil-toys/api/client'
+import { ipcApi, useToyContext } from '@aviutil-toys/api/client'
 import {
   Box,
   Button,
@@ -154,7 +154,7 @@ export const SofTalk: React.FC = () => {
               onDragStart={(e) => {
                 if (!dragFile) return
                 e.preventDefault()
-                api.invoke('native:drag-file', dragFile)
+                ipcApi.invoke('native:drag-file', dragFile)
               }}
             >
               <Heading size="sm">

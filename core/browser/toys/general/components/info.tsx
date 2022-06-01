@@ -1,4 +1,4 @@
-import { api } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutil-toys/api/client'
 import Icon from '@aviutil-toys/assets/image/icon.svg'
 import { Flex, HStack, Link, Stack, Text, useColorMode } from '@chakra-ui/react'
 
@@ -23,7 +23,7 @@ export const Info: React.FC = () => {
             <Link
               key={url}
               onClick={() => {
-                api.invoke('shell:open-external', url)
+                ipcApi.invoke('shell:open-external', url)
               }}
             >
               {name}

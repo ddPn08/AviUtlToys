@@ -2,7 +2,7 @@ import type { IpcRendererEvent } from 'electron/renderer'
 
 import { ipcRenderer } from '../preload/index.js'
 
-export class ApiClient<
+export class IpcClient<
     StoC extends Record<string, any> = Record<string, any>,
     CtoS extends Record<string, any> = Record<string, any>,
 > {

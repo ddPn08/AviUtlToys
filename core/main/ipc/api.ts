@@ -1,8 +1,8 @@
 import type { ClientToServerEvents, ServerToClientEvents } from '@aviutil-toys/api'
-import { Configuration, ApiServer } from '@aviutil-toys/api/server'
+import { Configuration, IpcServer } from '@aviutil-toys/api/server'
 import { BrowserWindow, dialog, shell } from 'electron'
 
-export const ipcApi = new ApiServer<ServerToClientEvents, ClientToServerEvents>('api')
+export const ipcApi = new IpcServer<ServerToClientEvents, ClientToServerEvents>('api')
 
 ipcApi.handle('window:close', () => {
     const window = BrowserWindow.getFocusedWindow()

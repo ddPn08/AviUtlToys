@@ -1,4 +1,4 @@
-import { api } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutil-toys/api/client'
 import { Button, Grid } from '@chakra-ui/react'
 import { useState } from 'react'
 
@@ -17,7 +17,7 @@ export const FileSelectButton: React.FC<{
         onClick={async () => {
           if (dialogIsOpen) return
           setDialogIsOpen(true)
-          const res = await api.invoke('native:show-open-dialog', {
+          const res = await ipcApi.invoke('native:show-open-dialog', {
             properties: ['openFile', 'multiSelections'],
           })
           setDialogIsOpen(false)
@@ -56,7 +56,7 @@ export const FileSelectButton: React.FC<{
         onClick={async () => {
           if (dialogIsOpen) return
           setDialogIsOpen(true)
-          const res = await api.invoke('native:show-open-dialog', {
+          const res = await ipcApi.invoke('native:show-open-dialog', {
             properties: ['openFile', 'openDirectory', 'multiSelections'],
           })
           setDialogIsOpen(false)
