@@ -150,9 +150,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@aviutil-toys/dev-tools@workspace:^, @aviutil-toys/dev-tools@workspace:modules/dev-tool":
+"@aviutil-toys/dev-tools@workspace:^, @aviutil-toys/dev-tools@workspace:modules/_dev_tools":
   version: 0.0.0-use.local
-  resolution: "@aviutil-toys/dev-tools@workspace:modules/dev-tool"
+  resolution: "@aviutil-toys/dev-tools@workspace:modules/_dev_tools"
   dependencies:
     "@aviutil-toys/assets": "workspace:^"
     "@aviutil-toys/config": "workspace:^"
