@@ -67,6 +67,8 @@ const bundle = async (watch) => {
             format: 'esm',
             platform: 'browser',
             plugins: [ExternalExporter, svgrPlugin()],
+            jsxFactory: 'jsx',
+            jsxFragment: 'Fragment',
             inject: [path.join(__dirname, 'shims', 'react.js')],
         },
         server: {

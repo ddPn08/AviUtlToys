@@ -84,6 +84,8 @@ export const run = async (context: { args: { watch: boolean } }) => {
                     external: properties['server.externals'],
                     outfile: path.join(outdir, 'server.js'),
                     format: 'cjs',
+                    jsxFactory: 'jsx',
+                    jsxFragment: 'Fragment',
                     platform: 'node',
                 }),
             ),

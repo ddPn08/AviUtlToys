@@ -9,7 +9,9 @@ export const api = new IpcServer<ServerToClientEvents, ClientToServerEvents>(
 )
 
 api.handle('enabled', () => voiceManager.enabled)
-api.handle('voice:craete', (_, id, readOptions) => voiceManager.createVoice(id, readOptions))
+api.handle('voice:craete', (_, id, fps, readOptions, subTitle) =>
+    voiceManager.createVoice(id, fps, readOptions, subTitle),
+)
 api.handle('voice:play', (_, id, readOptions) => voiceManager.playVoice(id, readOptions))
 
 api.handle('voice:preset:list', () => voiceManager.presets)

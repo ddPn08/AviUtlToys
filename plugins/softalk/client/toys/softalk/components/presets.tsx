@@ -23,11 +23,13 @@ import {
   PopoverCloseButton,
   ButtonGroup,
 } from '@chakra-ui/react'
+import { useAtom } from 'jotai'
 import { useContext, useEffect, useState } from 'react'
 
 import { SofTalkContext } from '..'
 
 import { ipc } from '@/client/api'
+import { lastPresetAtom } from '@/client/state'
 import type { VoicePreset } from '@/types'
 
 const NewPreset: React.FC<
@@ -36,7 +38,7 @@ const NewPreset: React.FC<
   }
 > = ({ onClose, isOpen, onCreate }) => {
   const toast = useToast()
-  const { readOptions } = useContext(SofTalkContext)
+  const { readOptions, subTitle } = useContext(SofTalkContext)
   const [name, setName] = useState('')
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -53,7 +55,11 @@ const NewPreset: React.FC<
             />
             <Button
               onClick={async () => {
-                await ipc.invoke('voice:preset:create', { name, readOptions })
+                await ipc.invoke('voice:preset:create', {
+                  name,
+                  readOptions,
+                  subTitle,
+                })
                 onClose()
                 onCreate()
                 toast({
@@ -72,68 +78,78 @@ const NewPreset: React.FC<
   )
 }
 
-export const Presets: React.FC = () => {
-  const { setReadOptions } = useContext(SofTalkContext)
-  const modal = useDisclosure()
-  const popover = useDisclosure()
+const Preset: React.FC<{
+  preset: VoicePreset
+  update: () => void
+}> = ({ preset, update }) => {
+  const { setReadOptions, setSubTitle } = useContext(SofTalkContext)
+  const disclosure = useDisclosure()
   const toast = useToast()
+  const [, setLastPreset] = useAtom(lastPresetAtom)
+  return (
+    <Popover key={preset.name} isOpen={disclosure.isOpen} onClose={disclosure.onClose}>
+      <PopoverTrigger>
+        <Button
+          onClick={() => {
+            setLastPreset(preset)
+            setReadOptions(preset.readOptions)
+            setSubTitle(preset.subTitle || '')
+          }}
+          onContextMenu={(e) => {
+            e.preventDefault()
+            disclosure.onOpen()
+          }}
+        >
+          {preset.name}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverArrow />
+        <PopoverCloseButton
+          onClick={() => {
+            disclosure.onClose()
+          }}
+        />
+        <PopoverBody>
+          <ButtonGroup>
+            <Button
+              bgColor="red.500"
+              onClick={async () => {
+                await ipc.invoke('voice:preset:delete', preset.name)
+                toast({
+                  title: '削除しました',
+                  status: 'success',
+                  isClosable: true,
+                })
+                update()
+                disclosure.onClose()
+              }}
+            >
+              削除
+            </Button>
+          </ButtonGroup>
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
+  )
+}
+
+export const Presets: React.FC = () => {
+  const modal = useDisclosure()
   const [presets, setPresets] = useState<VoicePreset[]>([])
-  const reload = async () => {
-    const presets = await ipc.invoke('voice:preset:list')
-    setPresets(presets)
-  }
+
+  const update = async () => ipc.invoke('voice:preset:list').then(setPresets)
   useEffect(() => {
-    reload()
+    update()
   }, [])
   return (
     <Box my="4">
       <Stack spacing={4}>
         <Divider />
         <Heading size="md">プリセット</Heading>
-        <Divider />
         <HStack>
           {presets.map((preset) => (
-            <Popover key={preset.name} isOpen={popover.isOpen}>
-              <PopoverTrigger>
-                <Button
-                  onClick={() => {
-                    setReadOptions(preset.readOptions)
-                  }}
-                  onContextMenu={(e) => {
-                    e.preventDefault()
-                    popover.onOpen()
-                  }}
-                >
-                  {preset.name}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent>
-                <PopoverArrow />
-                <PopoverCloseButton
-                  onClick={() => {
-                    popover.onClose()
-                  }}
-                />
-                <PopoverBody>
-                  <ButtonGroup>
-                    <Button
-                      bgColor="red.500"
-                      onClick={async () => {
-                        await ipc.invoke('voice:preset:delete', preset.name)
-                        toast({
-                          title: '削除しました',
-                          status: 'success',
-                          isClosable: true,
-                        })
-                        reload()
-                      }}
-                    >
-                      削除
-                    </Button>
-                  </ButtonGroup>
-                </PopoverBody>
-              </PopoverContent>
-            </Popover>
+            <Preset key={preset.name} preset={preset} update={update} />
           ))}
           <Button onClick={() => modal.onOpen()}>
             <AddIcon />
@@ -141,7 +157,7 @@ export const Presets: React.FC = () => {
         </HStack>
         <Divider />
       </Stack>
-      <NewPreset {...modal} onCreate={() => reload()} />
+      <NewPreset {...modal} onCreate={() => update()} />
     </Box>
   )
 }

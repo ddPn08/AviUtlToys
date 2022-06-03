@@ -1,10 +1,22 @@
 {
   "extends": "@aviutil-toys/config/browser.tsconfig.json",
   "compilerOptions": {
+    "types": [
+      "@emotion/react/types/css-prop"
+    ],
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "*"
+      "@/client/*": [
+        "./client/*"
+      ],
+      "@/server/*": [
+        "./server/*"
+      ],
+      "@/types": [
+        "./types"
+      ],
+      "@/types/*": [
+        "./types/*"
       ],
     }
   },

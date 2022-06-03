@@ -29,7 +29,7 @@ export const Options: React.FC = () => {
             onChange={(e) =>
               setReadOptions({
                 ...readOptions,
-                voice: parseInt(e.target.value, 0),
+                voice: parseInt(e.target.value || '0'),
               })
             }
           >
@@ -60,7 +60,7 @@ export const Options: React.FC = () => {
             </Slider>
             <Input
               type="number"
-              value={readOptions.volume}
+              value={readOptions.volume || 100}
               onChange={(e) => {
                 setReadOptions({
                   ...readOptions,

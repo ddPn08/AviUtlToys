@@ -3,6 +3,7 @@ import type { ReadOptions } from 'softalk'
 export type VoicePreset = {
     name: string
     readOptions: ReadOptions
+    subTitle: string | undefined
 }
 
 export const VoiceNumberMap = {

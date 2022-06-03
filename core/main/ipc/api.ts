@@ -20,6 +20,7 @@ ipcApi.handle('window:minimize', () => {
 ipcApi.handle('shell:open-external', (_, url) => {
     shell.openExternal(url)
 })
+
 ipcApi.handle('native:show-open-dialog', (_, options) => {
     return dialog.showOpenDialog({
         ...options,

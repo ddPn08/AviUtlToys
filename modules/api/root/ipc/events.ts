@@ -14,7 +14,6 @@ export interface ClientToServerEvents {
     'shell:open-external': (url: string) => void
 
     'native:show-open-dialog': (options: OpenDialogOptions) => OpenDialogReturnValue
-
     'native:drag-file': (file: string, icon?: string) => void
 
     'config:get': () => ConfigurationType

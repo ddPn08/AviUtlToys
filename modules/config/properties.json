@@ -16,6 +16,7 @@
   ],
   "server.externals": [
     "electron",
+    "get-audio-duration",
     "@aviutil-toys/api",
     "@aviutil-toys/api/server",
     "@aviutil-toys/assets"

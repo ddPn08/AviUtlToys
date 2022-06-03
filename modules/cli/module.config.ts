@@ -18,7 +18,7 @@ export default defineConfig(
 
             await fs.promises.writeFile(
                 path.join(__dirname, 'dist/cli/shims/react.js'),
-                `import * as React from 'react'; export { React }`,
+                `import { jsx } from '@emotion/react';import React, { Fragment } from 'react';export { React, jsx, Fragment }`,
             )
         },
     },
