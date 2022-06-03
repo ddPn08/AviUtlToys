@@ -121,42 +121,9 @@ const bundlePlugin = async () => {
 }
 
 const build = async () => {
-    /** @type {string[]} */
-    const resolved = []
+    const out = path.join(cwd, 'product/win-unpacked')
 
-    /**
-     * @param {string} module
-     * @returns {Promise<string[]>}
-     */
-    const getAllDependencies = async (module) => {
-        resolved.push(module)
-        const result = [module]
-        if (!fs.existsSync(path.join(NODE_MODULES, module, 'package.json'))) return result
-        const { dependencies, optionalDependencies, peerDependencies } = JSON.parse(
-            await fs.promises.readFile(path.join(NODE_MODULES, module, 'package.json'), 'utf-8'),
-        )
-        const all = [
-            ...Object.keys(dependencies || {}),
-            ...Object.keys(optionalDependencies || {}),
-            ...Object.keys(peerDependencies || {}),
-        ]
-        for (const dep of all) {
-            if (resolved.includes(dep)) continue
-            result.push(dep, ...(await getAllDependencies(dep)))
-        }
-        return result
-    }
-
-    const modules = new Set(await getAllDependencies('@aviutil-toys/core'))
-    modules.delete('@aviutil-toys/core')
-    const excludes = []
-    for (const module of modules) {
-        if (properties['server.externals'].includes(module)) continue
-        excludes.push(`!node_modules/${module}/**/*`)
-    }
-
-    /** @type {import('electron-builder').CliOptions} */
-    const options = {
+    await electronBuilder.build({
         dir: true,
         config: {
             electronVersion: '19.0.1',
@@ -175,12 +142,19 @@ const build = async () => {
                 ],
             },
             compression: 'store',
-            files: ['dist/**/*', ...excludes],
+            files: ['dist/**/*', '!node_modules/**/*'],
             asar: false,
         },
+    })
+    await fs.promises.mkdir(path.join(out, 'resources/app/node_modules'))
+    for (const external of properties['server.externals']) {
+        const filepath = path.join(NODE_MODULES, external)
+        const dest = path.join(out, 'resources/app/node_modules', external)
+        if (external === 'electron' || !fs.existsSync(filepath) || fs.existsSync(dest)) continue
+        fs.cpSync(filepath, dest, {
+            recursive: true,
+        })
     }
-
-    await electronBuilder.build(options)
     await fs.promises.writeFile(path.join(cwd, 'product/win-unpacked/resources/.portable'), '')
 
     const application = new AdmZip()
