@@ -147,10 +147,10 @@ const build = async () => {
         },
     })
     await fs.promises.mkdir(path.join(out, 'resources/app/node_modules'))
-    for (const external of properties['server.externals']) {
+    for (const external of properties['build.externals']) {
         const filepath = path.join(NODE_MODULES, external)
         const dest = path.join(out, 'resources/app/node_modules', external)
-        if (external === 'electron' || !fs.existsSync(filepath) || fs.existsSync(dest)) continue
+        if (!fs.existsSync(filepath) || fs.existsSync(dest)) continue
         fs.cpSync(filepath, dest, {
             recursive: true,
         })

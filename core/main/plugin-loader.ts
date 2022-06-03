@@ -49,9 +49,11 @@ class PluginLoaderClass {
         if (!fs.existsSync(PLUGIN_DATA_DIR)) await fs.promises.mkdir(PLUGIN_DATA_DIR)
 
         for (const pluginMeta of this.pluginMetaList) {
+            const dataFolder = path.join(PLUGIN_DATA_DIR, pluginMeta.meta['id'])
+            if (!fs.existsSync(dataFolder)) await fs.promises.mkdir(dataFolder)
             AviUtilToys.plugins.registerPlugin({
                 context: {
-                    dataFolder: path.join(PLUGIN_DATA_DIR, pluginMeta.meta['id']),
+                    dataFolder,
                     meta: pluginMeta.meta,
                 },
                 default: require(pluginMeta.entry.server).default,

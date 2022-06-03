@@ -16,9 +16,15 @@
   ],
   "server.externals": [
     "electron",
-    "get-audio-duration",
+    "@ffprobe-installer/ffprobe",
     "@aviutil-toys/api",
     "@aviutil-toys/api/server",
+    "@aviutil-toys/assets"
+  ],
+  "build.externals": [
+    "@ffprobe-installer/win32-x64",
+    "@ffprobe-installer/ffprobe",
+    "@aviutil-toys/api",
     "@aviutil-toys/assets"
   ]
 }
