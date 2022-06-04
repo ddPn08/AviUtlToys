@@ -64,16 +64,19 @@ class VoiceManager {
     }
 
     public async createVoice(
-        text: string,
+        pronunciation: string,
+        subTitleText: string,
         fps: number,
         readOptions: ReadOptions,
         subTitle?: string,
+        exoVolume?: number,
     ) {
-        const filename = text.replace(/\\|\/|:|\*|\?|<|>|\|/, '-') + new Date().getTime() + '.wav'
+        const filename =
+            subTitleText.replace(/\\|\/|:|\*|\?|<|>|\|/, '-') + new Date().getTime() + '.wav'
         const out = path.join(Context.dataFolder, 'voices', filename)
         if (!fs.existsSync(path.dirname(out)))
             await fs.promises.mkdir(path.dirname(out), { recursive: true })
-        await this.softalk?.save(text, out, readOptions)
+        await this.softalk?.save(pronunciation, out, readOptions)
 
         const duration = await getAudioDurationInSeconds(out)
 
@@ -107,7 +110,7 @@ class VoiceManager {
                     },
                     '0.1': {
                         _name: '標準再生',
-                        音量: 100.0,
+                        音量: exoVolume || 100,
                         左右: 0.0,
                     },
                 },
@@ -123,7 +126,7 @@ class VoiceManager {
             header.group = 1
             for (const item of textExo.filter((e) => Object.keys(e).includes('text'))) {
                 const utf16Array: string[] = []
-                for (const s of text)
+                for (const s of subTitleText)
                     utf16Array.push(iconv.encode(s, 'utf16le').toString('hex').padEnd(4, '0'))
                 item['text'] = utf16Array.join('').padEnd(4096, '0')
             }

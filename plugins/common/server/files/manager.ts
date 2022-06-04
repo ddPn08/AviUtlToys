@@ -31,6 +31,7 @@ class FileManagerClass {
     }
 
     private save() {
+        this.filesList.sort((a, b) => a.id.localeCompare(b.id, undefined, { sensitivity: 'base' }))
         const aviutilDir = this.getAviUtilDir()
         if (!aviutilDir) return
         return fs.promises.writeFile(
@@ -68,6 +69,7 @@ class FileManagerClass {
         if (!aviutilDir) return
 
         file.enabled = true
+        file.categories.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
         this.filesList.push(file)
         for (const { origin, dir, filename, type } of file.files) {
             if (!origin) throw new Error(`File ${file.id} is not valid (origin is not set)`)

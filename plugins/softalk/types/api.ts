@@ -6,10 +6,12 @@ export interface ServerToClientEvents {}
 export interface ClientToServerEvents {
     enabled: () => boolean
     'voice:craete': (
-        text: string,
+        pronunciation: string,
+        subTitleText: string,
         fps: number,
         readOptions: ReadOptions,
         subTitle?: string,
+        exoVolume?: number,
     ) => string
     'voice:play': (text: string, readOptions: ReadOptions) => void
     'voice:preset:list': () => VoicePreset[]

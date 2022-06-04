@@ -74,6 +74,8 @@ type SofTalkContextType = {
   setSubTitle: (subTitle: string) => void
   frameRate: number
   setFrameRate: (frameRate: number) => void
+  exoVolume: number
+  setExoVolume: (exoVolume: number) => void
 }
 
 export const SofTalkContext = createContext<SofTalkContextType>({} as SofTalkContextType)
@@ -90,6 +92,7 @@ export const SofTalk: React.FC = () => {
   )
   const [subTitle, setSubTitle] = useState<string>(lastPreset?.subTitle || '')
   const [frameRate, setFrameRate] = useState(60)
+  const [exoVolume, setExoVolume] = useState(lastPreset?.exoVolume || 100)
   return (
     <StatusChecker>
       <SofTalkContext.Provider
@@ -100,6 +103,8 @@ export const SofTalk: React.FC = () => {
           setSubTitle,
           frameRate,
           setFrameRate,
+          exoVolume,
+          setExoVolume,
         }}
       >
         <Presets />

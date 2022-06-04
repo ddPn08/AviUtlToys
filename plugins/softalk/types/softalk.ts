@@ -4,6 +4,7 @@ export type VoicePreset = {
     name: string
     readOptions: ReadOptions
     subTitle: string | undefined
+    exoVolume: number | undefined
 }
 
 export const VoiceNumberMap = {

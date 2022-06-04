@@ -31,6 +31,10 @@ export const FileSetList: React.FC<{
   const { colorMode } = useColorMode()
   const [categoryFilter, setCategoryFilter] = useState<string | undefined>()
   const [togglePending, setTogglePending] = useState(false)
+
+  const categories = Array.from(new Set(fileSets.flatMap((fileSet) => fileSet.categories))).sort(
+    (a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }),
+  )
   return (
     <Stack>
       <Tabs>
@@ -50,22 +54,19 @@ export const FileSetList: React.FC<{
           >
             ALL
           </Tab>
-          {fileSets
-            .flatMap((fileSet) => fileSet.categories)
-            .map((category, i) => (
-              <Tab
-                key={i}
-                onClick={() => {
-                  setCategoryFilter(category)
-                }}
-              >
-                <Badge>{category}</Badge>
-              </Tab>
-            ))}
+          {categories.map((category, i) => (
+            <Tab
+              key={i}
+              onClick={() => {
+                setCategoryFilter(category)
+              }}
+            >
+              <Badge>{category}</Badge>
+            </Tab>
+          ))}
         </TabList>
       </Tabs>
       {fileSets
-        .sort((a, b) => a.id.toLowerCase().localeCompare(b.id.toLowerCase()))
         .filter((fileSet) => {
           if (!categoryFilter) return true
           return fileSet.categories.includes(categoryFilter)

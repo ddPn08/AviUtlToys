@@ -1,5 +1,5 @@
-import { Box, ChakraProvider, ColorModeScript, useColorMode } from '@chakra-ui/react'
-import { css, useTheme, Global } from '@emotion/react'
+import { Box, ChakraProvider, ColorModeScript } from '@chakra-ui/react'
+import { css, Global } from '@emotion/react'
 import { useAtom } from 'jotai'
 import { Suspense } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
@@ -15,8 +15,6 @@ import { toysAtom } from '@/browser/state'
 import { BaseToy } from '@/browser/toys/base-toy'
 
 const GlobalStyles = () => {
-  const { colorMode } = useColorMode()
-  const theme = useTheme()
   return (
     <Global
       styles={css`

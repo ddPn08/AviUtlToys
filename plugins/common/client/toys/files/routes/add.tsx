@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { FilesContext } from '..'
 import { CategoriesEditor } from '../components/categories-editor'
+import { FileList } from '../components/file-list'
+import { FileSelectButton } from '../components/file-select-button'
 
 import { client } from '@/client/context'
 import type { AviutilFileSet } from '@/types/files'
@@ -13,7 +15,6 @@ export const Add: React.FC = () => {
   const { update } = useContext(FilesContext)
   const [error, setError] = useState<string | undefined>()
   const [isLoading, setIsLoading] = useState(false)
-  const [category, setCategory] = useState<string | undefined>()
   const [fileSet, setFileSet] = useState<AviutilFileSet>({
     id: '',
     files: [],
@@ -45,6 +46,8 @@ export const Add: React.FC = () => {
             </Tooltip>
           </Stack>
           <CategoriesEditor fileSet={fileSet} setFileSet={setFileSet} />
+          <FileSelectButton fileSet={fileSet} setFileSet={setFileSet} />
+          <FileList fileSet={fileSet} setFileSet={setFileSet} editable />
         </FormControl>
         <Button
           isLoading={isLoading}

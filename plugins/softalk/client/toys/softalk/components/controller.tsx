@@ -4,7 +4,10 @@ import {
   ButtonGroup,
   Flex,
   Heading,
+  HStack,
   Input,
+  Stack,
+  Switch,
   Text,
   Textarea,
   useToast,
@@ -35,28 +38,47 @@ const CheckReadOptions = (options: Partial<ReadOptions>): options is ReadOptions
 }
 
 export const Controller: React.FC = () => {
-  const { readOptions, subTitle, frameRate, setFrameRate } = useContext(SofTalkContext)
+  const { readOptions, subTitle, frameRate, setFrameRate, exoVolume, setExoVolume } =
+    useContext(SofTalkContext)
   const toast = useToast()
   const [isLoading, setIsLoading] = useState(false)
   const [dragFile, setDragFile] = useState<string | null>(null)
-  const [text, setText] = useState('')
+  const [pronunciation, setPronunciation] = useState('')
+  const [subTitleText, setSubTitleText] = useState('')
+  const [syncSubTitle, setSyncSubTitle] = useState(true)
   return (
     <>
-      <Textarea
-        placeholder="ここにテキストを入力してください"
-        value={text}
-        onChange={(e) => {
-          setDragFile(null)
-          setText(e.currentTarget.value)
-        }}
-        size="lg"
-      />
+      <Stack spacing={2}>
+        <Textarea
+          placeholder="字幕"
+          value={subTitleText}
+          onChange={(e) => {
+            if (syncSubTitle) setPronunciation(e.currentTarget.value)
+            if (!e.currentTarget.value) {
+              setPronunciation(e.currentTarget.value)
+              setSyncSubTitle(true)
+            }
+            setDragFile(null)
+            setSubTitleText(e.currentTarget.value)
+          }}
+          size="lg"
+        />
+        <Textarea
+          placeholder="発生記号"
+          value={pronunciation}
+          size="lg"
+          onChange={(e) => {
+            setSyncSubTitle(false)
+            setPronunciation(e.currentTarget.value)
+          }}
+        />
+      </Stack>
       <Flex justifyContent="space-between">
         <ButtonGroup m="2">
           <Button
             isLoading={isLoading}
             onClick={async () => {
-              if (!text)
+              if (!pronunciation)
                 return toast({
                   title: 'テキストが空です',
                   description: 'テキストを入力してください',
@@ -68,7 +90,15 @@ export const Controller: React.FC = () => {
                 return
               }
               setIsLoading(true)
-              const file = await ipc.invoke('voice:craete', text, frameRate, readOptions, subTitle)
+              const file = await ipc.invoke(
+                'voice:craete',
+                pronunciation,
+                subTitleText,
+                frameRate,
+                readOptions,
+                subTitle,
+                exoVolume,
+              )
               setIsLoading(false)
               setDragFile(file)
             }}
@@ -77,12 +107,12 @@ export const Controller: React.FC = () => {
           </Button>
           <Button
             onClick={() => {
-              if (!text) return
+              if (!pronunciation) return
               if (!CheckReadOptions(readOptions)) {
                 console.error('readOptions is invalid', readOptions)
                 return
               }
-              ipc.invoke('voice:play', text, readOptions)
+              ipc.invoke('voice:play', pronunciation, readOptions)
             }}
           >
             再生
@@ -106,6 +136,18 @@ export const Controller: React.FC = () => {
                 : '合成ボタンを押して音声を生成します。'}
             </Heading>
           </Flex>
+          <HStack>
+            <Heading size="sm">字幕をコピー</Heading>
+            <Switch
+              isChecked={syncSubTitle}
+              onChange={(e) => {
+                setSyncSubTitle(e.currentTarget.checked)
+                if (e.currentTarget.checked) {
+                  setPronunciation(subTitleText)
+                }
+              }}
+            />
+          </HStack>
         </ButtonGroup>
       </Flex>
       <Text>フレームレート (FPS)</Text>
@@ -113,6 +155,12 @@ export const Controller: React.FC = () => {
         type="number"
         value={frameRate}
         onChange={(e) => setFrameRate(parseInt(e.currentTarget.value || '60'))}
+      />
+      <Text>AviUtil上での音量</Text>
+      <Input
+        type="number"
+        value={exoVolume}
+        onChange={(e) => setExoVolume(parseInt(e.currentTarget.value || '100'))}
       />
     </>
   )

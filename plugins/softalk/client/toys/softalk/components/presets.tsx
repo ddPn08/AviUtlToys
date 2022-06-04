@@ -39,7 +39,7 @@ const NewPreset: React.FC<
   }
 > = ({ onClose, isOpen, onCreate }) => {
   const toast = useToast()
-  const { readOptions, subTitle } = useContext(SofTalkContext)
+  const { readOptions, subTitle, exoVolume } = useContext(SofTalkContext)
   const [name, setName] = useState('')
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -60,6 +60,7 @@ const NewPreset: React.FC<
                   name,
                   readOptions,
                   subTitle,
+                  exoVolume,
                 })
                 onClose()
                 onCreate()
@@ -83,7 +84,7 @@ const Preset: React.FC<{
   preset: VoicePreset
   update: () => void
 }> = ({ preset, update }) => {
-  const { setReadOptions, setSubTitle } = useContext(SofTalkContext)
+  const { setReadOptions, setSubTitle, setExoVolume } = useContext(SofTalkContext)
   const disclosure = useDisclosure()
   const toast = useToast()
   const [, setLastPreset] = useAtom(lastPresetAtom)
@@ -95,6 +96,7 @@ const Preset: React.FC<{
             setLastPreset(preset)
             setReadOptions(preset.readOptions)
             setSubTitle(preset.subTitle || '')
+            setExoVolume(preset.exoVolume || 100)
           }}
           onContextMenu={(e) => {
             e.preventDefault()
