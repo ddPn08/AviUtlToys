@@ -32,16 +32,18 @@ const GlobalStyles = () => {
         }
 
         ::-webkit-scrollbar {
-          width: 10px;
+          background-color: inherit;
+          width: 4px;
         }
         ::-webkit-scrollbar-track {
-          background: ${colorMode === 'dark' ? theme.colors.gray[700] : theme.colors.gray[200]};
+          background-color: inherit;
         }
         ::-webkit-scrollbar-thumb {
-          background: #888;
+          background-color: #babac0;
+          border-radius: 8px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-          background: #555;
+        ::-webkit-scrollbar-button {
+          display: none;
         }
       `}
     />

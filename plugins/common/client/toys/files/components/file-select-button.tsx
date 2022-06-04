@@ -28,12 +28,7 @@ export const FileSelectButton: React.FC<{
               (file) =>
                 ({
                   type: 'file',
-                  dir:
-                    fileSet.type === 'plugin'
-                      ? '/Plugins'
-                      : fileSet.type === 'script'
-                      ? '/Scripts'
-                      : '/',
+                  dir: '/',
                   filename: file.split(/\\|\//).pop()!,
                   origin: file,
                 } as AviutilFile),
@@ -67,12 +62,7 @@ export const FileSelectButton: React.FC<{
               (file) =>
                 ({
                   type: 'dir',
-                  dir:
-                    fileSet.type === 'plugin'
-                      ? '/Plugins'
-                      : fileSet.type === 'script'
-                      ? '/Scripts'
-                      : '/',
+                  dir: '/',
                   filename: file.split(/\\|\//).pop()!,
                   origin: file,
                 } as AviutilFile),

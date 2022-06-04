@@ -23,6 +23,7 @@ import {
   PopoverCloseButton,
   ButtonGroup,
 } from '@chakra-ui/react'
+import { css } from '@emotion/react'
 import { useAtom } from 'jotai'
 import { useContext, useEffect, useState } from 'react'
 
@@ -99,6 +100,7 @@ const Preset: React.FC<{
             e.preventDefault()
             disclosure.onOpen()
           }}
+          flex="0 0 auto"
         >
           {preset.name}
         </Button>
@@ -147,7 +149,15 @@ export const Presets: React.FC = () => {
       <Stack spacing={4}>
         <Divider />
         <Heading size="md">プリセット</Heading>
-        <HStack>
+        <HStack
+          w="100%"
+          overflowX="auto"
+          css={css`
+            ::-webkit-scrollbar {
+              display: none;
+            }
+          `}
+        >
           {presets.map((preset) => (
             <Preset key={preset.name} preset={preset} update={update} />
           ))}

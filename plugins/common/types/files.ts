@@ -10,6 +10,6 @@ export type AviutilFile = {
 export type AviutilFileSet = {
     id: string
     enabled?: boolean
-    type: AviutilFileType
     files: AviutilFile[]
+    categories: string[]
 }

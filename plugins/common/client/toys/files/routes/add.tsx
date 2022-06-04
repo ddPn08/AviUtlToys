@@ -1,20 +1,9 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Text,
-  Input,
-  Stack,
-  Tooltip,
-  FormControl,
-  FormLabel,
-} from '@chakra-ui/react'
+import { Box, Button, Text, Input, Stack, Tooltip, FormControl, FormLabel } from '@chakra-ui/react'
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { FilesContext } from '..'
-import { FileList } from '../components/file-list'
-import { FileSelectButton } from '../components/file-select-button'
+import { CategoriesEditor } from '../components/categories-editor'
 
 import { client } from '@/client/context'
 import type { AviutilFileSet } from '@/types/files'
@@ -24,16 +13,17 @@ export const Add: React.FC = () => {
   const { update } = useContext(FilesContext)
   const [error, setError] = useState<string | undefined>()
   const [isLoading, setIsLoading] = useState(false)
+  const [category, setCategory] = useState<string | undefined>()
   const [fileSet, setFileSet] = useState<AviutilFileSet>({
     id: '',
-    type: 'plugin',
     files: [],
+    categories: [],
   })
 
   return (
     <>
       <Box>
-        <FormControl>
+        <FormControl as={Stack} spacing={2}>
           <Stack spacing={2}>
             <FormLabel>ID</FormLabel>
             <Tooltip
@@ -53,29 +43,8 @@ export const Add: React.FC = () => {
                 }
               />
             </Tooltip>
-
-            <FormLabel>タイプ</FormLabel>
-            <ButtonGroup>
-              {(['plugin', 'script', 'other'] as const).map((type) => {
-                return (
-                  <Button
-                    key={type}
-                    disabled={fileSet.type === type}
-                    onClick={() => {
-                      setFileSet({
-                        ...fileSet,
-                        type,
-                      })
-                    }}
-                  >
-                    {type.toUpperCase()}
-                  </Button>
-                )
-              })}
-            </ButtonGroup>
-            <FileSelectButton fileSet={fileSet} setFileSet={setFileSet} />
-            <FileList fileSet={fileSet} setFileSet={setFileSet} editable />
           </Stack>
+          <CategoriesEditor fileSet={fileSet} setFileSet={setFileSet} />
         </FormControl>
         <Button
           isLoading={isLoading}
@@ -88,6 +57,7 @@ export const Add: React.FC = () => {
             setIsLoading(false)
             navigate('..')
           }}
+          my="2"
         >
           追加
         </Button>

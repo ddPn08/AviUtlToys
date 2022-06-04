@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonGroup,
+  Divider,
   Flex,
   Heading,
   Popover,
@@ -15,6 +16,7 @@ import { useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { FilesContext } from '..'
+import { CategoriesEditor } from '../components/categories-editor'
 import { FileList } from '../components/file-list'
 import { FileSelectButton } from '../components/file-select-button'
 
@@ -76,6 +78,8 @@ export const Edit: React.FC = () => {
           </Popover>
         </ButtonGroup>
       </Flex>
+      <Divider my="4" />
+      <CategoriesEditor fileSet={fileSet} setFileSet={setFileSet} />
       <FileList fileSet={fileSet} setFileSet={setFileSet} editable />
       <FileSelectButton fileSet={fileSet} setFileSet={setFileSet} />
     </>

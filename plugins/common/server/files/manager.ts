@@ -13,6 +13,13 @@ class FileManagerClass {
         this.load()
     }
 
+    private checkFields() {
+        for (const fileSet of this.filesList) {
+            if (!fileSet.categories) fileSet.categories = []
+        }
+        this.save()
+    }
+
     private async migrate() {
         const oldDataPath = path.join(Context.dataFolder, 'files', 'data.json')
         if (fs.existsSync(oldDataPath)) {
@@ -49,6 +56,7 @@ class FileManagerClass {
         if (!fs.existsSync(dataPath)) await fs.promises.writeFile(dataPath, '[]')
         const data = JSON.parse(await fs.promises.readFile(dataPath, 'utf-8'))
         this.filesList.push(...data)
+        this.checkFields()
     }
     public async update(id: string, file: AviutilFileSet) {
         await this.delete(id)
