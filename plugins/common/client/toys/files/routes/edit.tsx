@@ -21,16 +21,16 @@ import { FileList } from '../components/file-list'
 import { FileSelectButton } from '../components/file-select-button'
 
 import { client } from '@/client/context'
-import type { AviutilFileSet } from '@/types/files'
+import type { AviUtlFileSet } from '@/types/files'
 
 export const Edit: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const state = location.state as AviutilFileSet
+  const state = location.state as AviUtlFileSet
 
   const { update } = useContext(FilesContext)
   const [previousId] = useState(state.id)
-  const [fileSet, setFileSet] = useState<AviutilFileSet>(state)
+  const [fileSet, setFileSet] = useState<AviUtlFileSet>(state)
 
   return (
     <>

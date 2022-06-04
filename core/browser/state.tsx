@@ -1,4 +1,4 @@
-import type { ToyContextType, PluginMeta } from '@aviutil-toys/api/client'
+import type { ToyContextType, PluginMeta } from '@aviutl-toys/api/client'
 import { atom } from 'jotai'
 
 export const pluginsAtom = atom<

@@ -1,4 +1,4 @@
-import { definePluginConfig } from '@aviutil-toys/cli'
+import { definePluginConfig } from '@aviutl-toys/cli'
 
 export default definePluginConfig({
     server: {

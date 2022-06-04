@@ -35,6 +35,6 @@ server.handle('exos:drag', async (e, id) => {
     await fs.promises.writeFile(filepath, contents)
     e.sender.startDrag({
         file: filepath,
-        icon: require.resolve('@aviutil-toys/assets/image/drag-and-drop.png'),
+        icon: require.resolve('@aviutl-toys/assets/image/drag-and-drop.png'),
     })
 })

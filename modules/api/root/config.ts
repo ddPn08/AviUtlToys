@@ -1,4 +1,4 @@
 export type ConfigurationType = {
-    aviutilDir?: string
-    aviutilExec?: string
+    aviutlDir?: string
+    aviutlExec?: string
 }

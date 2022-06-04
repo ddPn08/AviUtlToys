@@ -68,9 +68,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aviutil-toys/api@0.1.1, @aviutil-toys/api@workspace:^, @aviutil-toys/api@workspace:modules/api":
+"@aviutil/exo@npm:^0.1.0, @aviutil/exo@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@aviutil/exo@npm:0.1.1"
+  dependencies:
+    iconv-lite: ^0.6.3
+  checksum: e6c92f20f237ede7d01f50a7c7217a0d8670939756f01b78cc848b54c437de401e3f51431d1091c1bc2236e0429536837bfdcac5a9afe06858bfd20a61bec776
+  languageName: node
+  linkType: hard
+
+"@aviutl-toys/api@0.1.1, @aviutl-toys/api@workspace:^, @aviutl-toys/api@workspace:modules/api":
   version: 0.0.0-use.local
-  resolution: "@aviutil-toys/api@workspace:modules/api"
+  resolution: "@aviutl-toys/api@workspace:modules/api"
   dependencies:
     "@types/node": ^17.0.35
     "@types/react": ^18
@@ -83,17 +92,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@aviutil-toys/assets@workspace:^, @aviutil-toys/assets@workspace:modules/assets":
+"@aviutl-toys/assets@workspace:^, @aviutl-toys/assets@workspace:modules/assets":
   version: 0.0.0-use.local
-  resolution: "@aviutil-toys/assets@workspace:modules/assets"
+  resolution: "@aviutl-toys/assets@workspace:modules/assets"
   languageName: unknown
   linkType: soft
 
-"@aviutil-toys/cli@0.1.1, @aviutil-toys/cli@workspace:^, @aviutil-toys/cli@workspace:modules/cli":
+"@aviutl-toys/cli@0.1.1, @aviutl-toys/cli@workspace:^, @aviutl-toys/cli@workspace:modules/cli":
   version: 0.0.0-use.local
-  resolution: "@aviutil-toys/cli@workspace:modules/cli"
+  resolution: "@aviutl-toys/cli@workspace:modules/cli"
   dependencies:
-    "@aviutil-toys/api": "workspace:^"
+    "@aviutl-toys/api": "workspace:^"
     "@types/degit": ^2.8.3
     "@types/node": ^17.0.35
     cac: ^6.7.12
@@ -104,23 +113,23 @@ __metadata:
     kleur: ^4.1.4
     replace-in-file: ^6.3.2
   bin:
-    aviutil-toys: ./cli.js
+    aviutl-toys: ./cli.js
   languageName: unknown
   linkType: soft
 
-"@aviutil-toys/config@workspace:^, @aviutil-toys/config@workspace:modules/config":
+"@aviutl-toys/config@workspace:^, @aviutl-toys/config@workspace:modules/config":
   version: 0.0.0-use.local
-  resolution: "@aviutil-toys/config@workspace:modules/config"
+  resolution: "@aviutl-toys/config@workspace:modules/config"
   languageName: unknown
   linkType: soft
 
-"@aviutil-toys/core@workspace:core":
+"@aviutl-toys/core@workspace:core":
   version: 0.0.0-use.local
-  resolution: "@aviutil-toys/core@workspace:core"
+  resolution: "@aviutl-toys/core@workspace:core"
   dependencies:
-    "@aviutil-toys/api": "workspace:^"
-    "@aviutil-toys/assets": "workspace:^"
-    "@aviutil-toys/config": "workspace:^"
+    "@aviutl-toys/api": "workspace:^"
+    "@aviutl-toys/assets": "workspace:^"
+    "@aviutl-toys/config": "workspace:^"
     "@chakra-ui/icons": ^2.0.1
     "@chakra-ui/react": ^2.1.2
     "@emotion/react": ^11
@@ -149,12 +158,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@aviutil-toys/dev-tools@workspace:^, @aviutil-toys/dev-tools@workspace:modules/_dev_tools":
+"@aviutl-toys/dev-tools@workspace:^, @aviutl-toys/dev-tools@workspace:modules/_dev_tools":
   version: 0.0.0-use.local
-  resolution: "@aviutil-toys/dev-tools@workspace:modules/_dev_tools"
+  resolution: "@aviutl-toys/dev-tools@workspace:modules/_dev_tools"
   dependencies:
-    "@aviutil-toys/assets": "workspace:^"
-    "@aviutil-toys/config": "workspace:^"
+    "@aviutl-toys/assets": "workspace:^"
+    "@aviutl-toys/config": "workspace:^"
     "@pnpm/local-resolver": ^8.0.2
     "@pnpm/npm-resolver": ^13.0.2
     "@types/node": ^17.0.31
@@ -171,15 +180,6 @@ __metadata:
     dev-tools: ./bin.js
   languageName: unknown
   linkType: soft
-
-"@aviutil/exo@npm:^0.1.0, @aviutil/exo@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@aviutil/exo@npm:0.1.1"
-  dependencies:
-    iconv-lite: ^0.6.3
-  checksum: e6c92f20f237ede7d01f50a7c7217a0d8670939756f01b78cc848b54c437de401e3f51431d1091c1bc2236e0429536837bfdcac5a9afe06858bfd20a61bec776
-  languageName: node
-  linkType: hard
 
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.16.7":
   version: 7.16.7
@@ -2841,12 +2841,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aviutil-toys-plugin@workspace:plugin-templates/basic":
+"aviutl-toys-plugin@workspace:plugin-templates/basic":
   version: 0.0.0-use.local
-  resolution: "aviutil-toys-plugin@workspace:plugin-templates/basic"
+  resolution: "aviutl-toys-plugin@workspace:plugin-templates/basic"
   dependencies:
-    "@aviutil-toys/api": 0.1.1
-    "@aviutil-toys/cli": 0.1.1
+    "@aviutl-toys/api": 0.1.1
+    "@aviutl-toys/cli": 0.1.1
     "@chakra-ui/icons": ^2.0.1
     "@chakra-ui/react": ^2.1.2
     "@emotion/react": ^11
@@ -2863,11 +2863,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aviutil-toys@workspace:.":
+"aviutl-toys@workspace:.":
   version: 0.0.0-use.local
-  resolution: "aviutil-toys@workspace:."
+  resolution: "aviutl-toys@workspace:."
   dependencies:
-    "@aviutil-toys/dev-tools": "workspace:^"
+    "@aviutl-toys/dev-tools": "workspace:^"
     "@tsconfig/create-react-app": ^1.0.2
     "@tsconfig/node16-strictest-esm": ^1.0.1
     "@types/eslint": ^8.4.1
@@ -3390,9 +3390,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "common@workspace:plugins/common"
   dependencies:
-    "@aviutil-toys/api": "workspace:^"
-    "@aviutil-toys/cli": "workspace:^"
     "@aviutil/exo": ^0.1.0
+    "@aviutl-toys/api": "workspace:^"
+    "@aviutl-toys/cli": "workspace:^"
     "@chakra-ui/icons": ^2.0.1
     "@chakra-ui/react": ^2.1.2
     "@emotion/react": 11
@@ -7667,9 +7667,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "softalk@workspace:plugins/softalk"
   dependencies:
-    "@aviutil-toys/api": "workspace:^"
-    "@aviutil-toys/cli": "workspace:^"
     "@aviutil/exo": ^0.1.1
+    "@aviutl-toys/api": "workspace:^"
+    "@aviutl-toys/cli": "workspace:^"
     "@chakra-ui/icons": ^2.0.1
     "@chakra-ui/react": ^2.1.2
     "@emotion/react": ^11

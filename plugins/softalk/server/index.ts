@@ -1,4 +1,4 @@
-import { createPlugin, PluginContext } from '@aviutil-toys/api/server'
+import { createPlugin, PluginContext } from '@aviutl-toys/api/server'
 import fs from 'fs'
 
 export let Context: PluginContext

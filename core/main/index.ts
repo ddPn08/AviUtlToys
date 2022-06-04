@@ -1,5 +1,5 @@
 import './__setup'
-import { AviUtilToys, Configuration } from '@aviutil-toys/api/server'
+import { AviUtlToys, Configuration } from '@aviutl-toys/api/server'
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
 
@@ -8,7 +8,7 @@ import { PluginLoader } from './plugin-loader'
 
 app.once('ready', async () => {
     await loadPLugins()
-    for (const { hook, context } of AviUtilToys.plugins.hook('preInitialization'))
+    for (const { hook, context } of AviUtlToys.plugins.hook('preInitialization'))
         await hook(context)
 
     await import('./ipc/api')
@@ -18,7 +18,7 @@ app.once('ready', async () => {
     await createWindow()
     Development.init()
 
-    for (const { hook, context } of AviUtilToys.plugins.hook('postInitialization'))
+    for (const { hook, context } of AviUtlToys.plugins.hook('postInitialization'))
         await hook(context)
 })
 

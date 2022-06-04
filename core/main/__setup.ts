@@ -7,7 +7,7 @@ const appRoot = path.join(__dirname, '../../../')
 const isPortable = !isDev && fs.existsSync(path.join(appRoot, 'resources/.portable'))
 const userData = isPortable
     ? path.join(appRoot, 'userData')
-    : path.join(app.getPath('appData'), 'aviutil-toys')
+    : path.join(app.getPath('appData'), 'aviutl-toys')
 
 if (isDev) for (const v of ['source-map-support', 'esbuild-register']) require(v)
 

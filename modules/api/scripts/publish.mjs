@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { execSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -34,16 +34,10 @@ await fs.promises.writeFile(
 await fs.promises.cp(root, publishTempDir, { recursive: true })
 await fs.promises.writeFile(path.join(publishTempDir, 'yarn.lock'), '')
 
-spawnSync('yarn', { cwd: publishTempDir, stdio: 'inherit' })
-const result = spawnSync('yarn', ['npm', 'publish', '--access', 'public'], {
+execSync('yarn', { cwd: publishTempDir, stdio: 'inherit' })
+execSync('yarn npm publish --access public', {
     cwd: publishTempDir,
     stdio: 'inherit',
 })
-
-if (result.status !== 0) {
-    console.error(`Publish failed`)
-} else {
-    console.log(`Publish success`)
-}
 
 await fs.promises.rm(publishTempDir, { recursive: true })

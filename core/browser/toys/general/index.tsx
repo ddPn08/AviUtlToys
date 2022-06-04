@@ -4,7 +4,7 @@ import { ColorMode } from './components/color-mode'
 import { Configuration } from './components/configuration'
 import { Info } from './components/info'
 import { PluginList } from './components/plugin-list'
-import { RunAviutil } from './components/run-aviutil'
+import { RunAviUtl } from './components/run-aviutl'
 
 export const Settings: React.FC = () => {
   return (
@@ -20,7 +20,7 @@ export const Settings: React.FC = () => {
           <Configuration />
         </Box>
         <Box>
-          <RunAviutil />
+          <RunAviUtl />
         </Box>
         <Box>
           <PluginList />

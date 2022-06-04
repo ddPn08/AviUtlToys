@@ -1,19 +1,19 @@
 {
-  "name": "@aviutil-toys/api",
+  "name": "@aviutl-toys/api",
   "main": "./root/index.ts",
   "version": "0.1.1",
   "license": "MIT",
-  "homepage": "https://github.com/ddPn08/aviutil-toys/tree/main/modules/api#readme",
+  "homepage": "https://github.com/ddpn08/AviUtlToys/tree/main/modules/api#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ddPn08/Aviutil-Toys.git"
+    "url": "git+https://github.com/ddpn08/AviUtlToys.git"
   },
   "bugs": {
-    "url": "https://github.com/ddPn08/aviutil-toys/issues"
+    "url": "https://github.com/ddpn08/AviUtlToys/issues"
   },
   "keywords": [
-    "aviutil",
-    "aviutil-toys",
+    "aviutl",
+    "aviutl-toys",
     "utility"
   ],
   "author": {

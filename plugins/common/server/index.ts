@@ -1,4 +1,4 @@
-import { createPlugin } from '@aviutil-toys/api/server'
+import { createPlugin } from '@aviutl-toys/api/server'
 
 import { Context } from './context'
 

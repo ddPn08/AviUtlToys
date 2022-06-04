@@ -1,5 +1,5 @@
 {
-  "extends": "@aviutil-toys/config/browser.tsconfig.json",
+  "extends": "@aviutl-toys/config/browser.tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "noEmit": false,

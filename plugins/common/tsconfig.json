@@ -1,5 +1,5 @@
 {
-  "extends": "@aviutil-toys/config/base.tsconfig.json",
+  "extends": "@aviutl-toys/config/base.tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "noEmit": false,

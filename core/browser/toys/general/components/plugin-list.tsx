@@ -1,4 +1,4 @@
-import { ipcApi } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutl-toys/api/client'
 import { Badge, Box, Heading, HStack, Stack, Text, useColorMode } from '@chakra-ui/react'
 import { useAtom } from 'jotai'
 

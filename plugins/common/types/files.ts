@@ -1,15 +1,13 @@
-export type AviutilFileType = 'plugin' | 'script' | 'other'
-
-export type AviutilFile = {
+export type AviUtlFile = {
     type: 'file' | 'dir'
     dir: string
     filename: string
     origin?: string
 }
 
-export type AviutilFileSet = {
+export type AviUtlFileSet = {
     id: string
     enabled?: boolean
-    files: AviutilFile[]
+    files: AviUtlFile[]
     categories: string[]
 }

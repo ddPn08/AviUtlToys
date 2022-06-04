@@ -1,4 +1,4 @@
-import { AviUtilToys, PluginModule } from '@aviutil-toys/api/server'
+import { AviUtlToys, PluginModule } from '@aviutl-toys/api/server'
 import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
@@ -51,7 +51,7 @@ class PluginLoaderClass {
         for (const pluginMeta of this.pluginMetaList) {
             const dataFolder = path.join(PLUGIN_DATA_DIR, pluginMeta.meta['id'])
             if (!fs.existsSync(dataFolder)) await fs.promises.mkdir(dataFolder)
-            AviUtilToys.plugins.registerPlugin({
+            AviUtlToys.plugins.registerPlugin({
                 context: {
                     dataFolder,
                     meta: pluginMeta.meta,

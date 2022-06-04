@@ -10,21 +10,21 @@
     "@chakra-ui/react",
     "@chakra-ui/icons",
     "framer-motion",
-    "@aviutil-toys/api",
-    "@aviutil-toys/api/client",
-    "@aviutil-toys/assets"
+    "@aviutl-toys/api",
+    "@aviutl-toys/api/client",
+    "@aviutl-toys/assets"
   ],
   "server.externals": [
     "electron",
     "@ffprobe-installer/ffprobe",
-    "@aviutil-toys/api",
-    "@aviutil-toys/api/server",
-    "@aviutil-toys/assets"
+    "@aviutl-toys/api",
+    "@aviutl-toys/api/server",
+    "@aviutl-toys/assets"
   ],
   "build.externals": [
     "@ffprobe-installer/win32-x64",
     "@ffprobe-installer/ffprobe",
-    "@aviutil-toys/api",
-    "@aviutil-toys/assets"
+    "@aviutl-toys/api",
+    "@aviutl-toys/assets"
   ]
 }

@@ -1,4 +1,4 @@
-import { ipcApi } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutl-toys/api/client'
 import { createContext, useEffect, useState } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 
@@ -7,15 +7,15 @@ import { Add } from './routes/add'
 import { Edit } from './routes/edit'
 
 import { client } from '@/client/context'
-import type { AviutilFileSet } from '@/types/files'
+import type { AviUtlFileSet } from '@/types/files'
 
 export const FilesContext = createContext<{
   update: () => void
-  files: AviutilFileSet[]
+  files: AviUtlFileSet[]
 }>({ update() {}, files: [] })
 
 export const Files = () => {
-  const [fileSets, setFileSets] = useState<AviutilFileSet[]>([])
+  const [fileSets, setFileSets] = useState<AviUtlFileSet[]>([])
 
   const update = () => {
     client.invoke('files:list').then(setFileSets)

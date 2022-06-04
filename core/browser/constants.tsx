@@ -1,5 +1,5 @@
-import type { ConfigurationType } from '@aviutil-toys/api'
-import type { ToyContextType } from '@aviutil-toys/api/client'
+import type { ConfigurationType } from '@aviutl-toys/api'
+import type { ToyContextType } from '@aviutl-toys/api/client'
 import { SettingsIcon } from '@chakra-ui/icons'
 
 import { Settings } from './toys/general'
@@ -14,18 +14,18 @@ type Constants = {
 export const Constants: Constants = {
   configuration: {
     keyMap: {
-      aviutilDir: 'Aviutilのフォルダ',
-      aviutilExec: 'Aviutilの実行ファイル',
+      aviutlDir: 'AviUtlのフォルダ',
+      aviutlExec: 'AviUtlの実行ファイル',
     },
   },
   links: [
     {
       name: 'GitHubリポジトリ',
-      url: 'https://github.com/ddpn08/aviutil-toys',
+      url: 'https://github.com/ddpn08/AviUtlToys',
     },
     {
       name: 'バグを報告',
-      url: 'https://github.com/ddPn08/aviutil-toys/issues/new',
+      url: 'https://github.com/ddpn08/AviUtlToys/issues/new',
     },
   ],
   toys: [

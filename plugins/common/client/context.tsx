@@ -1,4 +1,4 @@
-import { IpcClient } from '@aviutil-toys/api/client'
+import { IpcClient } from '@aviutl-toys/api/client'
 
 import type { ClientToServerEvents, ServerToClientEvents } from '@/types/api'
 

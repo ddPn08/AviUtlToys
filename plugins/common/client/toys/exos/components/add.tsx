@@ -1,4 +1,4 @@
-import { ipcApi } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutl-toys/api/client'
 import {
   Button,
   Input,
@@ -54,7 +54,7 @@ export const Add: React.FC<{
                 />
               </Tooltip>
               <InputGroup>
-                <Input readOnly placeholder="C:/aviutil/text.exo" value={file} />
+                <Input readOnly placeholder="C:/aviutl/text.exo" value={file} />
                 <InputRightAddon
                   cursor="pointer"
                   onClick={async () => {

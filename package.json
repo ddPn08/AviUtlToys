@@ -1,5 +1,5 @@
 {
-  "name": "aviutil-toys",
+  "name": "aviutl-toys",
   "workspaces": [
     ".github/actions/*",
     "plugins/*",
@@ -12,11 +12,11 @@
     "format": "prettier --write '**/*.{tsx,ts}'",
     "build:plugin": "yarn dev-tools build:plugin",
     "build:module": "yarn dev-tools build:module",
-    "build:app": "yarn workspace @aviutil-toys/core build",
+    "build:app": "yarn workspace @aviutl-toys/core build",
     "publish:module": "yarn dev-tools publish:module"
   },
   "devDependencies": {
-    "@aviutil-toys/dev-tools": "workspace:^",
+    "@aviutl-toys/dev-tools": "workspace:^",
     "@tsconfig/create-react-app": "^1.0.2",
     "@tsconfig/node16-strictest-esm": "^1.0.1",
     "@types/eslint": "^8.4.1",

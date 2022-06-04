@@ -1,8 +1,8 @@
 {
-  "name": "@aviutil-toys/cli",
+  "name": "@aviutl-toys/cli",
   "version": "0.1.1",
   "bin": {
-    "aviutil-toys": "./cli.js"
+    "aviutl-toys": "./cli.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,17 +11,17 @@
     "cli.js"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/ddPn08/aviutil-toys/tree/main/modules/cli#readme",
+  "homepage": "https://github.com/ddpn08/AviUtlToys/tree/main/modules/cli#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ddPn08/Aviutil-Toys.git"
+    "url": "git+https://github.com/ddpn08/AviUtlToys.git"
   },
   "bugs": {
-    "url": "https://github.com/ddPn08/aviutil-toys/issues"
+    "url": "https://github.com/ddpn08/AviUtlToys/issues"
   },
   "keywords": [
-    "aviutil",
-    "aviutil-toys",
+    "aviutl",
+    "aviutl-toys",
     "utility"
   ],
   "author": {
@@ -33,7 +33,7 @@
     "dev": "node -r esbuild-register cli/index.ts"
   },
   "dependencies": {
-    "@aviutil-toys/api": "workspace:^",
+    "@aviutl-toys/api": "workspace:^",
     "cac": "^6.7.12",
     "degit": "^2.8.4",
     "enquirer": "^2.3.6",

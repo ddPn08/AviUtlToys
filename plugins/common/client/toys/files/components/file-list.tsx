@@ -1,11 +1,11 @@
 import { DeleteIcon } from '@chakra-ui/icons'
 import { Box, Button, Grid, GridItem, Input, Text, useColorMode } from '@chakra-ui/react'
 
-import type { AviutilFileSet } from '@/types/files'
+import type { AviUtlFileSet } from '@/types/files'
 
 export const FileList: React.FC<{
-  fileSet: AviutilFileSet
-  setFileSet: (fileSet: AviutilFileSet) => void
+  fileSet: AviUtlFileSet
+  setFileSet: (fileSet: AviUtlFileSet) => void
   editable?: boolean
 }> = ({ fileSet, setFileSet, editable }) => {
   const { colorMode } = useColorMode()

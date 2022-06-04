@@ -1,4 +1,4 @@
-import properties from '@aviutil-toys/config/properties.json' assert { type: 'json' }
+import properties from '@aviutl-toys/config/properties.json' assert { type: 'json' }
 import AdmZip from 'adm-zip'
 import { spawn } from 'child_process'
 import crypto from 'crypto'
@@ -21,14 +21,14 @@ const NODE_MODULES = path.join(cwd, '../node_modules')
 
 /** @type {import('esbuild').Plugin} */
 export const ExternalExporter = {
-    name: 'aviutil-toys:external-exporter',
+    name: 'aviutl-toys:external-exporter',
     setup(build) {
         const filter = new RegExp(path.join(cwd, 'browser/index.tsx').replaceAll('\\', '\\\\'))
         build.onLoad({ filter }, async (args) => {
             let contents = await fs.promises.readFile(args.path, 'utf8')
             if (contents.includes('/** @LOAD_GLOBALS */')) {
                 const externals = properties['client.externals']
-                    .map((v) => `window.___AVIUTIL_TOYS_GLOBALS['${v}']=await import('${v}')`)
+                    .map((v) => `window.___AVIUTL_TOYS_GLOBALS['${v}']=await import('${v}')`)
                     .join(';')
                 contents = contents.replace('/** @LOAD_GLOBALS */', `${externals}`)
             }
@@ -127,11 +127,11 @@ const build = async () => {
         dir: true,
         config: {
             electronVersion: '19.0.1',
-            appId: 'world.ddpn.aviutil-toys',
-            productName: 'aviutil-toys',
+            appId: 'world.ddpn.aviutl-toys',
+            productName: 'aviutl-toys',
             artifactName: '${productName}-${version}.${ext}',
             copyright: 'Copyright © 2022 ddPn08',
-            icon: require.resolve('@aviutil-toys/assets/image/icon.png'),
+            icon: require.resolve('@aviutl-toys/assets/image/icon.png'),
             directories: { app: cwd, output: path.join(cwd, 'product') },
             win: {
                 target: [
@@ -159,7 +159,7 @@ const build = async () => {
 
     const application = new AdmZip()
     application.addLocalFolder(path.join(cwd, 'product/win-unpacked'))
-    application.writeZip(path.join(cwd, `product/aviutil-toys-${packageJson.version}.zip`))
+    application.writeZip(path.join(cwd, `product/aviutl-toys-${packageJson.version}.zip`))
 
     const app = new AdmZip()
     app.addLocalFolder(path.join(cwd, 'product/win-unpacked/resources/app'))

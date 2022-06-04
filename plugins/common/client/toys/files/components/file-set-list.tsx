@@ -21,10 +21,10 @@ import { useNavigate } from 'react-router-dom'
 import { FilesContext } from '..'
 
 import { client } from '@/client/context'
-import type { AviutilFileSet } from '@/types/files'
+import type { AviUtlFileSet } from '@/types/files'
 
 export const FileSetList: React.FC<{
-  fileSets: AviutilFileSet[]
+  fileSets: AviUtlFileSet[]
 }> = ({ fileSets }) => {
   const { update } = useContext(FilesContext)
   const navigate = useNavigate()

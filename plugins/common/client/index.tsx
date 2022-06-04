@@ -1,4 +1,4 @@
-import { createPlugin } from '@aviutil-toys/api/client'
+import { createPlugin } from '@aviutl-toys/api/client'
 
 import { Exos } from './toys/exos'
 import { Files } from './toys/files'
@@ -10,7 +10,7 @@ export default createPlugin(async () => {
         id: 'Exos',
         title: 'Exos',
         description:
-          'Exoファイルを管理できます。ドラッグアンドドロップでAviutilに読み込ませられます。',
+          'Exoファイルを管理できます。ドラッグアンドドロップでAviUtlに読み込ませられます。',
         component: () => <Exos />,
       },
       {
@@ -18,7 +18,7 @@ export default createPlugin(async () => {
         title: 'Files',
         description: 'ファイルを管理できます。プラグインやスクリプトの管理等に使えます。',
         component: () => <Files />,
-        essentialConfig: ['aviutilDir'],
+        essentialConfig: ['aviutlDir'],
       },
     ],
   }

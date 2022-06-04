@@ -1,14 +1,14 @@
 {
-  "name": "aviutil-toys-plugin",
+  "name": "aviutl-toys-plugin",
   "version": "v1.0.0",
-  "id": "com.example.aviutil-toys-plugin",
-  "description": "Aviutil Toys Plugin",
+  "id": "com.example.aviutl-toys-plugin",
+  "description": "AviUtl Toys Plugin",
   "scripts": {
-    "build": "aviutil-toys build"
+    "build": "aviutl-toys build"
   },
   "dependencies": {
-    "@aviutil-toys/api": "0.1.1",
-    "@aviutil-toys/cli": "0.1.1",
+    "@aviutl-toys/api": "0.1.1",
+    "@aviutl-toys/cli": "0.1.1",
     "@chakra-ui/icons": "^2.0.1",
     "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11",

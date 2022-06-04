@@ -1,4 +1,4 @@
-import { ipcApi } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutl-toys/api/client'
 import { Box, Button, ButtonGroup, Heading, useColorMode } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
@@ -50,7 +50,7 @@ export const Frame: React.FC<React.ComponentProps<typeof Box>> = ({ ...props }) 
       {...props}
     >
       <Box p="2">
-        <Heading size="sm">Aviutil-Toys</Heading>
+        <Heading size="sm">AviUtlToys</Heading>
       </Box>
       <ButtonGroup
         size="md"

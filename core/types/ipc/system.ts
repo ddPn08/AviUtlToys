@@ -5,5 +5,5 @@ export interface ServerToClientEvents {}
 export interface ClientToServerEvents {
     'update:check': () => boolean
     'plugin:list': () => PluginMeta[]
-    'aviutil:run': () => void
+    'aviutl:run': () => void
 }

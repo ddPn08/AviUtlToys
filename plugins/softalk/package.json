@@ -2,15 +2,15 @@
   "name": "softalk",
   "version": "v1.0.0",
   "id": "world.ddpn.softalk",
-  "description": "Aviutilでのゆっくりを、もっと便利に。",
-  "homepage": "https://github.com/ddPn08/aviutil-toys",
+  "description": "AviUtlでのゆっくりを、もっと便利に。",
+  "homepage": "https://github.com/ddpn08/AviUtlToys",
   "scripts": {
-    "build": "aviutil-toys build"
+    "build": "aviutl-toys build"
   },
   "dependencies": {
-    "@aviutil-toys/api": "workspace:^",
-    "@aviutil-toys/cli": "workspace:^",
     "@aviutil/exo": "^0.1.1",
+    "@aviutl-toys/api": "workspace:^",
+    "@aviutl-toys/cli": "workspace:^",
     "@chakra-ui/icons": "^2.0.1",
     "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11",

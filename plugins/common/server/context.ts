@@ -1,3 +1,3 @@
-import type { PluginContext } from '@aviutil-toys/api/server'
+import type { PluginContext } from '@aviutl-toys/api/server'
 
 export const Context = {} as PluginContext

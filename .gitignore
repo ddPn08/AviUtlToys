@@ -14,7 +14,7 @@ node_modules
 *dist
 *.asar
 *product
-.aviutil-toys
+.aviutl-toys
 .old
 .dev
 .vscode

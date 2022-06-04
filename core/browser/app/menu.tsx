@@ -1,4 +1,4 @@
-import type { ToyContextType } from '@aviutil-toys/api/client'
+import type { ToyContextType } from '@aviutl-toys/api/client'
 import { LinkIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, HStack, VStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'

@@ -1,7 +1,7 @@
-import properties from '@aviutil-toys/config/properties.json'
+import properties from '@aviutl-toys/config/properties.json'
 import type { Plugin } from 'esbuild'
 
-const PLUGIN_NAME = 'aviutil-toys:resolver'
+const PLUGIN_NAME = 'aviutl-toys:resolver'
 
 const createRegExp = (globals: string[]) => {
     const raw = []
@@ -17,7 +17,7 @@ export const GlobalsResolver: Plugin = {
         const filter = new RegExp(createRegExp(properties['client.externals']))
         build.onResolve({ filter }, (args) => {
             if (!properties['client.externals'].includes(args.path)) return
-            const contents = `const p=window.___AVIUTIL_TOYS_GLOBALS['${args.path}'];module.exports =p`
+            const contents = `const p=window.___AVIUTL_TOYS_GLOBALS['${args.path}'];module.exports =p`
             return {
                 namespace: PLUGIN_NAME,
                 path: args.path,

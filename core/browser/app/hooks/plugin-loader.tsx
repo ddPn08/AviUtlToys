@@ -1,4 +1,4 @@
-import type { ClientPlugin } from '@aviutil-toys/api/client'
+import type { ClientPlugin } from '@aviutl-toys/api/client'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 

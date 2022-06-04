@@ -1,10 +1,10 @@
-# Aviutil Toys CLI
+# AviUtlToys CLI
 
-Aviutil Toys のプラグインを開発する上で使用する cli ツールです。
+AviUtlToys のプラグインを開発する上で使用する cli ツールです。
 
 # 使い方
 
 | コマンド           | 説明                                         |
 | ------------------ | -------------------------------------------- |
-| aviutil-toys new   | 新しいプラグインのプロジェクトを作成します。 |
-| aviutil-toys build | プラグインをビルドします。                   |
+| aviutl-toys new   | 新しいプラグインのプロジェクトを作成します。 |
+| aviutl-toys build | プラグインをビルドします。                   |

@@ -1,4 +1,4 @@
-import { defineConfig, ModuleConfig } from '@aviutil-toys/dev-tools'
+import { defineConfig, ModuleConfig } from '@aviutl-toys/dev-tools'
 import path from 'path'
 
 const config: ModuleConfig = {

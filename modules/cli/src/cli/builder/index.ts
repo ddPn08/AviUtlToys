@@ -1,4 +1,4 @@
-import properties from '@aviutil-toys/config/properties.json'
+import properties from '@aviutl-toys/config/properties.json'
 import { build, BuildOptions } from 'esbuild'
 import fs from 'fs'
 import kleur from 'kleur'
@@ -25,12 +25,12 @@ const mergeConfig = (options: BuildOptions, ...overrides: Partial<BuildOptions>[
 const loadConfig = async (cwd: string) => {
     await build({
         entryPoints: [path.join(cwd, 'aut.config.ts')],
-        outdir: path.resolve('node_modules/.aviutil-toys/tmp'),
+        outdir: path.resolve('node_modules/.aviutl-toys/tmp'),
         bundle: false,
         format: 'cjs',
         platform: 'node',
     })
-    const config = require(path.resolve('node_modules/.aviutil-toys/tmp/aut.config.js')).default
+    const config = require(path.resolve('node_modules/.aviutl-toys/tmp/aut.config.js')).default
     if (!isBuildConfig(config)) {
         console.error(kleur.red('ERROR'), 'Invalid config!')
         process.exit(1)

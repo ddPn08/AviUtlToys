@@ -1,4 +1,4 @@
-import { ToyContext, ToyContextType } from '@aviutil-toys/api/client'
+import { ToyContext, ToyContextType } from '@aviutl-toys/api/client'
 import { Box, Heading, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 

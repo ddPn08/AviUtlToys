@@ -1,4 +1,4 @@
-import { IpcServer, Configuration } from '@aviutil-toys/api/server'
+import { IpcServer, Configuration } from '@aviutl-toys/api/server'
 import { spawn } from 'child_process'
 import fs from 'fs'
 
@@ -12,10 +12,10 @@ export const ipcSystem = new IpcServer<ServerToClientEvents, ClientToServerEvent
 ipcSystem.handle('plugin:list', () => {
     return PluginLoader.pluginMetaList
 })
-ipcSystem.handle('aviutil:run', () => {
+ipcSystem.handle('aviutl:run', () => {
     const config = Configuration.get()
-    if (!config.aviutilExec) throw new Error('Aviutilの実行ファイルが設定されていません。')
-    if (!fs.existsSync(config.aviutilExec)) throw new Error('Aviutilの実行ファイルが存在しません。')
-    spawn(config.aviutilExec, { detached: true })
+    if (!config.aviutlExec) throw new Error('AviUtlの実行ファイルが設定されていません。')
+    if (!fs.existsSync(config.aviutlExec)) throw new Error('AviUtlの実行ファイルが存在しません。')
+    spawn(config.aviutlExec, { detached: true })
 })
 ipcSystem.handle('update:check', update)

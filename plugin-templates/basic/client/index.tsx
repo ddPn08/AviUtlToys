@@ -1,4 +1,4 @@
-import { createPlugin } from '@aviutil-toys/api/client'
+import { createPlugin } from '@aviutl-toys/api/client'
 
 import { HelloWorld } from './futures'
 

@@ -1,16 +1,16 @@
 {
   "name": "common",
   "version": "v1.0.0",
-  "id": "world.ddpn.aviutil-toys",
-  "description": "Aviutil Toys の基礎機能を提供します。",
-  "homepage": "https://github.com/ddPn08/aviutil-toys",
+  "id": "world.ddpn.aviutl-toys",
+  "description": "AviUtl Toys の基礎機能を提供します。",
+  "homepage": "https://github.com/ddpn08/AviUtlToys",
   "scripts": {
-    "build": "aviutil-toys build"
+    "build": "aviutl-toys build"
   },
   "dependencies": {
-    "@aviutil-toys/api": "workspace:^",
-    "@aviutil-toys/cli": "workspace:^",
     "@aviutil/exo": "^0.1.0",
+    "@aviutl-toys/api": "workspace:^",
+    "@aviutl-toys/cli": "workspace:^",
     "@chakra-ui/icons": "^2.0.1",
     "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "11",

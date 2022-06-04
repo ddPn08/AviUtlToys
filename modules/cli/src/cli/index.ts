@@ -8,7 +8,7 @@ export type BaseCliContext = {
     args: {}
 }
 
-const cli = cac('aviutil-toys')
+const cli = cac('aviutl-toys')
 
 cli.version(packageJson.version)
 

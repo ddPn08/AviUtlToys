@@ -11,7 +11,7 @@ import type { NewProjectOptions } from './types'
 const POST_PROCESS_FILES = ['package.json']
 
 export const run = async (options: NewProjectOptions) => {
-    const officialTemplatesPath = 'ddpn08/aviutil-toys/plugin-templates'
+    const officialTemplatesPath = 'ddpn08/AviUtlToys/plugin-templates'
 
     const { name, template }: { name: string; template: string } = await Enquirer.prompt([
         {
@@ -64,7 +64,7 @@ export const run = async (options: NewProjectOptions) => {
         process.exit(1)
     }
 
-    if (name !== 'aviutil-toys-plugin' && !template.includes('/')) {
+    if (name !== 'aviutl-toys-plugin' && !template.includes('/')) {
         await Promise.all(
             POST_PROCESS_FILES.map(async (file) => {
                 const filepath = path.resolve(path.join(name, file))
@@ -73,7 +73,7 @@ export const run = async (options: NewProjectOptions) => {
                     try {
                         replace.sync({
                             files: filepath,
-                            from: /aviutil-toys-plugin/g,
+                            from: /aviutl-toys-plugin/g,
                             to: name,
                         })
                     } catch (err) {

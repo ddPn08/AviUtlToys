@@ -1,5 +1,5 @@
-import type { ClientToServerEvents, ServerToClientEvents } from '@aviutil-toys/api'
-import { Configuration, IpcServer } from '@aviutil-toys/api/server'
+import type { ClientToServerEvents, ServerToClientEvents } from '@aviutl-toys/api'
+import { Configuration, IpcServer } from '@aviutl-toys/api/server'
 import { BrowserWindow, dialog, shell } from 'electron'
 
 export const ipcApi = new IpcServer<ServerToClientEvents, ClientToServerEvents>('api')
@@ -29,7 +29,7 @@ ipcApi.handle('native:show-open-dialog', (_, options) => {
 ipcApi.handle('native:drag-file', (e, file, icon) => {
     e.sender.startDrag({
         file,
-        icon: icon || require.resolve('@aviutil-toys/assets/image/drag-and-drop.png'),
+        icon: icon || require.resolve('@aviutl-toys/assets/image/drag-and-drop.png'),
     })
 })
 

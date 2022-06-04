@@ -2,11 +2,11 @@ import { Input, FormLabel, HStack, Tag, TagLabel, TagCloseButton } from '@chakra
 import { css } from '@emotion/react'
 import { useState } from 'react'
 
-import type { AviutilFileSet } from '@/types/files'
+import type { AviUtlFileSet } from '@/types/files'
 
 export const CategoriesEditor: React.FC<{
-  fileSet: AviutilFileSet
-  setFileSet: (fileSet: AviutilFileSet) => void
+  fileSet: AviUtlFileSet
+  setFileSet: (fileSet: AviUtlFileSet) => void
 }> = ({ fileSet, setFileSet }) => {
   const [category, setCategory] = useState<string | undefined>()
   return (

@@ -1,4 +1,4 @@
-import { ipcApi } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutl-toys/api/client'
 import {
   Button,
   ButtonGroup,
@@ -132,7 +132,7 @@ export const Controller: React.FC = () => {
           >
             <Heading size="sm">
               {dragFile
-                ? 'ここをドラッグしてAviutilに読みいこませて下さい。'
+                ? 'ここをドラッグしてAviUtlに読みいこませて下さい。'
                 : '合成ボタンを押して音声を生成します。'}
             </Heading>
           </Flex>
@@ -156,7 +156,7 @@ export const Controller: React.FC = () => {
         value={frameRate}
         onChange={(e) => setFrameRate(parseInt(e.currentTarget.value || '60'))}
       />
-      <Text>AviUtil上での音量</Text>
+      <Text>AviUtl上での音量</Text>
       <Input
         type="number"
         value={exoVolume}

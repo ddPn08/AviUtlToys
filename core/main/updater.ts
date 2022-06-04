@@ -11,14 +11,14 @@ import { Development } from './development'
 
 import type { BuildMeta } from '@/types'
 
-const BASE_RELEASE_URL = 'https://github.com/ddPn08/Aviutil-Toys/releases/'
+const BASE_RELEASE_URL = 'https://github.com/ddpn08/AviUtlToys/releases/'
 
 let checking = false
 
 const fetchRelease = async (url: string): Promise<Response> => {
     const res = await fetch(url, {
         headers: {
-            'User-Agent': 'Aviutil-Toys',
+            'User-Agent': 'AviUtlToys',
         },
     })
     switch (res.status) {

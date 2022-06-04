@@ -8,14 +8,14 @@ import { FileList } from '../components/file-list'
 import { FileSelectButton } from '../components/file-select-button'
 
 import { client } from '@/client/context'
-import type { AviutilFileSet } from '@/types/files'
+import type { AviUtlFileSet } from '@/types/files'
 
 export const Add: React.FC = () => {
   const navigate = useNavigate()
   const { update } = useContext(FilesContext)
   const [error, setError] = useState<string | undefined>()
   const [isLoading, setIsLoading] = useState(false)
-  const [fileSet, setFileSet] = useState<AviutilFileSet>({
+  const [fileSet, setFileSet] = useState<AviUtlFileSet>({
     id: '',
     files: [],
     categories: [],

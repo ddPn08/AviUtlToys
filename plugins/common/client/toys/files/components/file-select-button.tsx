@@ -1,12 +1,12 @@
-import { ipcApi } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutl-toys/api/client'
 import { Button, Grid } from '@chakra-ui/react'
 import { useState } from 'react'
 
-import type { AviutilFile, AviutilFileSet } from '@/types/files'
+import type { AviUtlFile, AviUtlFileSet } from '@/types/files'
 
 export const FileSelectButton: React.FC<{
-  fileSet: AviutilFileSet
-  setFileSet: (fileSet: AviutilFileSet) => void
+  fileSet: AviUtlFileSet
+  setFileSet: (fileSet: AviUtlFileSet) => void
 }> = ({ fileSet, setFileSet }) => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
 
@@ -23,7 +23,7 @@ export const FileSelectButton: React.FC<{
           setDialogIsOpen(false)
           if (res.canceled) return
 
-          const newFiles: AviutilFile[] = res.filePaths
+          const newFiles: AviUtlFile[] = res.filePaths
             .map(
               (file) =>
                 ({
@@ -31,7 +31,7 @@ export const FileSelectButton: React.FC<{
                   dir: '/',
                   filename: file.split(/\\|\//).pop()!,
                   origin: file,
-                } as AviutilFile),
+                } as AviUtlFile),
             )
             .filter(
               (file) =>
@@ -57,7 +57,7 @@ export const FileSelectButton: React.FC<{
           setDialogIsOpen(false)
           if (res.canceled) return
 
-          const newFiles: AviutilFile[] = res.filePaths
+          const newFiles: AviUtlFile[] = res.filePaths
             .map(
               (file) =>
                 ({
@@ -65,7 +65,7 @@ export const FileSelectButton: React.FC<{
                   dir: '/',
                   filename: file.split(/\\|\//).pop()!,
                   origin: file,
-                } as AviutilFile),
+                } as AviUtlFile),
             )
             .filter(
               (file) =>

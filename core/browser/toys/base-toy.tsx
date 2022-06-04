@@ -1,5 +1,5 @@
-import type { ConfigurationType } from '@aviutil-toys/api'
-import { ipcApi, ToyContextType } from '@aviutil-toys/api/client'
+import type { ConfigurationType } from '@aviutl-toys/api'
+import { ipcApi, ToyContextType } from '@aviutl-toys/api/client'
 import { Code, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'

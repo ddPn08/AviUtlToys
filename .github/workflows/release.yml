@@ -27,7 +27,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            core/product/aviutil-toys-${{ steps.get_tag.outputs.tag }}.zip
+            core/product/aviutl-toys-${{ steps.get_tag.outputs.tag }}.zip
             core/product/app.zip
             core/product/meta.yaml
           body: "# ${{ steps.get_tag.outputs.tag }}"

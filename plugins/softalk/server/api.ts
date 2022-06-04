@@ -1,4 +1,4 @@
-import { IpcServer } from '@aviutil-toys/api/server'
+import { IpcServer } from '@aviutl-toys/api/server'
 
 import { voiceManager } from './voice-manager'
 

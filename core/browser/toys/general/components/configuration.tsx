@@ -1,4 +1,4 @@
-import { ipcApi } from '@aviutil-toys/api/client'
+import { ipcApi } from '@aviutl-toys/api/client'
 import { Input, InputGroup, InputRightAddon, Stack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -7,12 +7,12 @@ import { InputItem } from '@/browser/components/input-item'
 
 export const Configuration: React.FC = () => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
-  const [aviutilDir, setAviutilDir] = useState('')
-  const [aviutilExec, setAviutilExec] = useState('')
+  const [aviutlDir, setAviUtlDir] = useState('')
+  const [aviutlExec, setAviUtlExec] = useState('')
   const effect = async () => {
     const config = await ipcApi.invoke('config:get')
-    setAviutilDir(config.aviutilDir || '')
-    setAviutilExec(config.aviutilExec || '')
+    setAviUtlDir(config.aviutlDir || '')
+    setAviUtlExec(config.aviutlExec || '')
   }
 
   useEffect(() => {
@@ -22,10 +22,10 @@ export const Configuration: React.FC = () => {
     <>
       <Stack>
         <InputItem
-          label={<Text>Aviutilのフォルダ</Text>}
+          label={<Text>AviUtlのフォルダ</Text>}
           input={
             <InputGroup>
-              <Input value={aviutilDir} readOnly />
+              <Input value={aviutlDir} readOnly />
               <InputRightAddon
                 cursor="pointer"
                 onClick={async () => {
@@ -36,10 +36,10 @@ export const Configuration: React.FC = () => {
                   })
                   setDialogIsOpen(false)
                   if (res.canceled) return
-                  setAviutilDir(res.filePaths[0]!)
+                  setAviUtlDir(res.filePaths[0]!)
 
                   const config = await ipcApi.invoke('config:get')
-                  config.aviutilDir = res.filePaths[0]!
+                  config.aviutlDir = res.filePaths[0]!
                   await ipcApi.invoke('config:update', config)
                 }}
               >
@@ -49,10 +49,10 @@ export const Configuration: React.FC = () => {
           }
         />
         <InputItem
-          label={<Text>Aviutilの実行ファイル</Text>}
+          label={<Text>AviUtlの実行ファイル</Text>}
           input={
             <InputGroup>
-              <Input value={aviutilExec} readOnly />
+              <Input value={aviutlExec} readOnly />
               <InputRightAddon
                 cursor="pointer"
                 onClick={async () => {
@@ -69,10 +69,10 @@ export const Configuration: React.FC = () => {
                   })
                   setDialogIsOpen(false)
                   if (res.canceled) return
-                  setAviutilExec(res.filePaths[0]!)
+                  setAviUtlExec(res.filePaths[0]!)
 
                   const config = await ipcApi.invoke('config:get')
-                  config.aviutilExec = res.filePaths[0]!
+                  config.aviutlExec = res.filePaths[0]!
                   await ipcApi.invoke('config:update', config)
                 }}
               >
