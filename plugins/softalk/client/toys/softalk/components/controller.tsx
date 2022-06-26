@@ -132,7 +132,7 @@ export const Controller: React.FC = () => {
           >
             <Heading size="sm">
               {dragFile
-                ? 'ここをドラッグしてAviUtlに読みいこませて下さい。'
+                ? 'ここをドラッグしてAviUtlのタイムラインにドロップしてください。'
                 : '合成ボタンを押して音声を生成します。'}
             </Heading>
           </Flex>
